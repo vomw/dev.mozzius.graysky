@@ -10,7 +10,6 @@ export default {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: ["@graysky/api", "@graysky/db"],
-  /** We already do linting and typechecking as separate tasks in CI */
-  eslint: { ignoreDuringBuilds: !!process.env.CI },
+  /** We already do typechecking as a separate task in CI */
   typescript: { ignoreBuildErrors: !!process.env.CI },
 };
