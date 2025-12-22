@@ -1,14 +1,15 @@
 import React from "react";
 import {
   Text,
-  TouchableOpacity,
-  type TouchableOpacityProps,
+  TouchableHighlight,
+  View,
+  type TouchableHighlightProps,
 } from "react-native";
 import { useRouter } from "expo-router";
 
 import { cx } from "~/lib/utils/cx";
 
-interface ButtonProps extends TouchableOpacityProps {
+interface ButtonProps extends TouchableHighlightProps {
   variant?: "white" | "black" | "outline";
   className?: string;
 }
@@ -18,37 +19,37 @@ export const Button = ({
   className,
   variant = "black",
   children,
-  style,
+
   ...props
 }: ButtonProps) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      className={cx(
-        "items-center justify-center rounded-md px-4 py-2.5",
-        {
-          black: "bg-neutral-950",
-          white: "bg-white",
-          outline: "border border-black dark:border-white",
-        }[variant],
-        className,
-      )}
-      style={[{ borderCurve: "continuous" }, style]}
-      {...props}
-    >
-      <Text
+    <TouchableHighlight onPress={onPress} className="rounded-full" {...props}>
+      <View
         className={cx(
-          "text-base",
+          "w-full items-center justify-center rounded-full px-4 py-2.5",
           {
-            black: "text-white",
-            white: "text-black",
-            outline: "text-black dark:text-white",
+            black: "bg-neutral-950",
+            white: "bg-white",
+            outline: "border border-black dark:border-white",
           }[variant],
+          className,
         )}
+        style={[{ borderCurve: "continuous" }]}
       >
-        {children}
-      </Text>
-    </TouchableOpacity>
+        <Text
+          className={cx(
+            "text-base",
+            {
+              black: "text-white",
+              white: "text-black",
+              outline: "text-black dark:text-white",
+            }[variant],
+          )}
+        >
+          {children}
+        </Text>
+      </View>
+    </TouchableHighlight>
   );
 };
 

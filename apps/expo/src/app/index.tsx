@@ -47,7 +47,7 @@ export default function LandingPage() {
               </LinkButton> */}
               <LinkButton
                 href={sessions?.length ? "/resume" : "/sign-in"}
-                variant="black"
+                variant="white"
                 className="mt-4"
               >
                 <Trans>Log in</Trans>
