@@ -256,7 +256,7 @@ const PostThread = ({ contentFilter }: Props) => {
           data={posts}
           initialScrollIndex={posts.findIndex((post) => post.primary) ?? 0}
           initialScrollIndexParams={
-            isIOS26 ? { viewOffset: headerHeight } : undefined
+            isIOS26 ? { viewOffset: headerHeight * -1 } : undefined
           }
           contentInsetAdjustmentBehavior="automatic"
           scrollToOverflowEnabled
