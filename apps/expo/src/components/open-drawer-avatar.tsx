@@ -32,6 +32,7 @@ export function useOpenDrawerAvatarItem() {
       <TouchableHighlight
         onPress={() => openDrawer()}
         accessibilityHint={_(msg`Open drawer menu`)}
+        className="rounded-full"
       >
         <Avatar self size="medium" />
       </TouchableHighlight>

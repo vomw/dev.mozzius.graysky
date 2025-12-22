@@ -1,5 +1,11 @@
 import { useCallback, useMemo, useRef } from "react";
-import { TouchableHighlight, useWindowDimensions, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableHighlight,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import { useBottomTabBarHeight } from "react-native-bottom-tabs";
 import Animated, {
   FadeInDown,
   FadeOutDown,
@@ -35,6 +41,7 @@ import {
   useSortableFeeds,
 } from "~/lib/storage/app-preferences";
 import { cx } from "~/lib/utils/cx";
+import { isIOS26 } from "~/lib/utils/version";
 import { BackButtonOverride } from "./back-button-override";
 import { ErrorBoundary as ErrorBoundaryDisplay } from "./error-boundary";
 import { FeedRow } from "./feed-row";
@@ -60,6 +67,7 @@ export const FeedsButton = ({ show = true }: Props) => {
   const router = useRouter();
   const homepage = useHomepage();
   const dimensions = useWindowDimensions();
+  const bottomBarHeight = useBottomTabBarHeight();
 
   const dismiss = useCallback(() => bottomSheetRef.current?.dismiss(), []);
 
@@ -79,6 +87,7 @@ export const FeedsButton = ({ show = true }: Props) => {
           className="absolute bottom-6 right-6 flex-1 rounded-full"
           entering={FadeInDown}
           exiting={FadeOutDown}
+          style={isIOS26 && { bottom: bottomBarHeight + 16 }}
         >
           <TouchableHighlight
             onPress={() => {
@@ -101,6 +110,8 @@ export const FeedsButton = ({ show = true }: Props) => {
               style={{
                 backgroundColor: theme.colors.card,
                 borderColor: theme.colors.border,
+                borderWidth: StyleSheet.hairlineWidth,
+                borderCurve: "continuous",
               }}
             >
               <CloudyIcon size={20} color={theme.colors.text} />

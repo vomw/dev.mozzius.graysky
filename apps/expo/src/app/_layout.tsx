@@ -125,7 +125,7 @@ const App = () => {
           });
         }
       } else {
-        store.delete("session");
+        store.remove("session");
       }
     },
     [],
@@ -154,7 +154,6 @@ const App = () => {
         setAgentUpdate((prev) => prev + 1);
       },
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invalidator, saveSession]);
 
   const resumeSession = useMutation({
@@ -193,7 +192,7 @@ const App = () => {
   // redirect depending on login state
   useEffect(() => {
     if (resumeSession.isPending) return;
-    // @ts-expect-error
+    // @ts-expect-error type is overly specific
     const atRoot = segments.length === 0;
     const inAuthGroup = segments[0] === "(auth)";
 

@@ -143,7 +143,7 @@ msgid "<0>{4}</0><1>{5}</1>"
 msgstr "<0>{4}</0><1>{5}</1>"
 
 #. be very careful not to leave spaces between the elements
-#: src/app/capture/[author]/[post].tsx:119
+#: src/app/capture/[author]/[post].tsx:117
 msgid "<0>a bluesky post, via</0><1/><2>graysky.app</2>"
 msgstr "<0>une publication Bluesky, via</0><1/><2>graysky.app</2>"
 
@@ -252,7 +252,7 @@ msgstr "Ajouter aux favoris"
 msgid "Add to list"
 msgstr "Ajouter à la liste"
 
-#: src/app/_layout.tsx:401
+#: src/app/_layout.tsx:400
 msgid "Add to List"
 msgstr "Ajouter à la liste"
 
@@ -277,7 +277,7 @@ msgid "Advanced Settings"
 msgstr "Paramètres avancés"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
-#: src/components/feeds-button.tsx:196
+#: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "Tous les flux"
 
@@ -474,7 +474,7 @@ msgstr "En vous abonnant, vous acceptez nos <0>Conditions Générales</0>, les <
 #: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/lists/[list].tsx:332
 #: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/lists/[list].tsx:394
 #: src/app/(tabs)/(feeds,search,notifications,self)/tag/[tag].tsx:97
-#: src/app/capture/[author]/[post].tsx:161
+#: src/app/capture/[author]/[post].tsx:171
 #: src/app/create-list.tsx:70
 #: src/app/create-list.tsx:137
 #: src/app/edit-bio.tsx:126
@@ -542,6 +542,7 @@ msgstr "Graphique circulaire"
 
 #: src/app/(auth)/_layout.tsx:24
 #: src/app/add-to-list/[handle].tsx:134
+#: src/app/capture/[author]/[post].tsx:162
 #: src/app/circle.tsx:186
 #: src/app/composer/_layout.tsx:63
 #: src/app/composer/index.tsx:283
@@ -688,7 +689,7 @@ msgstr "Impossible de récupérer les listes"
 msgid "Create list"
 msgstr "Créer une liste"
 
-#: src/app/_layout.tsx:394
+#: src/app/_layout.tsx:393
 msgid "Create List"
 msgstr "Créer une liste"
 
@@ -799,7 +800,7 @@ msgstr "Supprimer la publication"
 msgid "Discover feeds"
 msgstr "Découvrir des flux"
 
-#: src/app/_layout.tsx:312
+#: src/app/_layout.tsx:311
 msgid "Discover Feeds"
 msgstr "Trouver des flux"
 
@@ -862,7 +863,7 @@ msgstr "Modifier le flux"
 msgid "Edit profile"
 msgstr "Modifier le profil"
 
-#: src/app/_layout.tsx:369
+#: src/app/_layout.tsx:368
 #: src/app/settings/account/index.tsx:40
 msgid "Edit Profile"
 msgstr "Modifier le profil"
@@ -888,7 +889,7 @@ msgstr "Activer les notifications"
 #~ msgstr ""
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/lists/[list].tsx:682
-#: src/app/capture/[author]/[post].tsx:88
+#: src/app/capture/[author]/[post].tsx:89
 #: src/app/settings/account/change-handle.tsx:53
 msgid "Error"
 msgstr "Erreur"
@@ -897,7 +898,7 @@ msgstr "Erreur"
 msgid "Everyone can reply"
 msgstr "Tout le monde peut répondre"
 
-#: src/app/capture/[author]/[post].tsx:88
+#: src/app/capture/[author]/[post].tsx:89
 msgid "Failed to capture image"
 msgstr "Échec de la capture d'image"
 
@@ -922,7 +923,7 @@ msgid "Favourited"
 msgstr "Ajouté aux favoris"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
-#: src/components/feeds-button.tsx:190
+#: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "Favoris"
 
@@ -978,7 +979,7 @@ msgstr "Abonnés"
 #. js-lingui-explicit-id
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
 #: src/app/settings/feed.tsx:56
-#: src/components/feeds-button.tsx:271
+#: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
 msgid "following.feed"
 msgstr "Abonnements"
@@ -1226,7 +1227,7 @@ msgstr "On dirait qu'il n'y a rien ici pour le moment !"
 msgid "Makes adding ALT text to your images mandatory"
 msgstr "Rend obligatoire l'ajout d'un texte de remplacement à vos images"
 
-#: src/components/feeds-button.tsx:321
+#: src/components/feeds-button.tsx:332
 msgid "Manage my feeds"
 msgstr "Gérer mes flux"
 
@@ -1327,7 +1328,7 @@ msgstr "Mutuels"
 msgid "My circle"
 msgstr "Mon cercle"
 
-#: src/app/_layout.tsx:336
+#: src/app/_layout.tsx:335
 msgid "My Circle"
 msgstr "Mon Cercle"
 
@@ -1339,7 +1340,7 @@ msgstr "Mon cercle d'amis"
 msgid "My feeds"
 msgstr "Mes flux"
 
-#: src/components/feeds-button.tsx:108
+#: src/components/feeds-button.tsx:119
 msgid "My Feeds"
 msgstr "Mes flux"
 
@@ -1353,7 +1354,7 @@ msgid "My languages"
 msgstr "Mes langues"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
-#: src/components/feeds-button.tsx:200
+#: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "Mes listes"
 
@@ -1604,7 +1605,7 @@ msgid "Posts"
 msgstr "Publications"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
-#: src/components/feeds-button.tsx:277
+#: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "Publications des personnes que vous suivez"
 
@@ -1646,7 +1647,7 @@ msgstr "Profil"
 msgid "Profile Settings"
 msgstr "Paramètres du profil"
 
-#: src/app/_layout.tsx:344
+#: src/app/_layout.tsx:343
 msgid "Purchase Successful"
 msgstr "Votre achat s'est bien passé"
 
@@ -1658,7 +1659,7 @@ msgstr "Objet"
 msgid "Push notifications"
 msgstr "Notifications push"
 
-#: src/app/_layout.tsx:408
+#: src/app/_layout.tsx:407
 #: src/app/push-notifications.tsx:35
 msgid "Push Notifications"
 msgstr "Notifications push"
@@ -1936,7 +1937,7 @@ msgstr "Contenu à caractère sexuel"
 msgid "Share"
 msgstr "Partager"
 
-#: src/app/capture/[author]/[post].tsx:82
+#: src/app/capture/[author]/[post].tsx:83
 msgid "Share {0}'s post"
 msgstr "Partager la publication de {0}"
 
@@ -1944,11 +1945,11 @@ msgstr "Partager la publication de {0}"
 msgid "Share as image"
 msgstr "Partager en tant qu'image"
 
-#: src/app/_layout.tsx:418
+#: src/app/_layout.tsx:417
 msgid "Share as Image"
 msgstr "Partager en tant qu'image"
 
-#: src/app/capture/[author]/[post].tsx:148
+#: src/app/capture/[author]/[post].tsx:146
 #: src/components/image-with-context-menu.tsx:191
 msgid "Share image"
 msgstr "Partager l'image"
@@ -2048,7 +2049,7 @@ msgid "Something went wrong, please try again later."
 msgstr "Il y eu un problème, réessaye plus tard."
 
 #: src/app/_layout.tsx:148
-#: src/app/_layout.tsx:167
+#: src/app/_layout.tsx:166
 msgid "Sorry! Your session expired. Please log in again."
 msgstr "Désolé ! Votre session a expiré. Veuillez vous reconnecter."
 

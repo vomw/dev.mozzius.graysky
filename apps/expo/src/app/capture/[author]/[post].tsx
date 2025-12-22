@@ -23,6 +23,7 @@ import { StatusBar } from "~/components/status-bar";
 import { Text } from "~/components/themed/text";
 import { TransparentHeaderUntilScrolled } from "~/components/transparent-header";
 import { useAgent } from "~/lib/agent";
+import { isIOS26 } from "~/lib/utils/version";
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const appIcon = require("../../../../assets/icon.png") as ImageSource;
@@ -94,10 +95,7 @@ export default function ShareAsImageScreen() {
       <>
         <StatusBar modal />
         <TransparentHeaderUntilScrolled>
-          <ScrollView
-            className="flex-1"
-            contentInsetAdjustmentBehavior="automatic"
-          >
+          <ScrollView contentInsetAdjustmentBehavior="automatic">
             <ViewShot
               ref={captureRef}
               options={{ format: "jpg", quality: 0.9 }}
@@ -154,15 +152,28 @@ export default function ShareAsImageScreen() {
         </TransparentHeaderUntilScrolled>
         {Platform.OS === "ios" && (
           <Stack.Screen
-            options={{
-              headerRight: () => (
-                <TouchableOpacity onPress={() => router.push("../")}>
-                  <Text primary className="text-lg">
-                    <Trans>Cancel</Trans>
-                  </Text>
-                </TouchableOpacity>
-              ),
-            }}
+            options={
+              isIOS26
+                ? {
+                    unstable_headerRightItems: () => [
+                      {
+                        type: "button",
+                        icon: { type: "sfSymbol", name: "xmark" },
+                        label: _(msg`Close`),
+                        onPress: () => router.dismiss(),
+                      },
+                    ],
+                  }
+                : {
+                    headerRight: () => (
+                      <TouchableOpacity onPress={() => router.push("../")}>
+                        <Text primary className="text-lg">
+                          <Trans>Cancel</Trans>
+                        </Text>
+                      </TouchableOpacity>
+                    ),
+                  }
+            }
           />
         )}
       </>

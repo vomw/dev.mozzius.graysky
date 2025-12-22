@@ -37,7 +37,7 @@ export const FeedScreen = ({ feed }: Props) => {
   // consider adding activity indicator to header like notifications screen
   const [ref, onScroll] = useTabPressScrollRef<TimelineItem>(
     useCallback(() => {
-      async () => {
+      return async () => {
         haptics.selection();
         await refetch();
       };

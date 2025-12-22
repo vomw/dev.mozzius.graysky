@@ -143,7 +143,7 @@ msgid "<0>{4}</0><1>{5}</1>"
 msgstr ""
 
 #. be very careful not to leave spaces between the elements
-#: src/app/capture/[author]/[post].tsx:119
+#: src/app/capture/[author]/[post].tsx:117
 msgid "<0>a bluesky post, via</0><1/><2>graysky.app</2>"
 msgstr "<0>um post do bluesky, via</0><1/><2>graysky.app</2>"
 
@@ -252,7 +252,7 @@ msgstr "Adicionar aos favoritos"
 msgid "Add to list"
 msgstr "Adicionar à lista"
 
-#: src/app/_layout.tsx:401
+#: src/app/_layout.tsx:400
 msgid "Add to List"
 msgstr "Adicionar à Lista"
 
@@ -277,7 +277,7 @@ msgid "Advanced Settings"
 msgstr "Configurações Avançadas"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
-#: src/components/feeds-button.tsx:196
+#: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "Todos os feeds"
 
@@ -474,7 +474,7 @@ msgstr "Ao assinar, você concorda com nossos <0>Termos e Condições</0>, os <1
 #: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/lists/[list].tsx:332
 #: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/lists/[list].tsx:394
 #: src/app/(tabs)/(feeds,search,notifications,self)/tag/[tag].tsx:97
-#: src/app/capture/[author]/[post].tsx:161
+#: src/app/capture/[author]/[post].tsx:171
 #: src/app/create-list.tsx:70
 #: src/app/create-list.tsx:137
 #: src/app/edit-bio.tsx:126
@@ -542,6 +542,7 @@ msgstr ""
 
 #: src/app/(auth)/_layout.tsx:24
 #: src/app/add-to-list/[handle].tsx:134
+#: src/app/capture/[author]/[post].tsx:162
 #: src/app/circle.tsx:186
 #: src/app/composer/_layout.tsx:63
 #: src/app/composer/index.tsx:283
@@ -688,7 +689,7 @@ msgstr "Não foi possível buscar as listas"
 msgid "Create list"
 msgstr "Criar lista"
 
-#: src/app/_layout.tsx:394
+#: src/app/_layout.tsx:393
 msgid "Create List"
 msgstr "Criar Lista"
 
@@ -799,7 +800,7 @@ msgstr "Descartar post"
 msgid "Discover feeds"
 msgstr "Descubra mais feeds"
 
-#: src/app/_layout.tsx:312
+#: src/app/_layout.tsx:311
 msgid "Discover Feeds"
 msgstr "Descubra mais Feeds"
 
@@ -862,7 +863,7 @@ msgstr "Editar feeds"
 msgid "Edit profile"
 msgstr ""
 
-#: src/app/_layout.tsx:369
+#: src/app/_layout.tsx:368
 #: src/app/settings/account/index.tsx:40
 msgid "Edit Profile"
 msgstr "Editar Perfil"
@@ -888,7 +889,7 @@ msgstr "Habilitar notificações"
 #~ msgstr ""
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/lists/[list].tsx:682
-#: src/app/capture/[author]/[post].tsx:88
+#: src/app/capture/[author]/[post].tsx:89
 #: src/app/settings/account/change-handle.tsx:53
 msgid "Error"
 msgstr "Erro"
@@ -897,7 +898,7 @@ msgstr "Erro"
 msgid "Everyone can reply"
 msgstr "Todos podem responder"
 
-#: src/app/capture/[author]/[post].tsx:88
+#: src/app/capture/[author]/[post].tsx:89
 msgid "Failed to capture image"
 msgstr "Não foi possível capturar imagem"
 
@@ -922,7 +923,7 @@ msgid "Favourited"
 msgstr "Favoritado"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
-#: src/components/feeds-button.tsx:190
+#: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "Favoritos"
 
@@ -978,7 +979,7 @@ msgstr "Seguidores"
 #. js-lingui-explicit-id
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
 #: src/app/settings/feed.tsx:56
-#: src/components/feeds-button.tsx:271
+#: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
 msgid "following.feed"
 msgstr "Seguindo"
@@ -1226,7 +1227,7 @@ msgstr "Parece que não há nada por aqui!"
 msgid "Makes adding ALT text to your images mandatory"
 msgstr "Obriga a adição de texto alternativo em imagens"
 
-#: src/components/feeds-button.tsx:321
+#: src/components/feeds-button.tsx:332
 msgid "Manage my feeds"
 msgstr "Gerenciar meus feeds"
 
@@ -1327,7 +1328,7 @@ msgstr "Mutuais"
 msgid "My circle"
 msgstr ""
 
-#: src/app/_layout.tsx:336
+#: src/app/_layout.tsx:335
 msgid "My Circle"
 msgstr ""
 
@@ -1339,7 +1340,7 @@ msgstr ""
 msgid "My feeds"
 msgstr "Meus feeds"
 
-#: src/components/feeds-button.tsx:108
+#: src/components/feeds-button.tsx:119
 msgid "My Feeds"
 msgstr "Meus Feeds"
 
@@ -1353,7 +1354,7 @@ msgid "My languages"
 msgstr "Meus idiomas"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
-#: src/components/feeds-button.tsx:200
+#: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "Minhas listas"
 
@@ -1604,7 +1605,7 @@ msgid "Posts"
 msgstr "Posts"
 
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
-#: src/components/feeds-button.tsx:277
+#: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "Posts de pessoas que você segue"
 
@@ -1646,7 +1647,7 @@ msgstr "Perfil"
 msgid "Profile Settings"
 msgstr "Configurações do Perfil"
 
-#: src/app/_layout.tsx:344
+#: src/app/_layout.tsx:343
 msgid "Purchase Successful"
 msgstr "Compra concluída"
 
@@ -1658,7 +1659,7 @@ msgstr "Propósito"
 msgid "Push notifications"
 msgstr "Notificações"
 
-#: src/app/_layout.tsx:408
+#: src/app/_layout.tsx:407
 #: src/app/push-notifications.tsx:35
 msgid "Push Notifications"
 msgstr "Notificações"
@@ -1936,7 +1937,7 @@ msgstr "Conteúdo sexual"
 msgid "Share"
 msgstr "Compartilhar"
 
-#: src/app/capture/[author]/[post].tsx:82
+#: src/app/capture/[author]/[post].tsx:83
 msgid "Share {0}'s post"
 msgstr "Compartilhar post de {0}"
 
@@ -1944,11 +1945,11 @@ msgstr "Compartilhar post de {0}"
 msgid "Share as image"
 msgstr "Compartilhar como imagem"
 
-#: src/app/_layout.tsx:418
+#: src/app/_layout.tsx:417
 msgid "Share as Image"
 msgstr "Compartilhar como Imagem"
 
-#: src/app/capture/[author]/[post].tsx:148
+#: src/app/capture/[author]/[post].tsx:146
 #: src/components/image-with-context-menu.tsx:191
 msgid "Share image"
 msgstr "Compartilhar imagem"
@@ -2048,7 +2049,7 @@ msgid "Something went wrong, please try again later."
 msgstr "Algo deu errado, tente novamente mais tarde."
 
 #: src/app/_layout.tsx:148
-#: src/app/_layout.tsx:167
+#: src/app/_layout.tsx:166
 msgid "Sorry! Your session expired. Please log in again."
 msgstr "Opa! Sua sessão expirou. Por favor, faça o login novamente."
 
