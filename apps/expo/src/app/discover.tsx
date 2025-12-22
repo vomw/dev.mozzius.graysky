@@ -16,6 +16,7 @@ import { Text } from "~/components/themed/text";
 import { useAgent } from "~/lib/agent";
 import { useSearchBarOptions } from "~/lib/hooks/search-bar";
 import { cx } from "~/lib/utils/cx";
+import { isIOS26 } from "~/lib/utils/version";
 
 // TODO: make this a flashlist and add a cursor to the query
 
@@ -112,7 +113,23 @@ export default function DiscoveryPage() {
 
   return (
     <>
-      <Stack.Screen options={{ headerSearchBarOptions, headerRight }} />
+      <Stack.Screen
+        options={{
+          headerSearchBarOptions,
+          ...(!isIOS26
+            ? { headerRight }
+            : {
+                unstable_headerRightItems: () => [
+                  {
+                    type: "button",
+                    onPress: () => router.dismiss(),
+                    label: _(msg`Close`),
+                    icon: { type: "sfSymbol", name: "xmark" },
+                  },
+                ],
+              }),
+        }}
+      />
       <StatusBar modal />
       <QueryWithoutData query={recommended} />
     </>

@@ -14,6 +14,7 @@ import { StatusBar } from "~/components/status-bar";
 import { Text } from "~/components/themed/text";
 import { TransparentHeaderUntilScrolled } from "~/components/transparent-header";
 import { useAgent } from "~/lib/agent";
+import { isIOS26 } from "~/lib/utils/version";
 
 export default function AddToListScreen() {
   const { handle } = useLocalSearchParams<{ handle: string }>();
@@ -119,12 +120,23 @@ export default function AddToListScreen() {
         <StatusBar modal />
         <Stack.Screen
           options={{
-            headerRight,
             title: _(
               msg`Add ${
                 profile.data.displayName ?? `@${profile.data.handle}`
               } to List`,
             ),
+            ...(isIOS26
+              ? {
+                  unstable_headerRightItems: () => [
+                    {
+                      type: "button",
+                      onPress: () => router.dismiss(),
+                      label: _(msg`Close`),
+                      icon: { type: "sfSymbol", name: "xmark" },
+                    },
+                  ],
+                }
+              : { headerRight }),
           }}
         />
         <TransparentHeaderUntilScrolled>

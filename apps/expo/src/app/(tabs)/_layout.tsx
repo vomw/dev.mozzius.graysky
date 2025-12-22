@@ -1,5 +1,10 @@
 import { useCallback, useRef, useState } from "react";
-import { Platform, useWindowDimensions } from "react-native";
+import {
+  ImageSourcePropType,
+  Platform,
+  useWindowDimensions,
+} from "react-native";
+import { AppleIcon } from "react-native-bottom-tabs";
 import { Drawer } from "react-native-drawer-layout";
 import { useReducedMotion } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -29,6 +34,7 @@ import { useNotifications } from "~/lib/hooks/notifications";
 import { useHaptics } from "~/lib/hooks/preferences";
 import { useHomepage } from "~/lib/storage/app-preferences";
 import { useRefreshOnFocus } from "~/lib/utils/query";
+import { isIOS26 } from "~/lib/utils/version";
 
 export default function AppLayout() {
   // agent might not be available yet
@@ -164,19 +170,24 @@ export default function AppLayout() {
               title: homepage === "feeds" ? _(msg`Feeds`) : _(msg`Skyline`),
               tabBarIcon:
                 homepage === "feeds"
-                  ? () =>
-                      Platform.select({
+                  ? ({ focused }) =>
+                      Platform.select<ImageSourcePropType | AppleIcon>({
                         ios: {
-                          sfSymbol: "cloud",
+                          sfSymbol: focused ? "cloud.fill" : "cloud",
                         },
-                        android: require("../../../assets/tabs/cloudy.svg"),
+                        default:
+                          // eslint-disable-next-line @typescript-eslint/no-require-imports
+                          require("../../../assets/tabs/cloudy.svg") as ImageSourcePropType,
                       })
-                  : () =>
-                      Platform.select({
+                  : ({ focused }) =>
+                      Platform.select<ImageSourcePropType | AppleIcon>({
                         ios: {
-                          sfSymbol: "cloud",
+                          sfSymbol: focused ? "cloud.fill" : "cloud",
                         },
-                        android: require("../../../assets/tabs/cloud.svg"),
+
+                        default:
+                          // eslint-disable-next-line @typescript-eslint/no-require-imports
+                          require("../../../assets/tabs/cloud.svg") as ImageSourcePropType,
                       }),
             }}
           />
@@ -185,11 +196,13 @@ export default function AppLayout() {
             options={{
               title: _(msg`Search`),
               tabBarIcon: () =>
-                Platform.select({
+                Platform.select<ImageSourcePropType | AppleIcon>({
                   ios: {
                     sfSymbol: "magnifyingglass",
                   },
-                  android: require("../../../assets/tabs/search.svg"),
+                  default:
+                    // eslint-disable-next-line @typescript-eslint/no-require-imports
+                    require("../../../assets/tabs/search.svg") as ImageSourcePropType,
                 }),
             }}
           />
@@ -198,17 +211,20 @@ export default function AppLayout() {
             options={{
               title: _(msg`Post`),
               tabBarIcon: () =>
-                Platform.select({
+                Platform.select<ImageSourcePropType | AppleIcon>({
                   ios: {
                     sfSymbol: "square.and.pencil",
                   },
-                  android: require("../../../assets/tabs/square-pen.svg"),
+
+                  default:
+                    // eslint-disable-next-line @typescript-eslint/no-require-imports
+                    require("../../../assets/tabs/square-pen.svg") as ImageSourcePropType,
                 }),
               preventsDefault: true,
               role: "search",
             }}
             listeners={{
-              tabPress: (evt) => {
+              tabPress: () => {
                 if (agent?.hasSession) {
                   if (segments.at(-2) === "profile") {
                     const actor = pathname.split("/").pop()!;
@@ -248,12 +264,14 @@ export default function AppLayout() {
                   ? "30+"
                   : String(notifications.data.count)
                 : undefined,
-              tabBarIcon: () =>
-                Platform.select({
+              tabBarIcon: ({ focused }) =>
+                Platform.select<ImageSourcePropType | AppleIcon>({
                   ios: {
-                    sfSymbol: "bell",
+                    sfSymbol: focused ? "bell.fill" : "bell",
                   },
-                  android: require("../../../assets/tabs/bell.svg"),
+                  default:
+                    // eslint-disable-next-line @typescript-eslint/no-require-imports
+                    require("../../../assets/tabs/bell.svg") as ImageSourcePropType,
                 }),
             }}
           />
@@ -261,12 +279,14 @@ export default function AppLayout() {
             name="(self)"
             options={{
               title: _(msg`Profile`),
-              tabBarIcon: () =>
-                Platform.select({
+              tabBarIcon: ({ focused }) =>
+                Platform.select<ImageSourcePropType | AppleIcon>({
                   ios: {
-                    sfSymbol: "person",
+                    sfSymbol: focused ? "person.fill" : "person",
                   },
-                  android: require("../../../assets/tabs/user.svg"),
+                  default:
+                    // eslint-disable-next-line @typescript-eslint/no-require-imports
+                    require("../../../assets/tabs/user.svg") as ImageSourcePropType,
                 }),
             }}
             listeners={{

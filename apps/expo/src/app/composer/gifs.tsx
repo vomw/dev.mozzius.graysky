@@ -180,11 +180,7 @@ export default function GifSearch() {
 
   return (
     <View className="flex-1" style={{ backgroundColor: theme.colors.card }}>
-      <Stack.Screen
-        options={{
-          headerSearchBarOptions,
-        }}
-      />
+      <Stack.Screen options={{ headerSearchBarOptions }} />
       <QueryWithoutData query={gifQuery} />
     </View>
   );

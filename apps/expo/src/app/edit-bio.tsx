@@ -29,6 +29,7 @@ import { useAgent } from "~/lib/agent";
 import { compress, getGalleryPermission } from "~/lib/composer/utils";
 import { cx } from "~/lib/utils/cx";
 import { uploadBlob } from "~/lib/utils/upload-blob";
+import { isIOS26 } from "~/lib/utils/version";
 import { useSelf } from "./settings/account";
 
 const MAX_DISPLAY_NAME = 64;
@@ -171,9 +172,32 @@ export default function EditBio() {
         <Stack.Screen
           options={{
             headerBackButtonMenuEnabled: false,
-            headerLeft: cancelButton,
-            headerRight: saveButton,
             gestureEnabled: !dirty,
+            ...(isIOS26
+              ? {
+                  unstable_headerLeftItems: () => [
+                    {
+                      label: _(msg`Discard and close`),
+                      type: "button",
+                      icon: { type: "sfSymbol", name: "xmark" },
+                      onPress: () => router.dismiss(),
+                    },
+                  ],
+                  unstable_headerRightItems: () => [
+                    {
+                      label: _(msg`Save`),
+                      type: "button",
+                      icon: { type: "sfSymbol", name: "checkmark" },
+                      onPress: () => save(),
+                      disabled: !dirty || saving,
+                      variant: "done",
+                    },
+                  ],
+                }
+              : {
+                  headerLeft: cancelButton,
+                  headerRight: saveButton,
+                }),
           }}
         />
         <View className="relative h-32">

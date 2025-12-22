@@ -28,6 +28,7 @@ import {
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useHeaderHeight } from "@react-navigation/elements";
 import { useTheme } from "@react-navigation/native";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
@@ -69,6 +70,7 @@ import { actionSheetStyles } from "~/lib/utils/action-sheet";
 import { cx } from "~/lib/utils/cx";
 import { getMentionAt, insertMentionAt } from "~/lib/utils/mention-suggest";
 import { produce } from "~/lib/utils/produce";
+import { isIOS26 } from "~/lib/utils/version";
 
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 
@@ -200,80 +202,137 @@ export default function ComposerScreen() {
     );
   }
 
+  const headerLeft = () => (
+    <CancelButton
+      hasContent={!isEmpty}
+      onSave={handleSave}
+      onCancel={handleFocus}
+      disabled={send.isPending}
+    />
+  );
+
+  const onPressSend = async (anchor?: number) => {
+    haptics.impact();
+
+    if (images.some((i) => !i.alt)) {
+      switch (altTextSetting) {
+        case "force":
+          Alert.alert(
+            _(msg`Missing alt text`),
+            _(
+              msg`Please add descriptive alt text to all images before posting.`,
+            ),
+          );
+          return;
+        case "warn": {
+          if (Platform.OS === "android") Keyboard.dismiss();
+          const cancel = await new Promise((resolve) => {
+            showActionSheetWithOptions(
+              {
+                title: _(msg`Missing alt text`),
+                message: _(
+                  msg`Adding a description to your image makes Bluesky more accessible to people with disabilities, and helps give context to everyone. We strongly recommend adding alt text to all images.`,
+                ),
+                options: [_(msg`Post anyway`), _(msg`Go back`)],
+                destructiveButtonIndex: 0,
+                cancelButtonIndex: 1,
+                anchor,
+                ...actionSheetStyles(theme),
+              },
+              (index) => resolve(index === 1),
+            );
+          });
+          if (cancel) return;
+          else break;
+        }
+        case "hide":
+          // do nothing
+          break;
+      }
+    }
+
+    send.mutate();
+  };
+
+  const disableSend =
+    isEmpty || send.isPending || (rt.graphemeLength ?? 0) > MAX_LENGTH;
+
+  const headerRight = () => (
+    <PostButton
+      onPress={onPressSend}
+      disabled={disableSend}
+      loading={send.isPending}
+    />
+  );
+
+  const headerHeight = useHeaderHeight();
+
   return (
-    <View
-      className="relative flex-1"
-      style={{ backgroundColor: theme.colors.card }}
-    >
+    <>
       <Stack.Screen
         options={{
           headerBackVisible: false,
-          headerLeft: () => (
-            <CancelButton
-              hasContent={!isEmpty}
-              onSave={handleSave}
-              onCancel={handleFocus}
-              disabled={send.isPending}
-            />
-          ),
-          headerRight: () => (
-            <PostButton
-              onPress={async (anchor) => {
-                haptics.impact();
-
-                if (images.some((i) => !i.alt)) {
-                  switch (altTextSetting) {
-                    case "force":
-                      Alert.alert(
-                        _(msg`Missing alt text`),
-                        _(
-                          msg`Please add descriptive alt text to all images before posting.`,
-                        ),
-                      );
-                      return;
-                    case "warn": {
-                      if (Platform.OS === "android") Keyboard.dismiss();
-                      const cancel = await new Promise((resolve) => {
-                        showActionSheetWithOptions(
-                          {
-                            title: _(msg`Missing alt text`),
-                            message: _(
-                              msg`Adding a description to your image makes Bluesky more accessible to people with disabilities, and helps give context to everyone. We strongly recommend adding alt text to all images.`,
-                            ),
-                            options: [_(msg`Post anyway`), _(msg`Go back`)],
-                            destructiveButtonIndex: 0,
-                            cancelButtonIndex: 1,
-                            anchor,
-                            ...actionSheetStyles(theme),
-                          },
-                          (index) => resolve(index === 1),
-                        );
-                      });
-                      if (cancel) return;
-                      else break;
-                    }
-                    case "hide":
-                      // do nothing
-                      break;
-                  }
-                }
-
-                send.mutate();
-              }}
-              disabled={
-                isEmpty ||
-                send.isPending ||
-                (rt.graphemeLength ?? 0) > MAX_LENGTH
-              }
-              loading={send.isPending}
-            />
-          ),
           headerTitleStyle: { color: "transparent" },
+          ...(isIOS26
+            ? {
+                headerTransparent: true,
+                unstable_headerLeftItems: () => [
+                  isEmpty
+                    ? {
+                        type: "button",
+                        label: _(msg`Close`),
+                        icon: { type: "sfSymbol", name: "xmark" },
+                        disabled: send.isPending,
+                        onPress: () => router.dismiss(),
+                      }
+                    : {
+                        type: "menu",
+                        disabled: send.isPending,
+                        icon: { type: "sfSymbol", name: "xmark" },
+                        label: _(msg`Close`),
+                        menu: {
+                          items: [
+                            {
+                              type: "action",
+                              label: _(msg`Discard post`),
+                              icon: { type: "sfSymbol", name: "trash" },
+                              onPress: () => router.dismiss(),
+                              destructive: true,
+                            },
+                          ],
+                        },
+                      },
+                ],
+                unstable_headerRightItems: () => [
+                  {
+                    type: "button",
+                    icon: { type: "sfSymbol", name: "globe" },
+                    label: _(msg`Edit who can reply`),
+                    onPress: () => {
+                      Keyboard.dismiss();
+                      router.push("/composer/threadgate");
+                    },
+                  },
+                  {
+                    type: "button",
+                    icon: { type: "sfSymbol", name: "paperplane" },
+                    label: _(msg`Send`),
+                    variant: "done",
+                    disabled: disableSend || send.isPending,
+                    onPress: () => {
+                      Keyboard.dismiss();
+                      void onPressSend();
+                    },
+                  },
+                ],
+              }
+            : { headerLeft, headerRight }),
         }}
       />
       {send.isError && (
         <Animated.View
-          className="bg-red-500 px-4 py-3"
+          className="z-10 bg-red-500 px-4 py-3"
+          style={isIOS26 ? { paddingTop: headerHeight + 4 } : {}}
           entering={SlideInUp}
           exiting={SlideOutUp}
           layout={LinearTransition}
@@ -291,10 +350,12 @@ export default function ComposerScreen() {
         </Animated.View>
       )}
       <KeyboardAwareScrollView
-        className="pt-4"
+        className="flex-1 pt-4"
+        style={{ backgroundColor: theme.colors.card }}
         alwaysBounceVertical={!isEmpty}
         keyboardShouldPersistTaps="always"
         bottomOffset={48 + 32}
+        contentInsetAdjustmentBehavior="automatic"
       >
         {reply.thread.data && (
           <TouchableOpacity
@@ -583,7 +644,7 @@ export default function ComposerScreen() {
         }
         onPressLanguage={() => router.push("/composer/language")}
       />
-    </View>
+    </>
   );
 }
 

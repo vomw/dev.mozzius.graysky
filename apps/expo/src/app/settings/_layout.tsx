@@ -22,17 +22,31 @@ export default function SettingsLayout() {
         screenOptions={{
           headerBackButtonDisplayMode: isIOS26 ? "minimal" : "default",
           ...Platform.select({
-            ios: {
-              headerLeft: () =>
-                !canGoBack ? (
-                  <Pressable
-                    onPress={() => router.dismiss()}
-                    className="ml-1.5"
-                  >
-                    <XIcon size={24} color={theme.colors.text} />
-                  </Pressable>
-                ) : undefined,
-            },
+            ios: isIOS26
+              ? {
+                  unstable_headerRightItems: () =>
+                    canGoBack
+                      ? []
+                      : [
+                          {
+                            type: "button",
+                            onPress: () => router.dismiss(),
+                            label: _(msg`Close`),
+                            icon: { type: "sfSymbol", name: "xmark" },
+                          },
+                        ],
+                }
+              : {
+                  headerLeft: () =>
+                    !canGoBack ? (
+                      <Pressable
+                        onPress={() => router.dismiss()}
+                        className="ml-1.5"
+                      >
+                        <XIcon size={24} color={theme.colors.text} />
+                      </Pressable>
+                    ) : undefined,
+                },
           }),
         }}
       >

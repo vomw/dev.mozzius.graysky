@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Pressable,
   StyleSheet,
   TouchableHighlight,
   View,
@@ -159,35 +158,36 @@ export default function MyCircle() {
         <Stack.Screen
           options={{
             headerTransparent: true,
-            headerLeft: isIOS26
-              ? () => (
-                  <Pressable
-                    onPress={() => router.dismiss()}
-                    className="ml-1.5"
-                  >
-                    <XIcon size={24} color={theme.colors.text} />
-                  </Pressable>
-                )
-              : undefined,
-            headerRight: isIOS26
-              ? undefined
-              : () => (
-                  <TouchableHighlight
-                    className="rounded-full"
-                    onPress={() => router.push("../")}
-                  >
-                    <View
-                      className="flex-1 rounded-full p-2"
-                      style={{ backgroundColor: theme.colors.background }}
+            ...(!isIOS26
+              ? {
+                  headerRight: () => (
+                    <TouchableHighlight
+                      className="rounded-full"
+                      onPress={() => router.push("../")}
                     >
-                      <XIcon
-                        color={theme.colors.text}
-                        size={18}
-                        strokeWidth={3}
-                      />
-                    </View>
-                  </TouchableHighlight>
-                ),
+                      <View
+                        className="flex-1 rounded-full p-2"
+                        style={{ backgroundColor: theme.colors.background }}
+                      >
+                        <XIcon
+                          color={theme.colors.text}
+                          size={18}
+                          strokeWidth={3}
+                        />
+                      </View>
+                    </TouchableHighlight>
+                  ),
+                }
+              : {
+                  unstable_headerRightItems: () => [
+                    {
+                      type: "button",
+                      onPress: () => router.dismiss(),
+                      label: _(msg`Close`),
+                      icon: { type: "sfSymbol", name: "xmark" },
+                    },
+                  ],
+                }),
           }}
         />
         <ViewShot

@@ -18,6 +18,7 @@ import { useAgent } from "~/lib/agent";
 import { useTabPressScrollRef } from "~/lib/hooks";
 import { useSearchBarOptions } from "~/lib/hooks/search-bar";
 import { useUserRefresh } from "~/lib/utils/query";
+import { isIOS26 } from "~/lib/utils/version";
 
 interface Props {
   search: string;
@@ -122,7 +123,11 @@ export default function FeedSearchScreen() {
   return (
     <>
       <Stack.Screen
-        options={{ title: _(msg`Search Feeds`), headerSearchBarOptions }}
+        options={{
+          title: _(msg`Search Feeds`),
+          headerSearchBarOptions,
+          headerTransparent: isIOS26,
+        }}
       />
       <FeedSearch search={search} />
     </>

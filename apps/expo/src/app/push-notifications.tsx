@@ -106,7 +106,7 @@ export default function PushNotificationsScreen() {
       </ScrollView>
       <View className="px-4 pb-2">
         <TouchableHighlight
-          className="rounded-xl"
+          className="rounded-full"
           style={{ borderCurve: "continuous" }}
           onPress={() => {
             setAppPreferences({
@@ -117,7 +117,7 @@ export default function PushNotificationsScreen() {
           }}
         >
           <View
-            className="w-full items-center rounded-xl py-3"
+            className="w-full items-center rounded-full py-3"
             style={{
               borderCurve: "continuous",
               backgroundColor: theme.colors.primary,
@@ -129,7 +129,7 @@ export default function PushNotificationsScreen() {
           </View>
         </TouchableHighlight>
         <TouchableHighlight
-          className="mt-2.5 rounded-xl"
+          className="mt-2.5 rounded-full"
           style={{ borderCurve: "continuous" }}
           onPress={() => {
             setAppPreferences({
@@ -140,7 +140,7 @@ export default function PushNotificationsScreen() {
           }}
         >
           <View
-            className="w-full items-center rounded-xl bg-neutral-100 py-3 dark:bg-neutral-800"
+            className="w-full items-center rounded-full bg-neutral-100 py-3 dark:bg-neutral-800"
             style={{ borderCurve: "continuous" }}
           >
             <Text className="text-center text-base font-medium">

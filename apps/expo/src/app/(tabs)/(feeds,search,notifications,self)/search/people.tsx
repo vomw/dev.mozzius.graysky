@@ -17,6 +17,7 @@ import { useAgent } from "~/lib/agent";
 import { useTabPressScrollRef } from "~/lib/hooks";
 import { useSearchBarOptions } from "~/lib/hooks/search-bar";
 import { useUserRefresh } from "~/lib/utils/query";
+import { isIOS26 } from "~/lib/utils/version";
 
 interface Props {
   search: string;
@@ -123,7 +124,11 @@ export default function PeopleSearchScreen() {
   return (
     <>
       <Stack.Screen
-        options={{ title: _(msg`Search People`), headerSearchBarOptions }}
+        options={{
+          title: _(msg`Search People`),
+          headerSearchBarOptions,
+          headerTransparent: isIOS26,
+        }}
       />
       <PeopleSearch search={search} />
     </>

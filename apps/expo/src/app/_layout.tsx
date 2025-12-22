@@ -372,13 +372,17 @@ const App = () => {
                                   presentation: "modal",
                                   headerTransparent: true,
                                   headerShadowVisible: true,
-                                  headerBlurEffect: theme.dark
-                                    ? "systemThickMaterialDark"
-                                    : "systemChromeMaterialLight",
+                                  headerBlurEffect: !isIOS26
+                                    ? theme.dark
+                                      ? "systemThickMaterialDark"
+                                      : "systemChromeMaterialLight"
+                                    : undefined,
                                   headerStyle: {
-                                    backgroundColor: theme.dark
-                                      ? "rgba(0,0,0,0.4)"
-                                      : "rgba(255,255,255,0.1)",
+                                    backgroundColor: !isIOS26
+                                      ? theme.dark
+                                        ? "rgba(0,0,0,0.4)"
+                                        : "rgba(255,255,255,0.1)"
+                                      : undefined,
                                   },
                                 },
                               }),

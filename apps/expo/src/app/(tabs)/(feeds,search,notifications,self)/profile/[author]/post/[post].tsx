@@ -1,16 +1,17 @@
 import { memo, useRef } from "react";
 import {
   ActivityIndicator,
-  RefreshControl,
   StyleSheet,
   Text,
   TouchableNativeFeedback,
   View,
 } from "react-native";
+import { useBottomTabBarHeight } from "react-native-bottom-tabs";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { AppBskyFeedDefs, type ComAtprotoLabelDefs } from "@atproto/api";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useHeaderHeight } from "@react-navigation/elements";
 import { useTheme } from "@react-navigation/native";
 import { FlashList, type FlashListRef } from "@shopify/flash-list";
 import { useQuery } from "@tanstack/react-query";
@@ -30,7 +31,7 @@ import { useAgent } from "~/lib/agent";
 import { useComposer } from "~/lib/composer/utils";
 import { useTabPressScroll } from "~/lib/hooks";
 import { useContentFilter, type FilterResult } from "~/lib/hooks/preferences";
-import { useUserRefresh } from "~/lib/utils/query";
+import { isIOS26 } from "~/lib/utils/version";
 
 export type Posts =
   | {
@@ -63,6 +64,8 @@ const PostThread = ({ contentFilter }: Props) => {
   const ref = useRef<FlashListRef<Posts>>(null);
   const theme = useTheme();
   const composer = useComposer();
+  const headerHeight = useHeaderHeight();
+  const tabBarHeight = useBottomTabBarHeight();
 
   const thread = useQuery({
     queryKey: ["profile", author, "post", post],
@@ -238,10 +241,6 @@ const PostThread = ({ contentFilter }: Props) => {
     },
   });
 
-  const { refreshing, handleRefresh, tintColor } = useUserRefresh(
-    thread.refetch,
-  );
-
   const onScroll = useTabPressScroll<Posts>(ref);
 
   if (thread.data) {
@@ -254,15 +253,12 @@ const PostThread = ({ contentFilter }: Props) => {
           onScroll={onScroll}
           data={posts}
           initialScrollIndex={posts.findIndex((post) => post.primary) ?? 0}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={handleRefresh}
-              tintColor={tintColor}
-            />
+          initialScrollIndexParams={
+            isIOS26 ? { viewOffset: headerHeight } : undefined
           }
+          contentInsetAdjustmentBehavior="automatic"
           ListFooterComponent={
-            thread.isFetching && !refreshing ? (
+            thread.isFetching ? (
               <View className="w-full items-center py-4">
                 <ActivityIndicator />
               </View>
@@ -297,7 +293,7 @@ const PostThread = ({ contentFilter }: Props) => {
             )
           }
         />
-        {thread.data.main && (
+        {thread.data.main && thread.data.main.viewer?.replyDisabled && (
           <TouchableNativeFeedback
             onPress={() => composer.reply(thread.data.main!)}
           >
@@ -307,6 +303,7 @@ const PostThread = ({ contentFilter }: Props) => {
                 backgroundColor: theme.colors.card,
                 borderColor: theme.colors.border,
                 borderTopWidth: StyleSheet.hairlineWidth,
+                ...(isIOS26 ? { paddingBottom: tabBarHeight + 12 } : {}),
               }}
             >
               {thread.data.main.viewer?.replyDisabled ? (
@@ -349,13 +346,25 @@ export default function PostPage() {
   if (preferences.data) {
     return (
       <>
-        <Stack.Screen options={{ headerTitle: _(msg`Post`) }} />
+        <Stack.Screen
+          options={{
+            headerTitle: _(msg`Post`),
+            ...(isIOS26 && { headerTransparent: true }),
+          }}
+        />
         <PostThread contentFilter={contentFilter} />
       </>
     );
   }
 
-  return <Stack.Screen options={{ headerTitle: _(msg`Post`) }} />;
+  return (
+    <Stack.Screen
+      options={{
+        headerTitle: _(msg`Post`),
+        ...(isIOS26 && { headerTransparent: true }),
+      }}
+    />
+  );
 }
 
 const BlockedPost = memo(() => {

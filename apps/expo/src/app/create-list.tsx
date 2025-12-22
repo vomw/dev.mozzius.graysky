@@ -24,6 +24,7 @@ import { TransparentHeaderUntilScrolled } from "~/components/transparent-header"
 import { useAgent } from "~/lib/agent";
 import { compress, getGalleryPermission } from "~/lib/composer/utils";
 import { uploadBlob } from "~/lib/utils/upload-blob";
+import { isIOS26 } from "~/lib/utils/version";
 
 export default function CreateListScreen() {
   const theme = useTheme();
@@ -143,7 +144,22 @@ export default function CreateListScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ headerLeft }} />
+      <Stack.Screen
+        options={
+          isIOS26
+            ? {
+                unstable_headerLeftItems: () => [
+                  {
+                    type: "button",
+                    onPress: () => router.dismiss(),
+                    label: _(msg`Close`),
+                    icon: { type: "sfSymbol", name: "xmark" },
+                  },
+                ],
+              }
+            : { headerLeft }
+        }
+      />
       <TransparentHeaderUntilScrolled>
         <KeyboardAwareScrollView
           className="flex-1 px-4"

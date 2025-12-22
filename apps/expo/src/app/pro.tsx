@@ -147,25 +147,29 @@ export default function Pro() {
       <Stack.Screen
         options={{
           headerTransparent: true,
-          headerLeft: isIOS26
-            ? () => (
-                <Pressable onPress={() => router.dismiss()} className="ml-1.5">
-                  <XIcon size={24} color="white" />
-                </Pressable>
-              )
-            : undefined,
-          headerRight: isIOS26
-            ? undefined
-            : () => (
-                <TouchableHighlight
-                  className="rounded-full"
-                  onPress={() => router.push("../")}
-                >
-                  <View className="flex-1 rounded-full bg-neutral-800 p-2">
-                    <XIcon className="text-white" size={18} strokeWidth={3} />
-                  </View>
-                </TouchableHighlight>
-              ),
+          ...(!isIOS26
+            ? {
+                headerRight: () => (
+                  <TouchableHighlight
+                    className="rounded-full"
+                    onPress={() => router.push("../")}
+                  >
+                    <View className="flex-1 rounded-full bg-neutral-800 p-2">
+                      <XIcon className="text-white" size={18} strokeWidth={3} />
+                    </View>
+                  </TouchableHighlight>
+                ),
+              }
+            : {
+                unstable_headerRightItems: () => [
+                  {
+                    type: "button",
+                    onPress: () => router.dismiss(),
+                    label: _(msg`Close`),
+                    icon: { type: "sfSymbol", name: "xmark" },
+                  },
+                ],
+              }),
         }}
       />
       <ImageBackground className="flex-1" source={background} blurRadius={4}>

@@ -56,6 +56,15 @@ export default function ComposerLayout() {
     [router],
   );
 
+  const headerItemsRight = () => [
+    {
+      type: "button",
+      onPress: () => router.dismiss(),
+      label: _(msg`Close`),
+      icon: { type: "sfSymbol", name: "xmark" },
+    },
+  ];
+
   return (
     <ComposerStateProvider value={state}>
       <BottomSheetModalProvider>
@@ -83,7 +92,9 @@ export default function ComposerLayout() {
             options={{
               title: _(msg`Content Warning`),
               presentation: "formSheet",
-              headerRight,
+              ...(isIOS26
+                ? { unstable_headerItemsRight: headerItemsRight }
+                : { headerRight }),
             }}
           />
           <Stack.Screen
@@ -91,7 +102,12 @@ export default function ComposerLayout() {
             options={{
               title: _(msg`Reply Controls`),
               presentation: "formSheet",
-              headerRight,
+              ...(Platform.OS === "ios"
+                ? {
+                    sheetGrabberVisible: true,
+                    sheetAllowedDetents: [0.5, 1.0],
+                  }
+                : { headerRight }),
             }}
           />
           <Stack.Screen
@@ -106,7 +122,9 @@ export default function ComposerLayout() {
                 backgroundColor: isIOS26 ? "transparent" : theme.colors.card,
               },
               presentation: "modal",
-              headerRight,
+              ...(isIOS26
+                ? { unstable_headerItemsRight: headerItemsRight }
+                : { headerRight }),
             }}
           />
         </Stack>

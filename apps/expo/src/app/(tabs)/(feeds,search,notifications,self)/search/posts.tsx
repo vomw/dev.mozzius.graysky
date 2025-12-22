@@ -17,6 +17,7 @@ import { useTabPressScrollRef } from "~/lib/hooks";
 import { useContentFilter, type FilterResult } from "~/lib/hooks/preferences";
 import { useSearchBarOptions } from "~/lib/hooks/search-bar";
 import { useUserRefresh } from "~/lib/utils/query";
+import { isIOS26 } from "~/lib/utils/version";
 
 interface Props {
   search: string;
@@ -142,7 +143,11 @@ export default function PostsSearchScreen() {
   return (
     <>
       <Stack.Screen
-        options={{ title: _(msg`Search Posts`), headerSearchBarOptions }}
+        options={{
+          title: _(msg`Search Posts`),
+          headerSearchBarOptions,
+          headerTransparent: isIOS26,
+        }}
       />
       <PostsSearch search={search} />
     </>

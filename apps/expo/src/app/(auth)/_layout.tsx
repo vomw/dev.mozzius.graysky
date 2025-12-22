@@ -1,28 +1,13 @@
-import { Platform, Pressable } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useTheme } from "@react-navigation/native";
-import { XIcon } from "lucide-react-native";
 
 import { StatusBar } from "~/components/status-bar";
-import { useCanGoBack } from "~/lib/hooks/can-go-back";
 import { isIOS26 } from "~/lib/utils/version";
 
 export default function AuthLayout() {
   const router = useRouter();
-  const canGoBack = useCanGoBack("(auth)");
   const { _ } = useLingui();
-  const theme = useTheme();
-
-  const headerLeft =
-    Platform.OS === "ios" && !canGoBack
-      ? () => (
-          <Pressable onPress={() => router.dismiss()} className="ml-1.5">
-            <XIcon size={24} color={theme.colors.text} />
-          </Pressable>
-        )
-      : undefined;
 
   return (
     <>
@@ -30,7 +15,17 @@ export default function AuthLayout() {
       <Stack
         screenOptions={{
           headerBackButtonDisplayMode: isIOS26 ? "minimal" : "default",
-          headerLeft,
+          unstable_headerLeftItems: ({ canGoBack }) =>
+            canGoBack
+              ? [
+                  {
+                    type: "button",
+                    icon: { type: "sfSymbol", name: "xmark" },
+                    label: _(msg`Close`),
+                    onPress: () => router.dismiss(),
+                  },
+                ]
+              : [],
           contentStyle: {
             height: "100%",
           },

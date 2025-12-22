@@ -20,6 +20,7 @@ import { useTabPressScrollRef } from "~/lib/hooks";
 import { useHaptics } from "~/lib/hooks/preferences";
 import { useGroupNotifications } from "~/lib/storage/app-preferences";
 import { useRefreshOnFocus, useUserRefresh } from "~/lib/utils/query";
+import { isIOS26 } from "~/lib/utils/version";
 
 export interface NotificationGroup {
   reason: AppBskyNotificationListNotifications.Notification["reason"];
@@ -223,6 +224,7 @@ function Notifications() {
         setNonScrollRefreshing(false);
       }
     }, [refetch, haptics, queryClient, agent, notifications.isPending]),
+    { largeHeader: isIOS26 },
   );
 
   const data = useMemo(() => {
@@ -241,6 +243,8 @@ function Notifications() {
             headerRight: nonScrollRefreshing
               ? () => <ActivityIndicator size="small" />
               : undefined,
+            headerLargeTitle: isIOS26,
+            headerTransparent: isIOS26,
           }}
         />
         <FlashList<NotificationGroup>
