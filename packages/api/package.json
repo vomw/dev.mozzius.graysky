@@ -1,34 +1,29 @@
 {
   "name": "@graysky/api",
   "version": "0.1.0",
+  "type": "module",
   "dependencies": {
     "@atproto/api": "^0.13.31",
-    "@atproto/identity": "^0.4.9",
-    "@atproto/xrpc-server": "^0.9.5",
+    "@atproto/identity": "^0.4.10",
+    "@atproto/xrpc-server": "^0.10.4",
     "@graysky/db": "0.1.0",
-    "@trpc/client": "^11.5.1",
-    "@trpc/server": "^11.5.1",
-    "@vercel/analytics": "^1.5.0",
+    "@trpc/client": "^11.8.1",
+    "@trpc/server": "^11.8.1",
+    "@vercel/analytics": "^1.6.1",
     "@vercel/kv": "^3.0.0",
     "encoding": "^0.1.13",
     "lande": "^1.0.10",
-    "sharp": "0.32.6",
-    "superjson": "2.2.2",
-    "zod": "^3.22.4"
+    "sharp": "0.34.5",
+    "superjson": "2.2.6",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@graysky/eslint-config": "0.1.0",
     "@graysky/prettier-config": "0.1.0",
     "@graysky/tsconfig": "0.1.0",
-    "eslint": "^9.36.0",
-    "prettier": "^3.2.5",
-    "typescript": "^5.9.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@graysky/eslint-config/base"
-    ]
+    "eslint": "^9.39.2",
+    "prettier": "^3.7.4",
+    "typescript": "^5.9.3"
   },
   "license": "MIT",
   "main": "./index.ts",
@@ -36,7 +31,7 @@
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check \"**/*.{mjs,ts,json}\"",
-    "lint": "eslint .",
+    "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
   "types": "./index.ts"

@@ -1,4 +1,4 @@
-import { type AppBskyEmbedExternal, type BlobRef } from "@atproto/api";
+import type { AppBskyEmbedExternal, BlobRef } from "@atproto/api";
 import { track } from "@vercel/analytics/server";
 import sharp from "sharp";
 import { z } from "zod";
@@ -64,7 +64,7 @@ export const gifsRouter = createTRPCRouter({
         "https://bsky.social/xrpc/com.atproto.repo.uploadBlob",
         {
           method: "POST",
-          // @ts-expect-error
+          // @ts-expect-error some sorta arraybuffer thingy
           body: image,
           headers: {
             "Content-Type": "image/jpeg",
@@ -109,7 +109,7 @@ export const gifsRouter = createTRPCRouter({
             uri,
             title,
             description,
-            thumb: blobRef?.blob,
+            thumb: blobRef.blob,
           },
         } satisfies AppBskyEmbedExternal.Main,
       };

@@ -21,21 +21,15 @@
     "sync": "crowdin push && crowdin pull",
     "sync:sources": "crowdin push",
     "sync:translations": "crowdin pull",
-    "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache' --ignore-path='../../.gitignore'",
-    "format:fix": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache' --ignore-path='../../.gitignore'",
-    "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
-    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
+    "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
+    "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
+    "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
+    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
+    "lint:ws": "pnpm dlx sherif@latest",
     "typecheck": "turbo typecheck"
   },
-  "dependencies": {
-    "@graysky/eslint-config": "0.1.0",
-    "@graysky/prettier-config": "0.1.0",
-    "@manypkg/cli": "^0.21.4",
-    "eslint": "^9.36.0",
-    "eslint-plugin-turbo": "^2.5.6",
-    "prettier": "^3.3.3",
-    "turbo": "^2.5.6",
-    "typescript": "^5.9.2"
+  "devDependencies": {
+    "@crowdin/cli": "^4.12.0"
   },
   "engines": {
     "node": ">=20"
@@ -48,13 +42,8 @@
       "color": "4.2.3"
     },
     "patchedDependencies": {
-      "react-native-collapsible-tab-view": "patches/react-native-collapsible-tab-view.patch",
-      "react-native-ios-utilities": "patches/react-native-ios-utilities.patch",
-      "react-native-ios-context-menu": "patches/react-native-ios-context-menu.patch"
+      "react-native-collapsible-tab-view": "patches/react-native-collapsible-tab-view.patch"
     }
   },
-  "prettier": "@graysky/prettier-config",
-  "devDependencies": {
-    "@crowdin/cli": "^4.11.0"
-  }
+  "prettier": "@graysky/prettier-config"
 }
