@@ -43,6 +43,9 @@ yarn-error.log*
 # turbo
 .turbo
 
+# eslint cache
+.cache/
+
 *.ipa
 *.apk
 *.apk.idsig
