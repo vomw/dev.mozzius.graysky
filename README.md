@@ -32,20 +32,6 @@ You can then start the expo server with:
 pnpm dev
 ```
 
-## Future Roadmap
-
-- [ ] Change handle
-  - [ ] own domain
-  - [x] bsky.social
-  - [ ] community handles
-- [x] Push notifications
-- [ ] Drafts
-- [x] Full lists support
-- [x] Share post as image
-- [ ] Pro features
-  - [ ] Polls
-  - [ ] Analytics
-
 ## Android local APK builds
 
 - Install Android Studio, and the Android SDK
