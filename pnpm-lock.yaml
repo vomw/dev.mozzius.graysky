@@ -25,8 +25,14 @@ importers:
   apps/expo:
     dependencies:
       '@atproto/api':
-        specifier: ^0.13.31
-        version: 0.13.31
+        specifier: ^0.18.8
+        version: 0.18.8
+      '@atproto/oauth-client':
+        specifier: ^0.5.11
+        version: 0.5.11
+      '@atproto/oauth-client-expo':
+        specifier: ^0.0.5
+        version: 0.0.5(expo@54.0.30)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
       '@bottom-tabs/react-navigation':
         specifier: ^1.1.0
         version: 1.1.0(@react-navigation/native@7.1.26(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0))(react-native-bottom-tabs@1.1.0(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
@@ -51,6 +57,9 @@ importers:
       '@graysky/api':
         specifier: 0.1.0
         version: link:../../packages/api
+      '@graysky/oauth-metadata':
+        specifier: 0.1.0
+        version: link:../../packages/oauth-metadata
       '@haileyok/bluesky-video':
         specifier: ^0.3.2
         version: 0.3.2(expo@54.0.30)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
@@ -90,6 +99,9 @@ importers:
       '@trpc/server':
         specifier: ^11.8.1
         version: 11.8.1(typescript@5.9.3)
+      abortcontroller-polyfill:
+        specifier: ^1.7.8
+        version: 1.7.8
       bcp-47-match:
         specifier: ^2.0.3
         version: 2.0.3
@@ -171,6 +183,9 @@ importers:
       expo-screen-orientation:
         specifier: ^9.0.8
         version: 9.0.8(expo@54.0.30)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))
+      expo-secure-store:
+        specifier: ^15.0.7
+        version: 15.0.8(expo@54.0.30)
       expo-sharing:
         specifier: ^14.0.8
         version: 14.0.8(expo@54.0.30)
@@ -403,6 +418,9 @@ importers:
       '@graysky/db':
         specifier: 0.1.0
         version: link:../../packages/db
+      '@graysky/oauth-metadata':
+        specifier: 0.1.0
+        version: link:../../packages/oauth-metadata
       '@graysky/tailwind-config':
         specifier: 0.1.0
         version: link:../../tooling/tailwind
@@ -657,6 +675,8 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  packages/oauth-metadata: {}
+
   tooling/eslint:
     dependencies:
       '@eslint/compat':
@@ -759,8 +779,32 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
+  '@atproto-labs/did-resolver@0.2.4':
+    resolution: {integrity: sha512-sbXxBnAJWsKv/FEGG6a/WLz7zQYUr1vA2TXvNnPwwJQJCjPwEJMOh1vM22wBr185Phy7D2GD88PcRokn7eUVyw==}
+
+  '@atproto-labs/fetch@0.2.3':
+    resolution: {integrity: sha512-NZtbJOCbxKUFRFKMpamT38PUQMY0hX0p7TG5AEYOPhZKZEP7dHZ1K2s1aB8MdVH0qxmqX7nQleNrrvLf09Zfdw==}
+
+  '@atproto-labs/handle-resolver@0.3.4':
+    resolution: {integrity: sha512-wsNopfzfgO3uPvfnFDgNeXgDufXxSXhjBjp2WEiSzEiLrMy0Jodnqggw4OzD9MJKf0a4Iu2/ydd537qdy91LrQ==}
+
+  '@atproto-labs/identity-resolver@0.3.4':
+    resolution: {integrity: sha512-HNUEFQIo2ws6iATxmgHd5D5rAsWYupgxZucgwolVHPiMjE1SY+EmxEsfbEN1wDEzM8/u9AKUg/jrxxPEwsgbew==}
+
+  '@atproto-labs/pipe@0.1.1':
+    resolution: {integrity: sha512-hdNw2oUs2B6BN1lp+32pF7cp8EMKuIN5Qok2Vvv/aOpG/3tNSJ9YkvfI0k6Zd188LeDDYRUpYpxcoFIcGH/FNg==}
+
+  '@atproto-labs/simple-store-memory@0.1.4':
+    resolution: {integrity: sha512-3mKY4dP8I7yKPFj9VKpYyCRzGJOi5CEpOLPlRhoJyLmgs3J4RzDrjn323Oakjz2Aj2JzRU/AIvWRAZVhpYNJHw==}
+
+  '@atproto-labs/simple-store@0.3.0':
+    resolution: {integrity: sha512-nOb6ONKBRJHRlukW1sVawUkBqReLlLx6hT35VS3imaNPwiXDxLnTK7lxw3Lrl9k5yugSBDQAkZAq3MPTEFSUBQ==}
+
   '@atproto/api@0.13.31':
     resolution: {integrity: sha512-i2cUQuwe+3j8rgPJj4YWRjSQeJunGqJ3IzesnvbODjjZh3IS9jB80BZ/pTe/AvNg6JCBbqeWJjWDVKeFHaiZAw==}
+
+  '@atproto/api@0.18.8':
+    resolution: {integrity: sha512-Qo3sGd1N5hdHTaEWUBgptvPkULt2SXnMcWRhveSyctSd/IQwTMyaIH6E62A1SU+8xBSN5QLpoUJNE7iSrYM2Zg==}
 
   '@atproto/api@0.3.13':
     resolution: {integrity: sha512-smDlomgipca16G+jKXAZSMfsAmA5wG8WR3Z1dj29ZShVJlhs6+HHdxX7dWVDYEdSeb2rp/wyHN/tQhxGDAkz/g==}
@@ -792,6 +836,9 @@ packages:
     resolution: {integrity: sha512-n40aKkMoCatP0u9Yvhrdk6fXyOHFDDbkdm4h4HCyWW+KlKl8iXfD5iV+ECq+w5BM+QH25aIpt3/j6EUNerhLxw==}
     engines: {node: '>=18.7.0'}
 
+  '@atproto/did@0.2.3':
+    resolution: {integrity: sha512-VI8JJkSizvM2cHYJa37WlbzeCm5tWpojyc1/Zy8q8OOjyoy6X4S4BEfoP941oJcpxpMTObamibQIXQDo7tnIjg==}
+
   '@atproto/identifier@0.2.1':
     resolution: {integrity: sha512-WCgDgqv3aoAZ7S0R96SsHMgzodLjy95iacD5nVDdefMJj2HkL8ygv9WCjcsBWxXcpRbKip2mcpnQhxduS6oRkw==}
     deprecated: This package is now deprecated. Please use @atproto/syntax, which provides the same interfaces.
@@ -802,6 +849,15 @@ packages:
   '@atproto/identity@0.4.10':
     resolution: {integrity: sha512-nQbzDLXOhM8p/wo0cTh5DfMSOSHzj6jizpodX37LJ4S1TZzumSxAjHEZa5Rev3JaoD5uSWMVE0MmKEGWkPPvfQ==}
     engines: {node: '>=18.7.0'}
+
+  '@atproto/jwk-jose@0.1.11':
+    resolution: {integrity: sha512-i4Fnr2sTBYmMmHXl7NJh8GrCH+tDQEVWrcDMDnV5DjJfkgT17wIqvojIw9SNbSL4Uf0OtfEv6AgG0A+mgh8b5Q==}
+
+  '@atproto/jwk-webcrypto@0.2.0':
+    resolution: {integrity: sha512-UmgRrrEAkWvxwhlwe30UmDOdTEFidlIzBC7C3cCbeJMcBN1x8B3KH+crXrsTqfWQBG58mXgt8wgSK3Kxs2LhFg==}
+
+  '@atproto/jwk@0.6.0':
+    resolution: {integrity: sha512-bDoJPvt7TrQVi/rBfBrSSpGykhtIriKxeYCYQTiPRKFfyRhbgpElF0wPXADjIswnbzZdOwbY63az4E/CFVT3Tw==}
 
   '@atproto/lex-cbor@0.0.3':
     resolution: {integrity: sha512-N8lCV3kK5ZcjSOWxKLWqzlnaSpK4isjXRZ0EqApl/5y9KB64s78hQ/U3KIE5qnPRlBbW5kSH3YACoU27u9nTOA==}
@@ -828,14 +884,26 @@ packages:
     resolution: {integrity: sha512-fTsHfiq2NF+Zm3P1XzeBrHh9BYoy5dEzGev3sY69nhemcKnfsbj/agnIN2ekSOAlyj0Bj405/3BHQSQeiDbz1w==}
     deprecated: This package is now deprecated. Please use @atproto/syntax, which provides the same interfaces.
 
+  '@atproto/oauth-client-browser@0.3.37':
+    resolution: {integrity: sha512-iU/sJeA0t10jEivQ/UcVlvIbApqyF7J967OPeKL37kwz4Dsd/WLfRo+LkCQQZmgt2uyVLAaXUSxGGirD1jHjlQ==}
+
+  '@atproto/oauth-client-expo@0.0.5':
+    resolution: {integrity: sha512-kFe/fZF+ldnuO3FOG49FtUkLjceJyoO72NBifvnW5mU4fHnAvwtLkUPoncEPOp82A9AcoDiiq1SGisi9w/rUqQ==}
+    peerDependencies:
+      expo: '*'
+      react-native: '*'
+
+  '@atproto/oauth-client@0.5.11':
+    resolution: {integrity: sha512-KyxKpnF988BI3m+4NNYDgkN6a2sPORD9uaOEGP4tnJLOvhMVHyATWwq3Jx4LOYotTFDOvLdheWcI1G9DozE88w==}
+
+  '@atproto/oauth-types@0.5.2':
+    resolution: {integrity: sha512-9DCDvtvCanTwAaU5UakYDO0hzcOITS3RutK5zfLytE5Y9unj0REmTDdN8Xd8YCfUJl7T/9pYpf04Uyq7bFTASg==}
+
   '@atproto/syntax@0.1.5':
     resolution: {integrity: sha512-pbY5lOnThoAbsmrdbN9LC/dNmckfqODJiX9zjW2t3BIHYFeGBc6w9bK3Vre8A0Hg8yWkQpv6gaBLu+ykgi2DJQ==}
 
   '@atproto/syntax@0.3.1':
     resolution: {integrity: sha512-fzW0Mg1QUOVCWUD3RgEsDt6d1OZ6DdFmbKcDdbzUfh0t4rhtRAC05KbZYmxuMPWDAiJ4BbbQ5dkAc/mNypMXkw==}
-
-  '@atproto/syntax@0.4.1':
-    resolution: {integrity: sha512-CJdImtLAiFO+0z3BWTtxwk6aY5w4t8orHTMVJgkf++QRJWTxPbIFko/0hrkADB7n2EruDxDSeAgfUGehpH6ngw==}
 
   '@atproto/syntax@0.4.2':
     resolution: {integrity: sha512-X9XSRPinBy/0VQ677j8VXlBsYSsUXaiqxWVpGGxJYsAhugdQRb0jqaVKJFtm6RskeNkV6y9xclSUi9UYG/COrA==}
@@ -3628,6 +3696,9 @@ packages:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
     engines: {node: '>=6.5'}
 
+  abortcontroller-polyfill@1.7.8:
+    resolution: {integrity: sha512-9f1iZ2uWh92VcrU9Y8x+LdM4DLj75VE0MJB8zuF1iUnroEptStw+DQ8EQPMUdfe5k+PkB1uUfDQfWbhstH8LrQ==}
+
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
     engines: {node: '>= 0.6'}
@@ -4301,6 +4372,9 @@ packages:
   core-js-compat@3.47.0:
     resolution: {integrity: sha512-IGfuznZ/n7Kp9+nypamBhvwdwLsW6KC8IOaURw2doAK5e98AG3acVLdh0woOnEqCfUtS+Vu882JE4k/DAm3ItQ==}
 
+  core-js@3.47.0:
+    resolution: {integrity: sha512-c3Q2VVkGAUyupsjRnaNX6u8Dq2vAdzm9iuPj5FW0fRxzlxgq9Q39MDq10IvmQSpLgHQNyQzQmOo6bgGHmH3NNg==}
+
   cosmiconfig@7.1.0:
     resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
     engines: {node: '>=10'}
@@ -4825,6 +4899,9 @@ packages:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
 
+  event-target-polyfill@0.0.4:
+    resolution: {integrity: sha512-Gs6RLjzlLRdT8X9ZipJdIZI/Y6/HhRLyq9RdDlCsnpxr/+Nn6bU2EFGuC94GjxqhM+Nmij2Vcq98yoHrU8uNFQ==}
+
   event-target-shim@5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
     engines: {node: '>=6'}
@@ -5072,6 +5149,11 @@ packages:
     peerDependencies:
       expo: '*'
       react-native: '*'
+
+  expo-secure-store@15.0.8:
+    resolution: {integrity: sha512-lHnzvRajBu4u+P99+0GEMijQMFCOYpWRO4dWsXSuMt77+THPIGjzNvVKrGSl6mMrLsfVaKL8BpwYZLGlgA+zAw==}
+    peerDependencies:
+      expo: '*'
 
   expo-server-sdk@3.13.0:
     resolution: {integrity: sha512-EeGs8PlXmnP2uDpjVhnclQmlua3A0swEj3BzqoRiHfU4WPsN5v3eHhqjjwl+Lf2rleKW2L9lhWp6sCL1vPMnAg==}
@@ -5835,6 +5917,9 @@ packages:
 
   joi@17.13.3:
     resolution: {integrity: sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==}
+
+  jose@5.10.0:
+    resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
 
   js-sha256@0.10.1:
     resolution: {integrity: sha512-5obBtsz9301ULlsgggLg542s/jqtddfOpV5KJc4hajc9JV8GeY2gZHSVpYBn4nWqAUTJ9v+xwtbJ1mIBgIH5Vw==}
@@ -7185,6 +7270,12 @@ packages:
       react: '*'
       react-native: '*'
       react-native-reanimated: '>=3.0.0'
+
+  react-native-mmkv@3.3.3:
+    resolution: {integrity: sha512-GMsfOmNzx0p5+CtrCFRVtpOOMYNJXuksBVARSQrCFaZwjUyHJdQzcN900GGaFFNTxw2fs8s5Xje//RDKj9+PZA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
 
   react-native-mmkv@4.1.0:
     resolution: {integrity: sha512-ia76WnU6dkLZxFkSSflxqFgHT2pIaML763aucEu7nMglF41oEWTdTtBu0o8a1cxbhZOaONk6KF8RQp5fLvPitA==}
@@ -8556,12 +8647,57 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
+  '@atproto-labs/did-resolver@0.2.4':
+    dependencies:
+      '@atproto-labs/fetch': 0.2.3
+      '@atproto-labs/pipe': 0.1.1
+      '@atproto-labs/simple-store': 0.3.0
+      '@atproto-labs/simple-store-memory': 0.1.4
+      '@atproto/did': 0.2.3
+      zod: 3.25.76
+
+  '@atproto-labs/fetch@0.2.3':
+    dependencies:
+      '@atproto-labs/pipe': 0.1.1
+
+  '@atproto-labs/handle-resolver@0.3.4':
+    dependencies:
+      '@atproto-labs/simple-store': 0.3.0
+      '@atproto-labs/simple-store-memory': 0.1.4
+      '@atproto/did': 0.2.3
+      zod: 3.25.76
+
+  '@atproto-labs/identity-resolver@0.3.4':
+    dependencies:
+      '@atproto-labs/did-resolver': 0.2.4
+      '@atproto-labs/handle-resolver': 0.3.4
+
+  '@atproto-labs/pipe@0.1.1': {}
+
+  '@atproto-labs/simple-store-memory@0.1.4':
+    dependencies:
+      '@atproto-labs/simple-store': 0.3.0
+      lru-cache: 10.4.3
+
+  '@atproto-labs/simple-store@0.3.0': {}
+
   '@atproto/api@0.13.31':
     dependencies:
       '@atproto/common-web': 0.3.2
       '@atproto/lexicon': 0.4.5
       '@atproto/syntax': 0.3.1
       '@atproto/xrpc': 0.6.6
+      await-lock: 2.2.2
+      multiformats: 9.9.0
+      tlds: 1.255.0
+      zod: 3.25.76
+
+  '@atproto/api@0.18.8':
+    dependencies:
+      '@atproto/common-web': 0.4.7
+      '@atproto/lexicon': 0.6.0
+      '@atproto/syntax': 0.4.2
+      '@atproto/xrpc': 0.7.7
       await-lock: 2.2.2
       multiformats: 9.9.0
       tlds: 1.255.0
@@ -8631,6 +8767,10 @@ snapshots:
       '@noble/hashes': 1.8.0
       uint8arrays: 3.0.0
 
+  '@atproto/did@0.2.3':
+    dependencies:
+      zod: 3.25.76
+
   '@atproto/identifier@0.2.1':
     dependencies:
       '@atproto/syntax': 0.1.5
@@ -8648,6 +8788,22 @@ snapshots:
     dependencies:
       '@atproto/common-web': 0.4.7
       '@atproto/crypto': 0.4.5
+
+  '@atproto/jwk-jose@0.1.11':
+    dependencies:
+      '@atproto/jwk': 0.6.0
+      jose: 5.10.0
+
+  '@atproto/jwk-webcrypto@0.2.0':
+    dependencies:
+      '@atproto/jwk': 0.6.0
+      '@atproto/jwk-jose': 0.1.11
+      zod: 3.25.76
+
+  '@atproto/jwk@0.6.0':
+    dependencies:
+      multiformats: 9.9.0
+      zod: 3.25.76
 
   '@atproto/lex-cbor@0.0.3':
     dependencies:
@@ -8689,7 +8845,7 @@ snapshots:
   '@atproto/lexicon@0.5.2':
     dependencies:
       '@atproto/common-web': 0.4.7
-      '@atproto/syntax': 0.4.1
+      '@atproto/syntax': 0.4.2
       iso-datestring-validator: 2.2.2
       multiformats: 9.9.0
       zod: 3.25.76
@@ -8706,13 +8862,60 @@ snapshots:
     dependencies:
       '@atproto/syntax': 0.1.5
 
+  '@atproto/oauth-client-browser@0.3.37':
+    dependencies:
+      '@atproto-labs/did-resolver': 0.2.4
+      '@atproto-labs/handle-resolver': 0.3.4
+      '@atproto-labs/simple-store': 0.3.0
+      '@atproto/did': 0.2.3
+      '@atproto/jwk': 0.6.0
+      '@atproto/jwk-webcrypto': 0.2.0
+      '@atproto/oauth-client': 0.5.11
+      '@atproto/oauth-types': 0.5.2
+      core-js: 3.47.0
+
+  '@atproto/oauth-client-expo@0.0.5(expo@54.0.30)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@atproto-labs/simple-store': 0.3.0
+      '@atproto/oauth-client': 0.5.11
+      '@atproto/oauth-client-browser': 0.3.37
+      core-js: 3.47.0
+      event-target-polyfill: 0.0.4
+      expo: 54.0.30(@babel/core@7.28.5)(@expo/metro-runtime@3.2.3(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0)))(bufferutil@4.0.9)(expo-router@6.0.21)(graphql@15.8.0)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
+      expo-web-browser: 15.0.10(expo@54.0.30)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))
+      react-native: 0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0)
+      react-native-mmkv: 3.3.3(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
+      react-native-url-polyfill: 3.0.0(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))
+    transitivePeerDependencies:
+      - react
+
+  '@atproto/oauth-client@0.5.11':
+    dependencies:
+      '@atproto-labs/did-resolver': 0.2.4
+      '@atproto-labs/fetch': 0.2.3
+      '@atproto-labs/handle-resolver': 0.3.4
+      '@atproto-labs/identity-resolver': 0.3.4
+      '@atproto-labs/simple-store': 0.3.0
+      '@atproto-labs/simple-store-memory': 0.1.4
+      '@atproto/did': 0.2.3
+      '@atproto/jwk': 0.6.0
+      '@atproto/oauth-types': 0.5.2
+      '@atproto/xrpc': 0.7.7
+      core-js: 3.47.0
+      multiformats: 9.9.0
+      zod: 3.25.76
+
+  '@atproto/oauth-types@0.5.2':
+    dependencies:
+      '@atproto/did': 0.2.3
+      '@atproto/jwk': 0.6.0
+      zod: 3.25.76
+
   '@atproto/syntax@0.1.5':
     dependencies:
       '@atproto/common-web': 0.2.4
 
   '@atproto/syntax@0.3.1': {}
-
-  '@atproto/syntax@0.4.1': {}
 
   '@atproto/syntax@0.4.2': {}
 
@@ -11970,6 +12173,8 @@ snapshots:
     dependencies:
       event-target-shim: 5.0.1
 
+  abortcontroller-polyfill@1.7.8: {}
+
   accepts@1.3.8:
     dependencies:
       mime-types: 2.1.35
@@ -12756,6 +12961,8 @@ snapshots:
     dependencies:
       browserslist: 4.28.1
 
+  core-js@3.47.0: {}
+
   cosmiconfig@7.1.0:
     dependencies:
       '@types/parse-json': 4.0.2
@@ -13474,6 +13681,8 @@ snapshots:
 
   etag@1.8.1: {}
 
+  event-target-polyfill@0.0.4: {}
+
   event-target-shim@5.0.1: {}
 
   events-universal@1.0.1:
@@ -13753,6 +13962,10 @@ snapshots:
     dependencies:
       expo: 54.0.30(@babel/core@7.28.5)(@expo/metro-runtime@3.2.3(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0)))(bufferutil@4.0.9)(expo-router@6.0.21)(graphql@15.8.0)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
       react-native: 0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0)
+
+  expo-secure-store@15.0.8(expo@54.0.30):
+    dependencies:
+      expo: 54.0.30(@babel/core@7.28.5)(@expo/metro-runtime@3.2.3(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0)))(bufferutil@4.0.9)(expo-router@6.0.21)(graphql@15.8.0)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
 
   expo-server-sdk@3.13.0(encoding@0.1.13):
     dependencies:
@@ -14663,6 +14876,8 @@ snapshots:
       '@sideway/formula': 3.0.1
       '@sideway/pinpoint': 2.0.0
     optional: true
+
+  jose@5.10.0: {}
 
   js-sha256@0.10.1: {}
 
@@ -16303,6 +16518,11 @@ snapshots:
       react-native: 0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0)
       react-native-is-edge-to-edge: 1.2.1(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
       react-native-reanimated: 4.2.1(react-native-worklets@0.7.1(@babel/core@7.28.5)(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0)
+
+  react-native-mmkv@3.3.3(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-native: 0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0)
 
   react-native-mmkv@4.1.0(react-native-nitro-modules@0.31.10(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@react-native-community/cli@14.1.0(bufferutil@4.0.9)(typescript@5.9.3))(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.1.0))(react@19.1.0):
     dependencies:

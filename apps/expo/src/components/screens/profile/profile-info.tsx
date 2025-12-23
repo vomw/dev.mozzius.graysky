@@ -351,7 +351,7 @@ export const ProfileInfo = ({ profile, backButton }: Props) => {
             className="h-10 flex-row items-center justify-end"
             pointerEvents="box-none"
           >
-            {agent.session?.handle !== profile.handle ? (
+            {agent.did !== profile.did ? (
               !profile.viewer?.blocking && (
                 <View className="flex-row justify-end" pointerEvents="box-none">
                   <TouchableOpacity

@@ -47,7 +47,7 @@ export default function AppLayout() {
   const notifications = useQuery({
     queryKey: ["notifications", "unread"],
     queryFn: async () => {
-      if (!agent?.hasSession) return null;
+      if (!agent?.did) return null;
       const unreadCount = await agent.countUnreadNotifications();
       if (!unreadCount.success)
         throw new Error("Failed to fetch notifications");
@@ -120,7 +120,7 @@ export default function AppLayout() {
         </Text>
         <BottomSheetScrollView style={contentContainerStyle}>
           <SwitchAccounts
-            active={agent?.session?.did}
+            active={agent?.did}
             onSuccessfulSwitch={dismissSheet}
           />
         </BottomSheetScrollView>
@@ -225,12 +225,12 @@ export default function AppLayout() {
             }}
             listeners={{
               tabPress: () => {
-                if (agent?.hasSession) {
+                if (agent?.did) {
                   if (segments.at(-2) === "profile") {
                     const actor = pathname.split("/").pop()!;
                     try {
                       if (actor.startsWith("did:")) {
-                        if (actor === agent.session?.did)
+                        if (actor === agent.did)
                           throw new Error("Cannot mention yourself");
                         void agent.getProfile({ actor }).then((profile) => {
                           if (!profile.success)
@@ -240,9 +240,18 @@ export default function AppLayout() {
                           );
                         });
                       } else {
-                        if (actor === agent.session?.handle)
-                          throw new Error("Cannot mention yourself");
-                        router.push(`/composer/?initialText=@${actor}`);
+                        // Resolve handle to DID and check if it's self
+                        void agent
+                          .resolveHandle({ handle: actor })
+                          .then((res) => {
+                            if (res.data.did === agent.did)
+                              throw new Error("Cannot mention yourself");
+                            router.push(`/composer/?initialText=@${actor}`);
+                          })
+                          .catch(() => {
+                            router.push("/composer");
+                          });
+                        return; // Return early since we're handling async
                       }
                     } catch (err) {
                       console.error(err);

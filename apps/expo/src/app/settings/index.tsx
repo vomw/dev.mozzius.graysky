@@ -95,7 +95,7 @@ export default function SettingsPage() {
   return (
     <GroupedList groups={groups}>
       <View className="mb-4 flex-1">
-        <SwitchAccounts active={agent?.session?.did} showAddAccount />
+        <SwitchAccounts active={agent?.did} showAddAccount />
       </View>
     </GroupedList>
   );

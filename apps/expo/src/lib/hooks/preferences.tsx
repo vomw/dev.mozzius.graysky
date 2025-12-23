@@ -79,7 +79,7 @@ const usePreferencesQuery = () => {
       if (!prefs.success) throw new Error("Could not get preferences");
       return prefs.data.preferences;
     },
-    enabled: agent.hasSession,
+    enabled: !!agent.did,
   });
 
   return query;

@@ -16,7 +16,7 @@ import { useRefreshOnFocus } from "~/lib/utils/query";
 export const useProfile = (handle?: string) => {
   const agent = useAgent();
 
-  const actor = handle ?? agent.session?.did;
+  const actor = handle ?? agent.did;
 
   const query = useQuery({
     queryKey: ["profile", actor],
@@ -53,7 +53,7 @@ export const useProfile = (handle?: string) => {
 export const useProfileFeeds = (handle?: string) => {
   const agent = useAgent();
 
-  const actor = handle ?? agent.session?.did;
+  const actor = handle ?? agent.did;
 
   return useInfiniteQuery({
     queryKey: ["profile", actor, "feeds"],
@@ -78,7 +78,7 @@ export const useProfilePosts = (
   const agent = useAgent();
   const { preferences, contentFilter } = useContentFilter();
 
-  const actor = did ?? agent.session?.did;
+  const actor = did ?? agent.did;
 
   const timeline = useInfiniteQuery({
     queryKey: ["profile", actor, "feed", mode],
@@ -211,7 +211,7 @@ export const useDefaultHeaderHeight = () => {
 export const useProfileLists = (did?: string) => {
   const agent = useAgent();
 
-  const actor = did ?? agent.session?.did;
+  const actor = did ?? agent.did;
 
   const query = useInfiniteQuery({
     queryKey: ["profile", actor, "lists"],

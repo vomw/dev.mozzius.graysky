@@ -9,13 +9,13 @@ import {
   AppBskyFeedPost,
   AppBskyRichtextFacet,
   RichText,
+  type Agent,
   type AppBskyEmbedExternal,
   type AppBskyEmbedImages,
   type AppBskyEmbedRecord,
   type AppBskyEmbedRecordWithMedia,
   type AppBskyFeedThreadgate,
   type BlobRef,
-  type BskyAgent,
   type ComAtprotoLabelDefs,
   type ComAtprotoRepoStrongRef,
 } from "@atproto/api";
@@ -112,7 +112,7 @@ export const useReply = (reply?: string) => {
 export const useQuote = (quote?: string) => {
   const ref = quote
     ? {
-        $type: "app.bsky.embed.record",
+        $type: "app.bsky.embed.record" as const,
         record: strongRefSchema.parse(JSON.parse(decodeURIComponent(quote))),
       }
     : undefined;
@@ -164,7 +164,7 @@ export const useSendPost = ({
   return useMutation({
     mutationKey: ["send"],
     mutationFn: async () => {
-      if (!agent.hasSession) throw new Error("Not logged in");
+      if (!agent.did) throw new Error("Not logged in");
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
@@ -200,7 +200,7 @@ export const useSendPost = ({
       const media =
         uploadedImages.length > 0
           ? {
-              $type: "app.bsky.embed.images",
+              $type: "app.bsky.embed.images" as const,
               images: uploadedImages,
             }
           : undefined;
@@ -239,7 +239,8 @@ export const useSendPost = ({
         Sentry.captureException(err);
       }
 
-      let mergedEmbed: AppBskyFeedPost.Record["embed"];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let mergedEmbed: any;
 
       // embed priorities
       // 1. quote with media
@@ -253,19 +254,19 @@ export const useSendPost = ({
             $type: "app.bsky.embed.recordWithMedia",
             record: quote,
             media: gif.main,
-          } satisfies AppBskyEmbedRecordWithMedia.Main;
+          };
         } else if (media) {
           mergedEmbed = {
             $type: "app.bsky.embed.recordWithMedia",
             record: quote,
             media,
-          } satisfies AppBskyEmbedRecordWithMedia.Main;
+          };
         } else if (external?.type === "external") {
           mergedEmbed = {
             $type: "app.bsky.embed.recordWithMedia",
             record: quote,
             media: external.main,
-          } satisfies AppBskyEmbedRecordWithMedia.Main;
+          };
         } else {
           mergedEmbed = quote;
         }
@@ -277,7 +278,7 @@ export const useSendPost = ({
             $type: "app.bsky.embed.recordWithMedia",
             record: external.main,
             media,
-          } satisfies AppBskyEmbedRecordWithMedia.Main;
+          };
         } else {
           mergedEmbed = media;
         }
@@ -285,7 +286,8 @@ export const useSendPost = ({
         mergedEmbed = external.main;
       }
 
-      let selfLabels: ComAtprotoLabelDefs.SelfLabels | undefined;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let selfLabels: any;
       if (labels?.length) {
         selfLabels = {
           $type: "com.atproto.label.defs#selfLabels",
@@ -303,17 +305,18 @@ export const useSendPost = ({
       });
 
       if (threadgate.length > 0) {
-        const allow: (
-          | AppBskyFeedThreadgate.MentionRule
-          | AppBskyFeedThreadgate.FollowingRule
-          | AppBskyFeedThreadgate.ListRule
-        )[] = [];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const allow: any[] = [];
         if (!threadgate.find((v) => v.type === "nobody")) {
           for (const rule of threadgate) {
             if (rule.type === "mention") {
-              allow.push({ $type: "app.bsky.feed.threadgate#mentionRule" });
+              allow.push({
+                $type: "app.bsky.feed.threadgate#mentionRule",
+              });
             } else if (rule.type === "following") {
-              allow.push({ $type: "app.bsky.feed.threadgate#followingRule" });
+              allow.push({
+                $type: "app.bsky.feed.threadgate#followingRule",
+              });
             } else if (rule.type === "list") {
               allow.push({
                 $type: "app.bsky.feed.threadgate#listRule",
@@ -480,7 +483,7 @@ export const useImages = () => {
   };
 };
 
-export const generateRichText = async (text: string, agent: BskyAgent) => {
+export const generateRichText = async (text: string, agent: Agent) => {
   const rt = new RichText({ text });
   await rt.detectFacets(agent);
   return rt;
@@ -680,9 +683,9 @@ export const useExternal = (facets: AppBskyRichtextFacet.Main[] = []) => {
               return {
                 type: "record",
                 view: {
-                  $type: "app.bsky.embed.record#view",
+                  $type: "app.bsky.embed.record#view" as const,
                   record: {
-                    $type: "app.bsky.embed.record#viewRecord",
+                    $type: "app.bsky.embed.record#viewRecord" as const,
                     author: thread.post.author,
                     uri: thread.post.uri,
                     cid: thread.post.cid,
@@ -690,15 +693,15 @@ export const useExternal = (facets: AppBskyRichtextFacet.Main[] = []) => {
                     labels: thread.post.labels,
                     value: thread.post.record,
                     embeds: thread.post.embed ? [thread.post.embed] : undefined,
-                  } satisfies AppBskyEmbedRecord.ViewRecord,
-                } satisfies AppBskyEmbedRecord.View,
+                  },
+                },
                 main: {
-                  $type: "app.bsky.embed.record",
+                  $type: "app.bsky.embed.record" as const,
                   record: {
                     uri: thread.post.uri,
                     cid: thread.post.cid,
                   },
-                } satisfies AppBskyEmbedRecord.Main,
+                },
               };
             }
 
@@ -714,16 +717,19 @@ export const useExternal = (facets: AppBskyRichtextFacet.Main[] = []) => {
             return {
               type: "record",
               view: {
-                $type: "app.bsky.embed.record#view",
-                record: generator.data.view,
-              } satisfies AppBskyEmbedRecord.View,
+                $type: "app.bsky.embed.record#view" as const,
+                record: {
+                  ...generator.data.view,
+                  $type: "app.bsky.feed.defs#generatorView" as const,
+                },
+              },
               main: {
-                $type: "app.bsky.embed.record",
+                $type: "app.bsky.embed.record" as const,
                 record: {
                   uri: generator.data.view.uri,
                   cid: generator.data.view.cid,
                 },
-              } satisfies AppBskyEmbedRecord.Main,
+              },
             };
           }
           default:
@@ -758,28 +764,26 @@ export const useExternal = (facets: AppBskyRichtextFacet.Main[] = []) => {
         return {
           type: "external",
           view: {
-            $type: "app.bsky.embed.external#view",
+            $type: "app.bsky.embed.external#view" as const,
             external: {
-              $type: "app.bsky.embed.external#viewExternal",
+              $type: "app.bsky.embed.external#viewExternal" as const,
               uri: url.toString(),
               title,
               description,
               thumb: image,
-              url: selectedEmbed,
-            } satisfies AppBskyEmbedExternal.ViewExternal,
-          } satisfies AppBskyEmbedExternal.View,
+            },
+          },
           main: {
-            $type: "app.bsky.embed.external",
+            $type: "app.bsky.embed.external" as const,
             external: {
-              $type: "app.bsky.embed.external#external",
+              $type: "app.bsky.embed.external#external" as const,
               uri: url.toString(),
               title,
               description,
               // thumb is filled in later
               thumb: undefined,
-              url: selectedEmbed,
-            } satisfies AppBskyEmbedExternal.External,
-          } satisfies AppBskyEmbedExternal.Main,
+            },
+          },
         };
       }
     },

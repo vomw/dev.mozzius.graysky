@@ -108,7 +108,7 @@ export default function CreateListScreen() {
 
       await agent.app.bsky.graph.list.create(
         {
-          repo: agent.session?.did,
+          repo: agent.assertDid,
         },
         {
           name,
@@ -122,7 +122,7 @@ export default function CreateListScreen() {
     },
     onSuccess: () => {
       void queryClient.invalidateQueries({
-        queryKey: [agent.session?.did, "lists"],
+        queryKey: [agent.did, "lists"],
       });
       router.push("../");
     },

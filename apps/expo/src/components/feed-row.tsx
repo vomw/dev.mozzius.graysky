@@ -178,6 +178,13 @@ export const FeedRow = ({
   );
 };
 
+type FeedRowFeed = (
+  | AppBskyFeedDefs.GeneratorView
+  | AppBskyGraphDefs.ListView
+) & {
+  pinned: boolean;
+};
+
 export const DraggableFeedRow = ({
   feed,
   onPressStar,
@@ -185,9 +192,7 @@ export const DraggableFeedRow = ({
   editing,
   onUnsave,
 }: {
-  feed: (AppBskyFeedDefs.GeneratorView | AppBskyGraphDefs.ListView) & {
-    pinned: boolean;
-  };
+  feed: FeedRowFeed;
   onPressStar: () => void;
   drag?: () => void;
   editing: boolean;

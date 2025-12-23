@@ -368,7 +368,7 @@ export default function ComposerScreen() {
               className="flex-1"
             >
               <FeedPost
-                item={reply.thread.data}
+                item={{ post: reply.thread.data.post }}
                 dataUpdatedAt={0}
                 filter={contentFilter(reply.thread.data.post.labels)}
                 hasReply
@@ -562,7 +562,10 @@ export default function ComposerScreen() {
               <Embed
                 uri={gif.view.external.uri}
                 transparent
-                content={gif.view}
+                content={{
+                  ...gif.view,
+                  $type: "app.bsky.embed.external#view" as const,
+                }}
               />
             </Animated.View>
           )}
@@ -578,16 +581,14 @@ export default function ComposerScreen() {
                   <Embed
                     uri=""
                     transparent
-                    content={
-                      {
-                        $type: "app.bsky.embed.record#view",
-                        record: {
-                          $type: "app.bsky.embed.record#viewRecord",
-                          ...quote.thread.data.post,
-                          value: quote.thread.data.post.record,
-                        },
-                      } satisfies AppBskyEmbedRecord.View
-                    }
+                    content={{
+                      $type: "app.bsky.embed.record#view" as const,
+                      record: {
+                        $type: "app.bsky.embed.record#viewRecord" as const,
+                        ...quote.thread.data.post,
+                        value: quote.thread.data.post.record,
+                      },
+                    }}
                   />
                 </View>
               ) : (
@@ -677,7 +678,16 @@ const LoadableEmbed = ({
       if (query.data === null) return null;
       return (
         <View className="w-full flex-1" pointerEvents="none">
-          <Embed uri={url} transparent content={query.data.view} />
+          <Embed
+            uri={url}
+            transparent
+            content={{
+              ...query.data.view,
+              $type: query.data.view.$type as
+                | "app.bsky.embed.external#view"
+                | "app.bsky.embed.record#view",
+            }}
+          />
         </View>
       );
   }

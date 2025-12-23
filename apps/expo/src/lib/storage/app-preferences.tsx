@@ -134,8 +134,8 @@ export const {
 } = createSelectorHooks();
 
 export const useSetAppPreferences = () => {
-  return useCallback((change: Partial<AppPreferences>) => {
-    return appPreferencesStore.setState(change);
+  return useCallback((change: Partial<AppPreferences>): void => {
+    appPreferencesStore.setState(change);
   }, []);
 };
 

@@ -213,7 +213,7 @@ const PostContextMenuButton = ({
             </DropdownMenu.Item>
           </DropdownMenu.Group>
         )}
-        {post.author.handle === agent.session?.handle ? (
+        {post.author.did === agent.did ? (
           <DropdownMenu.Group>
             <DropdownMenu.Item
               key="delete"

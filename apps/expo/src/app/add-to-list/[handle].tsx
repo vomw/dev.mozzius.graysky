@@ -34,11 +34,11 @@ export default function AddToListScreen() {
   });
 
   const lists = useQuery({
-    queryKey: [agent.session?.did, "lists"],
+    queryKey: [agent.did, "lists"],
     queryFn: async () => {
-      if (!agent.session) return null;
+      if (!agent.did) return null;
       const lists = await agent.app.bsky.graph.getLists({
-        actor: agent.session.did,
+        actor: agent.did,
       });
       if (!lists.success) throw new Error(_(msg`Couldn't fetch lists`));
       return lists.data;
@@ -203,16 +203,16 @@ export interface ListMembership {
 export function useDangerousListMembershipsQuery() {
   const agent = useAgent();
   return useQuery<ListMembership[]>({
-    queryKey: ["list-membership", agent.session?.did],
+    queryKey: ["list-membership", agent.did],
     async queryFn() {
-      if (!agent.session?.did) {
+      if (!agent.did) {
         return [];
       }
       let cursor;
       let arr: ListMembership[] = [];
       for (let i = 0; i < SANITY_PAGE_LIMIT; i++) {
         const res = await agent.app.bsky.graph.listitem.list({
-          repo: agent.session.did,
+          repo: agent.did,
           limit: PAGE_SIZE,
           cursor,
         });
@@ -258,9 +258,9 @@ export function useListMembershipAddMutation() {
       listUri,
       actorDid,
     }: Pick<ListMembership, "actorDid" | "listUri">) => {
-      if (!agent.session) throw new Error("Not logged in");
+      if (!agent.did) throw new Error("Not logged in");
       const res = await agent.app.bsky.graph.listitem.create(
-        { repo: agent.session.did },
+        { repo: agent.did },
         {
           subject: actorDid,
           list: listUri,
@@ -273,7 +273,7 @@ export function useListMembershipAddMutation() {
       // manually update the cache; a refetch is too expensive
       let memberships = queryClient.getQueryData<ListMembership[]>([
         "list-membership",
-        agent.session?.did,
+        agent.did,
       ]);
       if (memberships) {
         memberships = memberships
@@ -291,10 +291,7 @@ export function useListMembershipAddMutation() {
               membershipUri: data.uri,
             },
           ]);
-        queryClient.setQueryData(
-          ["list-membership", agent.session?.did],
-          memberships,
-        );
+        queryClient.setQueryData(["list-membership", agent.did], memberships);
       }
     },
   });
@@ -305,9 +302,9 @@ export function useListMembershipRemoveMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ membershipUri }: ListMembership) => {
-      if (!agent.session) throw new Error("Not logged in");
+      if (!agent.did) throw new Error("Not logged in");
       await agent.app.bsky.graph.listitem.delete({
-        repo: agent.session.did,
+        repo: agent.did,
         rkey: membershipUri.split("/").pop(),
       });
     },
@@ -315,7 +312,7 @@ export function useListMembershipRemoveMutation() {
       // manually update the cache; a refetch is too expensive
       let memberships = queryClient.getQueryData<ListMembership[]>([
         "list-membership",
-        agent.session?.did,
+        agent.did,
       ]);
       if (memberships) {
         memberships = memberships.filter(
@@ -325,10 +322,7 @@ export function useListMembershipRemoveMutation() {
               m.listUri === variables.listUri
             ),
         );
-        queryClient.setQueryData(
-          ["list-membership", agent.session?.did],
-          memberships,
-        );
+        queryClient.setQueryData(["list-membership", agent.did], memberships);
       }
     },
   });

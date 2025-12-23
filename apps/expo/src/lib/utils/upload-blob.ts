@@ -1,11 +1,11 @@
 import * as FileSystem from "expo-file-system/legacy";
-import { type AtpAgent, type ComAtprotoRepoUploadBlob } from "@atproto/api";
+import { type Agent, type ComAtprotoRepoUploadBlob } from "@atproto/api";
 
 /**
  * @param encoding Allows overriding the blob's type
  */
 export async function uploadBlob(
-  agent: AtpAgent,
+  agent: Agent,
   input: string | Blob,
   encoding?: string,
 ): Promise<ComAtprotoRepoUploadBlob.Response> {

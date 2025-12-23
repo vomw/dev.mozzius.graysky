@@ -13,7 +13,7 @@ const useReposts = (post?: string) => {
     queryKey: ["reposts", post],
     queryFn: async ({ pageParam }) => {
       if (!post) return { people: [], cursor: undefined };
-      if (!agent.hasSession) throw new Error("Not logged in");
+      if (!agent.did) throw new Error("Not logged in");
       const followers = await agent.getRepostedBy({
         uri: post,
         cursor: pageParam,

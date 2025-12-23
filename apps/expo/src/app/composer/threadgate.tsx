@@ -17,11 +17,11 @@ export default function ThreadgateScreen() {
   const { _ } = useLingui();
 
   const lists = useQuery({
-    queryKey: [agent.session?.did, "lists"],
+    queryKey: [agent.did, "lists"],
     queryFn: async () => {
-      if (!agent.session) return null;
+      if (!agent.did) return null;
       const lists = await agent.app.bsky.graph.getLists({
-        actor: agent.session.did,
+        actor: agent.did,
       });
       if (!lists.success) throw new Error("Couldn't fetch lists");
       return lists.data;

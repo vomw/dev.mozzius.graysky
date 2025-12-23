@@ -13,9 +13,9 @@ import * as FileSystem from "expo-file-system/legacy";
 import { Image, type ImageSource } from "expo-image";
 import { Stack, useRouter } from "expo-router";
 import {
+  Agent,
   AppBskyFeedLike,
   RichText as RichTextHelper,
-  type BskyAgent,
 } from "@atproto/api";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
@@ -291,7 +291,7 @@ export default function MyCircle() {
   );
 }
 
-async function getNotifications(agent: BskyAgent) {
+async function getNotifications(agent: Agent) {
   let isOlderThanAWeek = false;
   let cursor: string | undefined;
 
@@ -340,7 +340,7 @@ async function getNotifications(agent: BskyAgent) {
   return potentialFriends;
 }
 
-async function getRecords(agent: BskyAgent, collection: string) {
+async function getRecords(agent: Agent, collection: string) {
   let isOlderThanAWeek = false;
   let cursor: string | undefined;
 
@@ -356,7 +356,8 @@ async function getRecords(agent: BskyAgent, collection: string) {
     cursor = records.data.cursor;
     for (const record of records.data.records) {
       if (AppBskyFeedLike.isRecord(record.value)) {
-        const date = record.value.createdAt;
+        const likeRecord = record.value as AppBskyFeedLike.Record;
+        const date = likeRecord.createdAt;
         if (
           date &&
           new Date(date).getTime() < Date.now() - 7 * 24 * 60 * 60 * 1000
@@ -365,7 +366,7 @@ async function getRecords(agent: BskyAgent, collection: string) {
           break;
         }
 
-        const [, , did = ""] = record.value.subject.uri.split("/");
+        const [, , did = ""] = likeRecord.subject.uri.split("/");
 
         potentialFriends[did] = (potentialFriends[did] || 0) + 1;
       }

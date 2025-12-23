@@ -1,0 +1,12 @@
+{
+  "client_id": "http://localhost:3000/oauth-client-metadata.json",
+  "client_name": "Graysky (Dev)",
+  "client_uri": "http://localhost:3000",
+  "redirect_uris": ["graysky:/oauth-callback"],
+  "scope": "atproto account:email rpc:*?aud=did:web:api.bsky.app#bsky_appview",
+  "token_endpoint_auth_method": "none",
+  "response_types": ["code"],
+  "grant_types": ["authorization_code", "refresh_token"],
+  "application_type": "native",
+  "dpop_bound_access_tokens": true
+}

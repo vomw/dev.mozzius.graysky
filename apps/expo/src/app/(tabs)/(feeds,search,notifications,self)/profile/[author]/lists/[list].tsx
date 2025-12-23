@@ -304,7 +304,7 @@ const ListHeader = ({
 
   const handleOptions = () => {
     if (!info) return;
-    if (info.creator.did === agent.session?.did) {
+    if (info.creator.did === agent.did) {
       const options = [
         info.purpose === AppBskyGraphDefs.CURATELIST
           ? _(msg`Change to moderation list`)

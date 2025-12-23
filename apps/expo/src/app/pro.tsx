@@ -73,7 +73,8 @@ export default function Pro() {
             throw Error("No monthly package");
           plan = offerings.data.current.monthly;
         }
-        await Purchases.setDisplayName(agent.session?.handle ?? null);
+        // Set display name to DID (handle not directly available with OAuth)
+        await Purchases.setDisplayName(agent.did ?? null);
         const { customerInfo } = await Purchases.purchasePackage(plan);
         queryClient.setQueryData(["purchases", "info"], customerInfo);
       } catch (err) {

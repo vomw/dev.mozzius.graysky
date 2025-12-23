@@ -13,7 +13,7 @@ const useFollowers = (actor?: string) => {
     queryKey: ["followers", actor],
     queryFn: async ({ pageParam }) => {
       if (!actor) return { people: [], cursor: undefined };
-      if (!agent.hasSession) throw new Error("Not logged in");
+      if (!agent.did) throw new Error("Not logged in");
       const followers = await agent.getFollowers({
         actor,
         cursor: pageParam,

@@ -9,7 +9,6 @@ import {
 import { useMMKVObject } from "react-native-mmkv";
 import { showToastable } from "react-native-toastable";
 import { Link, useRouter } from "expo-router";
-import { type AtpSessionData } from "@atproto/api";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useTheme } from "@react-navigation/native";
@@ -18,20 +17,15 @@ import { ChevronRightIcon, PlusIcon } from "lucide-react-native";
 
 import { ItemSeparator } from "~/components/item-separator";
 import { Text } from "~/components/themed/text";
-import { useAgent } from "~/lib/agent";
 import { useLogOut } from "~/lib/log-out-context";
+import { useSession, type SavedSession } from "~/lib/session-provider";
 import { store } from "~/lib/storage/storage";
 import { cx } from "~/lib/utils/cx";
 import { Avatar } from "./avatar";
 
-export interface SavedSession {
-  displayName?: string;
-  avatar?: string;
-  handle: string;
-  did: string;
-  session: AtpSessionData;
-  signedOut?: boolean;
-}
+// Re-export SavedSession for backwards compatibility
+export type { SavedSession } from "~/lib/session-provider";
+
 interface Props {
   active?: string;
   onSuccessfulSwitch?: () => void;
@@ -45,44 +39,38 @@ export function SwitchAccounts({
   chevrons,
   showAddAccount,
 }: Props) {
-  const agent = useAgent();
   const theme = useTheme();
   const queryClient = useQueryClient();
   const logOut = useLogOut();
   const router = useRouter();
   const { _ } = useLingui();
+  const { switchAccount, signIn } = useSession();
 
   const [sessions = []] = useMMKVObject<SavedSession[]>("sessions", store);
 
-  const resume = useMutation({
+  const switchMutation = useMutation({
     mutationKey: ["switch-accounts"],
-    mutationFn: async (session: AtpSessionData) => {
-      // HACKFIX - service url gets changed after authenication
-      // reset service URL and pdsUrl when resuming
-      // https://github.com/bluesky-social/atproto/issues/1964
-      agent.pdsUrl = undefined;
-      agent.api.xrpc.uri = new URL("https://bsky.social");
-      const res = await agent.resumeSession(session);
-      if (!res.success) throw new Error("Could not resume session");
-      return res.data;
+    mutationFn: async (did: string) => {
+      await switchAccount(did);
+      return did;
     },
-    onError: (err, session) => {
+    onError: (err, did) => {
       Alert.alert(
-        _(msg`Could not log you in`),
+        _(msg`Could not switch account`),
         err instanceof Error ? err.message : _(msg`Unknown error`),
       );
       console.error(err);
-      showToastable({
-        title: _(msg`Could not log you in`),
-        message: err instanceof Error ? err.message : _(msg`Unknown error`),
-        status: "warning",
-      });
-      router.push(`/sign-in?handle=${session.handle}`);
+      // Find the handle for this DID to pre-fill the sign-in form
+      const account = sessions.find((s) => s.did === did);
+      if (account) {
+        router.push(`/sign-in?handle=${account.handle}`);
+      }
     },
-    onSuccess: (data) => {
+    onSuccess: (did) => {
+      const account = sessions.find((s) => s.did === did);
       showToastable({
         title: _(msg`Logged in`),
-        message: _(msg`You are now logged in as @${data.handle}`),
+        message: _(msg`You are now logged in as @${account?.handle ?? did}`),
         status: "success",
       });
       void queryClient.resetQueries();
@@ -90,6 +78,16 @@ export function SwitchAccounts({
       onSuccessfulSwitch?.();
     },
   });
+
+  const handleAccountPress = async (account: SavedSession) => {
+    if (account.signedOut) {
+      // If signed out, need to re-authenticate
+      router.push(`/sign-in?handle=${account.handle}`);
+    } else {
+      // Try to switch to this account
+      switchMutation.mutate(account.did);
+    }
+  };
 
   return (
     <View
@@ -105,15 +103,9 @@ export function SwitchAccounts({
         .map((account) => (
           <Fragment key={account.did}>
             <TouchableHighlight
-              className={cx("flex-1", resume.isPending && "opacity-50")}
-              onPress={() => {
-                if (account.signedOut) {
-                  router.push(`/sign-in?handle=${account.handle}`);
-                } else {
-                  resume.mutate(account.session);
-                }
-              }}
-              disabled={resume.isPending || account.did === active}
+              className={cx("flex-1", switchMutation.isPending && "opacity-50")}
+              onPress={() => handleAccountPress(account)}
+              disabled={switchMutation.isPending || account.did === active}
             >
               <View
                 className="flex-1 flex-row items-center px-4 py-2"
@@ -132,14 +124,20 @@ export function SwitchAccounts({
                     </Text>
                   )}
                   <Text className="text-neutral-500">@{account.handle}</Text>
+                  {account.signedOut && (
+                    <Text className="text-xs text-orange-500">
+                      <Trans>Tap to sign in again</Trans>
+                    </Text>
+                  )}
                 </View>
-                {resume.isPending && resume.variables?.did === account.did ? (
+                {switchMutation.isPending &&
+                switchMutation.variables === account.did ? (
                   <ActivityIndicator />
                 ) : account.did === active ? (
                   <TouchableOpacity
                     onPress={() => {
                       router.push("../");
-                      logOut();
+                      void logOut();
                     }}
                   >
                     <Text primary className="font-medium">
@@ -159,8 +157,8 @@ export function SwitchAccounts({
       {showAddAccount && (
         <Link href="/sign-in" asChild>
           <TouchableHighlight
-            className={cx("flex-1", resume.isPending && "opacity-50")}
-            disabled={resume.isPending}
+            className={cx("flex-1", switchMutation.isPending && "opacity-50")}
+            disabled={switchMutation.isPending}
           >
             <View
               className="flex-1 flex-row items-center px-4 py-2"

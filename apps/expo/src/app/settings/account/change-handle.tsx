@@ -13,6 +13,7 @@ import { useTheme } from "@react-navigation/native";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CheckIcon } from "lucide-react-native";
 
+import { useSelf } from "~/app/settings/account/index";
 import { ListGroup } from "~/components/grouped-list";
 import {
   HandleAvailabilityResult,
@@ -32,8 +33,10 @@ export default function ChangeHandle() {
   const [handle, setHandle] = useState("");
   const { _ } = useLingui();
   const router = useRouter();
+  const self = useSelf();
 
   const derivedHandle = `${handle.trim()}.bsky.social`;
+  const currentHandle = self.data?.handle;
 
   const resolveHandle = useHandleAvailability(derivedHandle);
 
@@ -145,8 +148,7 @@ export default function ChangeHandle() {
                 query={resolveHandle}
                 handle={derivedHandle}
                 success={
-                  changeHandle.isSuccess ||
-                  agent.session?.handle === derivedHandle
+                  changeHandle.isSuccess || currentHandle === derivedHandle
                 }
               />
             </Animated.View>

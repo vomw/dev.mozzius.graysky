@@ -37,7 +37,66 @@ async function fetchTenor<
   return res.json() as Promise<T>;
 }
 
+// Define the BlobRef schema for validation
+const blobRefSchema = z.object({
+  $type: z.literal("blob"),
+  ref: z.object({
+    $link: z.string(),
+  }),
+  mimeType: z.string(),
+  size: z.number(),
+});
+
 export const gifsRouter = createTRPCRouter({
+  // New endpoint that receives the blob directly from client
+  selectWithBlob: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        description: z.string().optional(),
+        blob: blobRefSchema,
+      }),
+    )
+    .mutation(async ({ input }) => {
+      void fetchTenor<TenorRegisterShareAPIResponse>("/registershare", {
+        id: input.id,
+      });
+
+      const title = input.description ?? "Tenor GIF";
+      const description =
+        "Posted from Graysky - get the app to view and post GIFs!";
+
+      const uri = `https://tenor.com/view/${input.id}`;
+
+      await track("post gif", {
+        title: input.description ?? "No description",
+        url: uri,
+      });
+
+      return {
+        view: {
+          $type: "app.bsky.embed.external#view" as const,
+          external: {
+            $type: "app.bsky.embed.external#viewExternal" as const,
+            uri,
+            title,
+            description,
+          },
+        },
+        main: {
+          $type: "app.bsky.embed.external" as const,
+          external: {
+            $type: "app.bsky.embed.external#external" as const,
+            uri,
+            title,
+            description,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+            thumb: input.blob as any,
+          },
+        },
+      };
+    }),
+  // Legacy endpoint kept for backwards compatibility
   select: publicProcedure
     .input(
       z.object({
@@ -94,24 +153,24 @@ export const gifsRouter = createTRPCRouter({
 
       return {
         view: {
-          $type: "app.bsky.embed.external#view",
+          $type: "app.bsky.embed.external#view" as const,
           external: {
-            $type: "app.bsky.embed.external#viewExternal",
+            $type: "app.bsky.embed.external#viewExternal" as const,
             uri,
             title,
             description,
           },
-        } satisfies AppBskyEmbedExternal.View,
+        },
         main: {
-          $type: "app.bsky.embed.external",
+          $type: "app.bsky.embed.external" as const,
           external: {
-            $type: "app.bsky.embed.external#external",
+            $type: "app.bsky.embed.external#external" as const,
             uri,
             title,
             description,
             thumb: blobRef.blob,
           },
-        } satisfies AppBskyEmbedExternal.Main,
+        },
       };
     }),
   tenor: createTRPCRouter({

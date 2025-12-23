@@ -96,12 +96,12 @@ export const useSavedFeeds = () => {
 
       return {
         feeds: generators.data.feeds.map((feed) => ({
-          $type: "app.bsky.feed.defs#generatorView",
+          $type: "app.bsky.feed.defs#generatorView" as const,
           ...feed,
           pinned: feeds.pinned.includes(feed.uri),
         })),
         lists: lists.map((list) => ({
-          $type: "app.bsky.graph.defs#listView",
+          $type: "app.bsky.graph.defs#listView" as const,
           ...list,
           pinned: feeds.pinned.includes(list.uri),
         })),
@@ -193,7 +193,7 @@ export const useToggleFeedPref = (
           }
           if (!hasPref) {
             draft.push({
-              $type: "app.bsky.actor.defs#savedFeedsPref",
+              $type: "app.bsky.actor.defs#savedFeedsPref" as const,
               pinned: pin ? [pin] : [],
               saved: save ? [save] : [],
             });
@@ -321,7 +321,7 @@ export const useTimeline = (feed: string) => {
           AppBskyEmbedRecordWithMedia.isView(item.post.embed);
         const isByUnfollowed =
           !item.post.author.viewer?.following &&
-          item.post.author.did !== agent.session?.did;
+          item.post.author.did !== agent.did;
 
         if (feedViewPref.hideReplies && item.reply) {
           return [];
@@ -343,7 +343,7 @@ export const useTimeline = (feed: string) => {
             const parent = item.reply.parent;
             if (
               !parent.author.viewer?.following &&
-              parent.author.did !== agent.session?.did
+              parent.author.did !== agent.did
             ) {
               return [];
             }
@@ -390,7 +390,7 @@ export const useTimeline = (feed: string) => {
     homepage,
     feed,
     defaultFeed,
-    agent.session?.did,
+    agent.did,
   ]);
 
   return { timeline, data, preferences, contentFilter };

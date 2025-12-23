@@ -198,7 +198,7 @@ const Gif = ({ item }: GifProps) => {
   const [, setComposerState] = useComposerState();
   const { _ } = useLingui();
 
-  const select = api.gifs.select.useMutation({
+  const select = api.gifs.selectWithBlob.useMutation({
     onMutate: () => haptics.impact(),
     onSuccess: (result) => {
       setComposerState(
@@ -225,15 +225,24 @@ const Gif = ({ item }: GifProps) => {
     <View className="mb-2 flex-1 px-1">
       <TouchableHighlight
         className="relative w-full flex-1 rounded-lg"
-        onPress={() => {
-          if (!agent.session)
-            throw new Error("No session when trying to select a gif");
+        onPress={async () => {
+          // Fetch preview image and upload using agent
+          const previewRes = await fetch(item.media_formats.gifpreview.url);
+          const previewBlob = await previewRes.blob();
+          const uploadRes = await agent.uploadBlob(previewBlob, {
+            encoding: "image/gif",
+          });
+
+          const blobRef = uploadRes.data.blob;
           select.mutate({
             id: item.id,
-            assetUrl: item.media_formats.mp4.url,
-            previewUrl: item.media_formats.gifpreview.url,
             description: item.content_description,
-            token: agent.session.accessJwt,
+            blob: {
+              $type: "blob" as const,
+              ref: { $link: blobRef.ref.toString() },
+              mimeType: blobRef.mimeType,
+              size: blobRef.size,
+            },
           });
         }}
         onLongPress={() => showLinkOptions(item.url)}

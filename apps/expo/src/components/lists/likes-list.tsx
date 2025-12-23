@@ -13,7 +13,7 @@ const useLikes = (post?: string) => {
     queryKey: ["likes", post],
     queryFn: async ({ pageParam }) => {
       if (!post) return { people: [], cursor: undefined };
-      if (!agent.hasSession) throw new Error("Not logged in");
+      if (!agent.did) throw new Error("Not logged in");
       const followers = await agent.getLikes({
         uri: post,
         cursor: pageParam,

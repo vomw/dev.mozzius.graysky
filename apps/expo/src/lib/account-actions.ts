@@ -79,10 +79,10 @@ export const useBlockAccount = () => {
             style: "destructive",
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onPress: async () => {
-              if (!agent.session)
-                throw new Error("No session when trying to block someone");
+              if (!agent.did)
+                throw new Error("Not logged in when trying to block someone");
               await agent.app.bsky.graph.block.create(
-                { repo: agent.session.did },
+                { repo: agent.did },
                 {
                   createdAt: new Date().toISOString(),
                   subject: did,
@@ -125,11 +125,11 @@ export const useUnblockAccount = () => {
             style: "destructive",
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onPress: async () => {
-              if (!agent.session)
-                throw new Error("No session when trying to unblock someone");
+              if (!agent.did)
+                throw new Error("Not logged in when trying to unblock someone");
               await agent.app.bsky.graph.block.delete(
                 {
-                  repo: agent.session.did,
+                  repo: agent.did,
                   rkey,
                 },
                 {},

@@ -34,7 +34,7 @@ export const useNotifications = () => {
   const hasPushed = useRef(false);
 
   useEffect(() => {
-    if (!agent?.hasSession) return;
+    if (!agent?.did) return;
 
     if (!hasPrompted && !hasPushed.current) {
       hasPushed.current = true;
@@ -57,7 +57,7 @@ export const useNotifications = () => {
       const token = await getPushToken();
       if (token) {
         try {
-          if (agent.hasSession) {
+          if (agent.did) {
             await agent.app.bsky.notification.registerPush({
               serviceDid: SERVICE_DID,
               platform: Platform.OS,
@@ -109,7 +109,7 @@ export const useNotifications = () => {
     };
   }, [
     agent,
-    agent?.hasSession,
+    agent?.did,
     router,
     queryClient,
     notificationsEnabled,
