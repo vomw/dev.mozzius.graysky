@@ -276,7 +276,7 @@ msgstr "Sadržaj za odrasle"
 msgid "Advanced Settings"
 msgstr "Napredne postavke"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:184
 #: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "Svi feedovi"
@@ -423,7 +423,7 @@ msgstr "Blokiraj korisnika"
 msgid "Blocked"
 msgstr "Blokirani"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:377
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:384
 msgid "Blocked post"
 msgstr "Blokirani post"
 
@@ -756,7 +756,7 @@ msgstr "Izbriši popis"
 msgid "Delete post"
 msgstr "Obriši objavu"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:391
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:398
 msgid "Deleted post"
 msgstr "Objava je izbrisana"
 
@@ -804,7 +804,7 @@ msgstr "Pronađite feedove"
 msgid "Discover Feeds"
 msgstr "Pronađite Feedove"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:219
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:220
 msgid "Discover more feeds"
 msgstr "Pronađite još feedova"
 
@@ -820,7 +820,7 @@ msgstr "Domena"
 msgid "Don't enable"
 msgstr "Nemoj omogućiti"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 #: src/app/add-to-list/[handle].tsx:56
 #: src/app/composer/_layout.tsx:50
@@ -838,7 +838,7 @@ msgstr "Još jednom provjerite razumijete li"
 msgid "Drafts"
 msgstr "Skice"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 msgid "Edit"
 msgstr "Uredi"
@@ -922,7 +922,7 @@ msgstr "Greška prilikom snimanja slike"
 msgid "Favourited"
 msgstr "Favoriti"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:146
 #: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "Favoriti"
@@ -936,7 +936,7 @@ msgid "Feed Details"
 msgstr "Detalji feeda"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:270
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:273
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:25
 #: src/components/screens/profile/profile-tab-view.tsx:89
 msgid "Feeds"
@@ -951,7 +951,7 @@ msgstr "Lista feedova"
 msgid "Fetch connections"
 msgstr ""
 
-#: src/components/screens/feed-screen.tsx:116
+#: src/components/screens/feed-screen.tsx:118
 msgid "Find people to follow"
 msgstr "Pronađi korisnike koje ćeš pratiti"
 
@@ -960,7 +960,7 @@ msgstr "Pronađi korisnike koje ćeš pratiti"
 msgid "Follow"
 msgstr "Prati"
 
-#: src/components/screens/feed-screen.tsx:105
+#: src/components/screens/feed-screen.tsx:107
 msgid "Follow people, and their posts will show up here"
 msgstr "Zaprati korisnike, a njihove objave će se prikazivati ovdje"
 
@@ -977,7 +977,7 @@ msgstr "Pratitelji"
 #. 'Following' - The name of the main feed
 #. 'Following' - The name of the main feed
 #. js-lingui-explicit-id
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:130
 #: src/app/settings/feed.tsx:56
 #: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
@@ -1219,7 +1219,7 @@ msgstr "Prijavljen"
 msgid "Logo designed by"
 msgstr "Logo dizajnirao"
 
-#: src/components/screens/feed-screen.tsx:102
+#: src/components/screens/feed-screen.tsx:104
 msgid "Looks like there's nothing here yet!"
 msgstr "Čini se da ovdje još nema ničega!"
 
@@ -1353,7 +1353,7 @@ msgstr "Moj feed zaslon"
 msgid "My languages"
 msgstr "Moji jezici"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:81
 #: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "Moj popis"
@@ -1430,7 +1430,7 @@ msgid "Note: Adult content settings cannot be changed on iOS. Please use the web
 msgstr "Napomena: Postavke sadržaja za odrasle ne mogu se promijeniti na iOS-u. Umjesto toga upotrijebite web aplikaciju."
 
 #: src/app/(tabs)/_layout.tsx:261
-#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:297
+#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:299
 msgid "Notifications"
 msgstr "Obavijesti"
 
@@ -1558,8 +1558,8 @@ msgid "Pornographic content"
 msgstr "Pornografski sadržaj"
 
 #: src/app/(tabs)/_layout.tsx:212
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:351
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:363
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:356
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:369
 #: src/lib/composer/buttons.tsx:72
 msgid "Post"
 msgstr "Objavi"
@@ -1604,7 +1604,7 @@ msgstr "Tekst objave spremljen je u međuspremnik"
 msgid "Posts"
 msgstr "Objave"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:136
 #: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "Objave od korisnika koje pratite"
@@ -1692,7 +1692,7 @@ msgstr "Kontrola odgovora"
 msgid "Reply settings"
 msgstr "Postavke odgovora"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:326
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:330
 msgid "Reply to {0}"
 msgstr "Odgovori {0}"
 
@@ -1717,7 +1717,7 @@ msgstr "odgovori izbrisanoj objavi"
 msgid "replying to a post that couldn't be fetched"
 msgstr "odgovori na objavu koja se nije mogla prikazati"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:409
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:416
 msgid "Replying to some sort of post"
 msgstr "Odgovori na neki oblik objave"
 
@@ -2040,7 +2040,7 @@ msgid "Sign up for project updates"
 msgstr "Prijavite se za buduće informacije o projektu"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:253
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:255
 msgid "Skyline"
 msgstr "Skyline"
 
@@ -2152,7 +2152,7 @@ msgstr "Aplikacija više neće pokretati povratne dodirne informacije, no neki e
 msgid "There's nothing here..."
 msgstr "Ovdje nema ničega..."
 
-#: src/components/screens/feed-screen.tsx:125
+#: src/components/screens/feed-screen.tsx:127
 msgid "This feed is empty"
 msgstr "Ovaj feed je prazan"
 
@@ -2187,7 +2187,7 @@ msgstr "Objava je on nekoga koga ste blokirali"
 msgid "This post is from someone you have muted"
 msgstr "Objava je od nekoga koga ste utišali"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:324
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:328
 msgid "This thread is locked"
 msgstr "Ova nit je zaključana"
 

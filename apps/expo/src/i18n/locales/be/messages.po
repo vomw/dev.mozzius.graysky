@@ -276,7 +276,7 @@ msgstr "Змесціва для дарослых"
 msgid "Advanced Settings"
 msgstr "Пашыраныя налады"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:184
 #: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "Усе стужкі"
@@ -423,7 +423,7 @@ msgstr "Заблакіраваць карыстальніка"
 msgid "Blocked"
 msgstr "Заблакіравана"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:377
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:384
 msgid "Blocked post"
 msgstr "Допіс заблакіраваны"
 
@@ -756,7 +756,7 @@ msgstr "Выдаліць спіс"
 msgid "Delete post"
 msgstr "Выдаліць допіс"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:391
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:398
 msgid "Deleted post"
 msgstr "Выдалены допіс"
 
@@ -804,7 +804,7 @@ msgstr "Пошук стужак"
 msgid "Discover Feeds"
 msgstr "Пошук стужак"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:219
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:220
 msgid "Discover more feeds"
 msgstr "Знайсці больш стужак"
 
@@ -820,7 +820,7 @@ msgstr "Дамен"
 msgid "Don't enable"
 msgstr "Не ўключаць"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 #: src/app/add-to-list/[handle].tsx:56
 #: src/app/composer/_layout.tsx:50
@@ -838,7 +838,7 @@ msgstr "Пераканайцеся, што вы зразумелі"
 msgid "Drafts"
 msgstr "Чарнавікі"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 msgid "Edit"
 msgstr "Рэдагаваць"
@@ -922,7 +922,7 @@ msgstr "Не атрымалася запампаваць відарыс"
 msgid "Favourited"
 msgstr "Абранае"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:146
 #: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "Абраныя"
@@ -936,7 +936,7 @@ msgid "Feed Details"
 msgstr "Звесткі пра стужку"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:270
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:273
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:25
 #: src/components/screens/profile/profile-tab-view.tsx:89
 msgid "Feeds"
@@ -951,7 +951,7 @@ msgstr "Спіс стужак"
 msgid "Fetch connections"
 msgstr "Загрузіць сувязі"
 
-#: src/components/screens/feed-screen.tsx:116
+#: src/components/screens/feed-screen.tsx:118
 msgid "Find people to follow"
 msgstr "Знайсці людзей, каб падпісацца"
 
@@ -960,7 +960,7 @@ msgstr "Знайсці людзей, каб падпісацца"
 msgid "Follow"
 msgstr "Падпісацца"
 
-#: src/components/screens/feed-screen.tsx:105
+#: src/components/screens/feed-screen.tsx:107
 msgid "Follow people, and their posts will show up here"
 msgstr "Падпісвайцеся на людзей, іхнія допісы будуць з’яўляцца тут"
 
@@ -977,7 +977,7 @@ msgstr "Падпісчыкі"
 #. 'Following' - The name of the main feed
 #. 'Following' - The name of the main feed
 #. js-lingui-explicit-id
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:130
 #: src/app/settings/feed.tsx:56
 #: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
@@ -1219,7 +1219,7 @@ msgstr "Вы ўвайшлі"
 msgid "Logo designed by"
 msgstr "Дызайн лагатыпа"
 
-#: src/components/screens/feed-screen.tsx:102
+#: src/components/screens/feed-screen.tsx:104
 msgid "Looks like there's nothing here yet!"
 msgstr "Здаецца, тут пакуль нічога няма!"
 
@@ -1353,7 +1353,7 @@ msgstr "Экран маіх стужак"
 msgid "My languages"
 msgstr "Мае мовы"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:81
 #: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "Мае спісы"
@@ -1430,7 +1430,7 @@ msgid "Note: Adult content settings cannot be changed on iOS. Please use the web
 msgstr "Заўвага: налады змесціва для дарослых не могуць быць змененыя з iOS. Калі ласка, выкарыстоўвайце вэб-версію."
 
 #: src/app/(tabs)/_layout.tsx:261
-#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:297
+#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:299
 msgid "Notifications"
 msgstr "Апавяшчэнні"
 
@@ -1558,8 +1558,8 @@ msgid "Pornographic content"
 msgstr "Парнаграфічны кантэнт"
 
 #: src/app/(tabs)/_layout.tsx:212
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:351
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:363
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:356
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:369
 #: src/lib/composer/buttons.tsx:72
 msgid "Post"
 msgstr "Допіс"
@@ -1604,7 +1604,7 @@ msgstr "Тэкст допісу скапіяваны ў буфер абмену"
 msgid "Posts"
 msgstr "Допісы"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:136
 #: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "Допісы ад людзей, на якіх вы падпісаны"
@@ -1692,7 +1692,7 @@ msgstr "Налады адказаў"
 msgid "Reply settings"
 msgstr "Налады адказаў"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:326
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:330
 msgid "Reply to {0}"
 msgstr "Адказ {0}"
 
@@ -1717,7 +1717,7 @@ msgstr "у адказ на выдалены допіс"
 msgid "replying to a post that couldn't be fetched"
 msgstr "у адказ на допіс, які не атрымалася загрузіць"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:409
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:416
 msgid "Replying to some sort of post"
 msgstr "У адказ на нейкі допіс"
 
@@ -2040,7 +2040,7 @@ msgid "Sign up for project updates"
 msgstr "Падпішыцеся на абнаўленні праекту"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:253
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:255
 msgid "Skyline"
 msgstr "Skyline"
 
@@ -2152,7 +2152,7 @@ msgstr "Праграма болей не будзе выкарыстоўваць
 msgid "There's nothing here..."
 msgstr "Тут нічога няма..."
 
-#: src/components/screens/feed-screen.tsx:125
+#: src/components/screens/feed-screen.tsx:127
 msgid "This feed is empty"
 msgstr "Гэтая стужка пустая"
 
@@ -2187,7 +2187,7 @@ msgstr "Гэты допіс апублікаваны кімсьці, каго в
 msgid "This post is from someone you have muted"
 msgstr "Вы ігнаруеце аўтара гэтага допісу"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:324
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:328
 msgid "This thread is locked"
 msgstr "Гэтая гутарка заблакіравана"
 

@@ -276,7 +276,7 @@ msgstr "アダルトコンテンツ"
 msgid "Advanced Settings"
 msgstr "高度な設定"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:184
 #: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "すべてのフィード"
@@ -423,7 +423,7 @@ msgstr "ユーザーをブロック"
 msgid "Blocked"
 msgstr "ブロック中"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:377
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:384
 msgid "Blocked post"
 msgstr "ブロックをした投稿"
 
@@ -756,7 +756,7 @@ msgstr "リストを削除"
 msgid "Delete post"
 msgstr "投稿を削除"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:391
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:398
 msgid "Deleted post"
 msgstr "削除された投稿"
 
@@ -804,7 +804,7 @@ msgstr "フィードを見つける"
 msgid "Discover Feeds"
 msgstr "フィードを見つける"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:219
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:220
 msgid "Discover more feeds"
 msgstr "さらにフィードを見つける"
 
@@ -820,7 +820,7 @@ msgstr "ドメイン"
 msgid "Don't enable"
 msgstr "有効化しない"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 #: src/app/add-to-list/[handle].tsx:56
 #: src/app/composer/_layout.tsx:50
@@ -838,7 +838,7 @@ msgstr "理解をしているか再確認してください"
 msgid "Drafts"
 msgstr "ドラフト"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 msgid "Edit"
 msgstr "編集"
@@ -922,7 +922,7 @@ msgstr "画像のアップロードに失敗しました"
 msgid "Favourited"
 msgstr "お気に入り"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:146
 #: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "お気に入り"
@@ -936,7 +936,7 @@ msgid "Feed Details"
 msgstr "フィードの詳細"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:270
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:273
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:25
 #: src/components/screens/profile/profile-tab-view.tsx:89
 msgid "Feeds"
@@ -951,7 +951,7 @@ msgstr "フィードリスト"
 msgid "Fetch connections"
 msgstr "ユーザーとの繋がりを取得"
 
-#: src/components/screens/feed-screen.tsx:116
+#: src/components/screens/feed-screen.tsx:118
 msgid "Find people to follow"
 msgstr "フォローする人を見つけよう"
 
@@ -960,7 +960,7 @@ msgstr "フォローする人を見つけよう"
 msgid "Follow"
 msgstr "フォロー"
 
-#: src/components/screens/feed-screen.tsx:105
+#: src/components/screens/feed-screen.tsx:107
 msgid "Follow people, and their posts will show up here"
 msgstr "フォローすると、その投稿がここに表示されます"
 
@@ -977,7 +977,7 @@ msgstr "フォロワー"
 #. 'Following' - The name of the main feed
 #. 'Following' - The name of the main feed
 #. js-lingui-explicit-id
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:130
 #: src/app/settings/feed.tsx:56
 #: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
@@ -1219,7 +1219,7 @@ msgstr "サインイン済み"
 msgid "Logo designed by"
 msgstr "ロゴデザイン"
 
-#: src/components/screens/feed-screen.tsx:102
+#: src/components/screens/feed-screen.tsx:104
 msgid "Looks like there's nothing here yet!"
 msgstr "ここにはまだ何もないようです!"
 
@@ -1353,7 +1353,7 @@ msgstr "マイフィードの画面"
 msgid "My languages"
 msgstr "自分の言語"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:81
 #: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "マイリスト"
@@ -1430,7 +1430,7 @@ msgid "Note: Adult content settings cannot be changed on iOS. Please use the web
 msgstr "注意: iOSではアダルトコンテンツ設定は変更できません。Webアプリをご利用ください。"
 
 #: src/app/(tabs)/_layout.tsx:261
-#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:297
+#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:299
 msgid "Notifications"
 msgstr "通知"
 
@@ -1558,8 +1558,8 @@ msgid "Pornographic content"
 msgstr "ポルノ"
 
 #: src/app/(tabs)/_layout.tsx:212
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:351
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:363
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:356
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:369
 #: src/lib/composer/buttons.tsx:72
 msgid "Post"
 msgstr "投稿"
@@ -1604,7 +1604,7 @@ msgstr "クリップボードに投稿のテキストをコピーしました"
 msgid "Posts"
 msgstr "投稿"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:136
 #: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "フォローしている人の投稿"
@@ -1692,7 +1692,7 @@ msgstr "返信の制御"
 msgid "Reply settings"
 msgstr "返信の設定"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:326
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:330
 msgid "Reply to {0}"
 msgstr "{0}に返信"
 
@@ -1717,7 +1717,7 @@ msgstr "削除された投稿に返信"
 msgid "replying to a post that couldn't be fetched"
 msgstr "取得できなかった投稿に返信"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:409
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:416
 msgid "Replying to some sort of post"
 msgstr "何らかの投稿に返信"
 
@@ -2040,7 +2040,7 @@ msgid "Sign up for project updates"
 msgstr "プロジェクトの最新情報を登録する"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:253
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:255
 msgid "Skyline"
 msgstr "Skyline"
 
@@ -2152,7 +2152,7 @@ msgstr "アプリが触覚フィードバックをトリガーしなくなりま
 msgid "There's nothing here..."
 msgstr "ここには何もありません..."
 
-#: src/components/screens/feed-screen.tsx:125
+#: src/components/screens/feed-screen.tsx:127
 msgid "This feed is empty"
 msgstr "このフィードは空です"
 
@@ -2187,7 +2187,7 @@ msgstr "この投稿はブロックした人からのものです"
 msgid "This post is from someone you have muted"
 msgstr "この投稿はミュートした人からのものです"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:324
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:328
 msgid "This thread is locked"
 msgstr "このスレッドはロックされています"
 

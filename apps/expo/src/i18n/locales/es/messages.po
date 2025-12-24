@@ -276,7 +276,7 @@ msgstr "Contenido adulto"
 msgid "Advanced Settings"
 msgstr "Ajustes avanzados"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:184
 #: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "Todos mis feeds"
@@ -423,7 +423,7 @@ msgstr "Bloquear usuario"
 msgid "Blocked"
 msgstr "Bloqueado"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:377
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:384
 msgid "Blocked post"
 msgstr "Post bloqueado"
 
@@ -756,7 +756,7 @@ msgstr "Eliminar lista"
 msgid "Delete post"
 msgstr "Eliminar post"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:391
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:398
 msgid "Deleted post"
 msgstr "Post eliminado"
 
@@ -804,7 +804,7 @@ msgstr "Descubre feeds"
 msgid "Discover Feeds"
 msgstr "Descubre feeds"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:219
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:220
 msgid "Discover more feeds"
 msgstr "Descubre más feeds"
 
@@ -820,7 +820,7 @@ msgstr "Dominio"
 msgid "Don't enable"
 msgstr "No habilitar"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 #: src/app/add-to-list/[handle].tsx:56
 #: src/app/composer/_layout.tsx:50
@@ -838,7 +838,7 @@ msgstr "Confirma tu decisión"
 msgid "Drafts"
 msgstr "Borradores"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 msgid "Edit"
 msgstr "Editar"
@@ -922,7 +922,7 @@ msgstr "No se pudo subir la imagen"
 msgid "Favourited"
 msgstr "Añadido a favoritos"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:146
 #: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "Favoritos"
@@ -936,7 +936,7 @@ msgid "Feed Details"
 msgstr "Detalles sobre este feed"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:270
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:273
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:25
 #: src/components/screens/profile/profile-tab-view.tsx:89
 msgid "Feeds"
@@ -951,7 +951,7 @@ msgstr "Lista de feeds"
 msgid "Fetch connections"
 msgstr "Ve tus conexiones"
 
-#: src/components/screens/feed-screen.tsx:116
+#: src/components/screens/feed-screen.tsx:118
 msgid "Find people to follow"
 msgstr "Encuentra gente a quien seguir"
 
@@ -960,7 +960,7 @@ msgstr "Encuentra gente a quien seguir"
 msgid "Follow"
 msgstr "Seguir"
 
-#: src/components/screens/feed-screen.tsx:105
+#: src/components/screens/feed-screen.tsx:107
 msgid "Follow people, and their posts will show up here"
 msgstr "Sigue a personas y sus posts aparecerán aquí"
 
@@ -977,7 +977,7 @@ msgstr "Seguidores"
 #. 'Following' - The name of the main feed
 #. 'Following' - The name of the main feed
 #. js-lingui-explicit-id
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:130
 #: src/app/settings/feed.tsx:56
 #: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
@@ -1219,7 +1219,7 @@ msgstr "Sesión inciada"
 msgid "Logo designed by"
 msgstr "Logo diseñado por"
 
-#: src/components/screens/feed-screen.tsx:102
+#: src/components/screens/feed-screen.tsx:104
 msgid "Looks like there's nothing here yet!"
 msgstr "Parece que todavía no hay nada aquí"
 
@@ -1353,7 +1353,7 @@ msgstr "Mi pantalla de Feeds"
 msgid "My languages"
 msgstr "Mis idiomas"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:81
 #: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "Mis listas"
@@ -1430,7 +1430,7 @@ msgid "Note: Adult content settings cannot be changed on iOS. Please use the web
 msgstr "Nota: Los ajustes de contenido adulto no pueden ser cambiados en iOS. Use la aplicación web para cambiar estos ajustes."
 
 #: src/app/(tabs)/_layout.tsx:261
-#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:297
+#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:299
 msgid "Notifications"
 msgstr "Notificaciones"
 
@@ -1558,8 +1558,8 @@ msgid "Pornographic content"
 msgstr "Contenido pornográfico"
 
 #: src/app/(tabs)/_layout.tsx:212
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:351
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:363
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:356
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:369
 #: src/lib/composer/buttons.tsx:72
 msgid "Post"
 msgstr "Publicar"
@@ -1604,7 +1604,7 @@ msgstr "Texto copiado a tu portapapeles"
 msgid "Posts"
 msgstr "Posts"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:136
 #: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "Posts de gente que sigues"
@@ -1692,7 +1692,7 @@ msgstr "Controla quien puede responder"
 msgid "Reply settings"
 msgstr "Respuestas"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:326
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:330
 msgid "Reply to {0}"
 msgstr "Responder a {0}"
 
@@ -1717,7 +1717,7 @@ msgstr "respondiendo a un post eliminado"
 msgid "replying to a post that couldn't be fetched"
 msgstr "respondiendo a un post que no pudo ser cargado"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:409
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:416
 msgid "Replying to some sort of post"
 msgstr "Respondiendo a algún tipo de post"
 
@@ -2040,7 +2040,7 @@ msgid "Sign up for project updates"
 msgstr "Ponte al día sobre el proyecto"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:253
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:255
 msgid "Skyline"
 msgstr "Skyline"
 
@@ -2152,7 +2152,7 @@ msgstr "Esta aplicación ya no generará vibraciones. Sin embargo, algunos eleme
 msgid "There's nothing here..."
 msgstr "No hay nada aquí..."
 
-#: src/components/screens/feed-screen.tsx:125
+#: src/components/screens/feed-screen.tsx:127
 msgid "This feed is empty"
 msgstr "Este feed está vacío"
 
@@ -2187,7 +2187,7 @@ msgstr "Este post es de alguien que has bloqueado"
 msgid "This post is from someone you have muted"
 msgstr "Este post es de alguien que has silenciado"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:324
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:328
 msgid "This thread is locked"
 msgstr "Este hilo está cerrado"
 

@@ -276,7 +276,7 @@ msgstr "Contenu adulte"
 msgid "Advanced Settings"
 msgstr "Paramètres avancés"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:184
 #: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "Tous les flux"
@@ -423,7 +423,7 @@ msgstr "Bloquer l'utilisateur"
 msgid "Blocked"
 msgstr "Bloqué"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:377
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:384
 msgid "Blocked post"
 msgstr "Publication bloquée"
 
@@ -756,7 +756,7 @@ msgstr "Supprimer la liste"
 msgid "Delete post"
 msgstr "Supprimer la publication"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:391
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:398
 msgid "Deleted post"
 msgstr "Publication supprimée"
 
@@ -804,7 +804,7 @@ msgstr "Découvrir des flux"
 msgid "Discover Feeds"
 msgstr "Trouver des flux"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:219
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:220
 msgid "Discover more feeds"
 msgstr "Découvrir plus de flux"
 
@@ -820,7 +820,7 @@ msgstr "Domaine"
 msgid "Don't enable"
 msgstr "Ne pas activer"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 #: src/app/add-to-list/[handle].tsx:56
 #: src/app/composer/_layout.tsx:50
@@ -838,7 +838,7 @@ msgstr "Vérifiez deux fois que vous comprenez"
 msgid "Drafts"
 msgstr "Brouillons"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 msgid "Edit"
 msgstr "Modifier"
@@ -922,7 +922,7 @@ msgstr "Échec de l'envoi de l'image"
 msgid "Favourited"
 msgstr "Ajouté aux favoris"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:146
 #: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "Favoris"
@@ -936,7 +936,7 @@ msgid "Feed Details"
 msgstr "Détails du flux"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:270
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:273
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:25
 #: src/components/screens/profile/profile-tab-view.tsx:89
 msgid "Feeds"
@@ -951,7 +951,7 @@ msgstr "Liste des flux"
 msgid "Fetch connections"
 msgstr "Récupérer les connexions"
 
-#: src/components/screens/feed-screen.tsx:116
+#: src/components/screens/feed-screen.tsx:118
 msgid "Find people to follow"
 msgstr "Trouver des personnes à suivre"
 
@@ -960,7 +960,7 @@ msgstr "Trouver des personnes à suivre"
 msgid "Follow"
 msgstr "Suivre"
 
-#: src/components/screens/feed-screen.tsx:105
+#: src/components/screens/feed-screen.tsx:107
 msgid "Follow people, and their posts will show up here"
 msgstr "Suivez des personnes et leurs messages apparaîtront ici"
 
@@ -977,7 +977,7 @@ msgstr "Abonnés"
 #. 'Following' - The name of the main feed
 #. 'Following' - The name of the main feed
 #. js-lingui-explicit-id
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:130
 #: src/app/settings/feed.tsx:56
 #: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
@@ -1219,7 +1219,7 @@ msgstr "Connecté"
 msgid "Logo designed by"
 msgstr "Logo conçu par"
 
-#: src/components/screens/feed-screen.tsx:102
+#: src/components/screens/feed-screen.tsx:104
 msgid "Looks like there's nothing here yet!"
 msgstr "On dirait qu'il n'y a rien ici pour le moment !"
 
@@ -1353,7 +1353,7 @@ msgstr "Écran de mes flux"
 msgid "My languages"
 msgstr "Mes langues"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:81
 #: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "Mes listes"
@@ -1430,7 +1430,7 @@ msgid "Note: Adult content settings cannot be changed on iOS. Please use the web
 msgstr "Remarque : les paramètres de contenu pour adultes ne peuvent pas être modifiés sur iOS. Veuillez utiliser l'application web à la place."
 
 #: src/app/(tabs)/_layout.tsx:261
-#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:297
+#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:299
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -1558,8 +1558,8 @@ msgid "Pornographic content"
 msgstr "Contenu pornographique"
 
 #: src/app/(tabs)/_layout.tsx:212
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:351
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:363
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:356
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:369
 #: src/lib/composer/buttons.tsx:72
 msgid "Post"
 msgstr "Publier"
@@ -1604,7 +1604,7 @@ msgstr "Texte du message copié dans le presse-papiers"
 msgid "Posts"
 msgstr "Publications"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:136
 #: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "Publications des personnes que vous suivez"
@@ -1692,7 +1692,7 @@ msgstr "Contrôles de réponse"
 msgid "Reply settings"
 msgstr "Paramètres de réponse"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:326
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:330
 msgid "Reply to {0}"
 msgstr "Répondre à {0}"
 
@@ -1717,7 +1717,7 @@ msgstr "en train de répondre à une publication supprimée"
 msgid "replying to a post that couldn't be fetched"
 msgstr "en train de répondre à un message qui n'a pas pu être récupéré"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:409
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:416
 msgid "Replying to some sort of post"
 msgstr "En train de répondre à une sorte de publication"
 
@@ -2040,7 +2040,7 @@ msgid "Sign up for project updates"
 msgstr "S'inscrire pour les mises à jour du projet"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:253
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:255
 msgid "Skyline"
 msgstr "Skyline"
 
@@ -2152,7 +2152,7 @@ msgstr "L'application ne déclenchera plus de retour haptique manuellement, mais
 msgid "There's nothing here..."
 msgstr "Il n'y a rien ici..."
 
-#: src/components/screens/feed-screen.tsx:125
+#: src/components/screens/feed-screen.tsx:127
 msgid "This feed is empty"
 msgstr "Ce flux est vide"
 
@@ -2187,7 +2187,7 @@ msgstr "Cette publication provient de quelqu'un que vous avez bloqué"
 msgid "This post is from someone you have muted"
 msgstr "Ce message provient d'une personne que vous avez mise en sourdine"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:324
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:328
 msgid "This thread is locked"
 msgstr "Ce fil est verrouillé"
 

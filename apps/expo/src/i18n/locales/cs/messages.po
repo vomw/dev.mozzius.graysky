@@ -276,7 +276,7 @@ msgstr "Obsah pro dospělé"
 msgid "Advanced Settings"
 msgstr "Pokročilé nastavení"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:183
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:184
 #: src/components/feeds-button.tsx:207
 msgid "All feeds"
 msgstr "Všechny kanály"
@@ -423,7 +423,7 @@ msgstr "Blokovat uživatele"
 msgid "Blocked"
 msgstr "Blokovaní"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:377
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:384
 msgid "Blocked post"
 msgstr "Blokovaný příspěvek"
 
@@ -756,7 +756,7 @@ msgstr ""
 msgid "Delete post"
 msgstr "Odstranit příspěvek"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:391
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:398
 msgid "Deleted post"
 msgstr "Odstraněný příspěvek"
 
@@ -804,7 +804,7 @@ msgstr "Objevit kanály"
 msgid "Discover Feeds"
 msgstr "Objevit kanály"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:219
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:220
 msgid "Discover more feeds"
 msgstr "Objevit další kanály"
 
@@ -820,7 +820,7 @@ msgstr "Doména"
 msgid "Don't enable"
 msgstr "Nepovolovat"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 #: src/app/add-to-list/[handle].tsx:56
 #: src/app/composer/_layout.tsx:50
@@ -838,7 +838,7 @@ msgstr "Dvakrát zkontrolujte, zda rozumíte"
 msgid "Drafts"
 msgstr "Koncepty"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:287
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:290
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:42
 msgid "Edit"
 msgstr "Upravit"
@@ -922,7 +922,7 @@ msgstr "Nepodařilo se nahrát obrázek"
 msgid "Favourited"
 msgstr "Oblíbené"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:145
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:146
 #: src/components/feeds-button.tsx:201
 msgid "Favourites"
 msgstr "Oblíbené"
@@ -936,7 +936,7 @@ msgid "Feed Details"
 msgstr "Podrobnosti kanálu"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:270
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:273
 #: src/app/(tabs)/(feeds,search,notifications,self)/feeds/manage.tsx:25
 #: src/components/screens/profile/profile-tab-view.tsx:89
 msgid "Feeds"
@@ -951,7 +951,7 @@ msgstr "Seznam kanálů"
 msgid "Fetch connections"
 msgstr ""
 
-#: src/components/screens/feed-screen.tsx:116
+#: src/components/screens/feed-screen.tsx:118
 msgid "Find people to follow"
 msgstr "Najít lidi ke sledování"
 
@@ -960,7 +960,7 @@ msgstr "Najít lidi ke sledování"
 msgid "Follow"
 msgstr "Sledovat"
 
-#: src/components/screens/feed-screen.tsx:105
+#: src/components/screens/feed-screen.tsx:107
 msgid "Follow people, and their posts will show up here"
 msgstr "Sledujte lidi a jejich příspěvky se zobrazí zde"
 
@@ -977,7 +977,7 @@ msgstr "Sledující"
 #. 'Following' - The name of the main feed
 #. 'Following' - The name of the main feed
 #. js-lingui-explicit-id
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:129
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:130
 #: src/app/settings/feed.tsx:56
 #: src/components/feeds-button.tsx:282
 #: src/lib/hooks/feeds.ts:128
@@ -1219,7 +1219,7 @@ msgstr "Přihlášen/a"
 msgid "Logo designed by"
 msgstr "Logo navrženo"
 
-#: src/components/screens/feed-screen.tsx:102
+#: src/components/screens/feed-screen.tsx:104
 msgid "Looks like there's nothing here yet!"
 msgstr "Vypadá to, že tu zatím nic není!"
 
@@ -1353,7 +1353,7 @@ msgstr "Obrazovka mých kanálů"
 msgid "My languages"
 msgstr "Moje jazyky"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:80
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:81
 #: src/components/feeds-button.tsx:211
 msgid "My lists"
 msgstr "Moje seznamy"
@@ -1430,7 +1430,7 @@ msgid "Note: Adult content settings cannot be changed on iOS. Please use the web
 msgstr "Poznámka: Nastavení obsahu pro dospělé nelze změnit na iOS. Použijte prosím webovou aplikaci."
 
 #: src/app/(tabs)/_layout.tsx:261
-#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:297
+#: src/app/(tabs)/(feeds,search,notifications,self)/notifications.tsx:299
 msgid "Notifications"
 msgstr "Oznámení"
 
@@ -1558,8 +1558,8 @@ msgid "Pornographic content"
 msgstr "Pornografický obsah"
 
 #: src/app/(tabs)/_layout.tsx:212
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:351
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:363
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:356
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:369
 #: src/lib/composer/buttons.tsx:72
 msgid "Post"
 msgstr "Příspěvek"
@@ -1604,7 +1604,7 @@ msgstr "Text příspěvku zkopírován do schránky"
 msgid "Posts"
 msgstr "Příspěvky"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:135
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:136
 #: src/components/feeds-button.tsx:288
 msgid "Posts from people you follow"
 msgstr "Příspěvky od lidí, které sledujete"
@@ -1692,7 +1692,7 @@ msgstr "Ovládací prvky odpovědí"
 msgid "Reply settings"
 msgstr "Nastavení odpovědí"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:326
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:330
 msgid "Reply to {0}"
 msgstr "Odpovědět {0}"
 
@@ -1717,7 +1717,7 @@ msgstr "odpovídá na odstraněný příspěvek"
 msgid "replying to a post that couldn't be fetched"
 msgstr "odpovídá na příspěvek, který nemohl být načten"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:409
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:416
 msgid "Replying to some sort of post"
 msgstr "Odpovídá na nějaký druh příspěvku"
 
@@ -2040,7 +2040,7 @@ msgid "Sign up for project updates"
 msgstr "Odebírejte novinky o projektu"
 
 #: src/app/(tabs)/_layout.tsx:170
-#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:253
+#: src/app/(tabs)/(feeds,search,notifications,self)/feeds/index.tsx:255
 msgid "Skyline"
 msgstr "Skyline"
 
@@ -2152,7 +2152,7 @@ msgstr "Aplikace již nebude spouštět haptickou odezvu manuálně, ale někter
 msgid "There's nothing here..."
 msgstr "Nic tady není..."
 
-#: src/components/screens/feed-screen.tsx:125
+#: src/components/screens/feed-screen.tsx:127
 msgid "This feed is empty"
 msgstr "Tento kanál je prázdný"
 
@@ -2187,7 +2187,7 @@ msgstr "Tento příspěvek je od někoho, koho jste zablokovali"
 msgid "This post is from someone you have muted"
 msgstr "Tento příspěvek je od někoho, koho jste ztlumili"
 
-#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:324
+#: src/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post].tsx:328
 msgid "This thread is locked"
 msgstr "Toto vlákno je uzamčeno"
 
