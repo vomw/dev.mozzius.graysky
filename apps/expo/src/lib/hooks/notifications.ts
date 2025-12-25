@@ -73,20 +73,22 @@ export const useNotifications = () => {
       }
     })();
     // handle notifications that are received, both in the foreground or background
-    Notifications.addNotificationReceivedListener((event) => {
-      if (
-        event.request.trigger &&
-        "type" in event.request.trigger &&
-        event.request.trigger.type === "push"
-      ) {
-        // refresh notifications in the background
-        void queryClient.invalidateQueries({
-          queryKey: ["notifications", "unread"],
-        });
-      }
-    });
+    const receivedSub = Notifications.addNotificationReceivedListener(
+      (event) => {
+        if (
+          event.request.trigger &&
+          "type" in event.request.trigger &&
+          event.request.trigger.type === "push"
+        ) {
+          // refresh notifications in the background
+          void queryClient.invalidateQueries({
+            queryKey: ["notifications", "unread"],
+          });
+        }
+      },
+    );
     // handle notifications that are tapped on
-    const sub = Notifications.addNotificationResponseReceivedListener(
+    const responseSub = Notifications.addNotificationResponseReceivedListener(
       (response) => {
         if (
           response.actionIdentifier === Notifications.DEFAULT_ACTION_IDENTIFIER
@@ -105,11 +107,11 @@ export const useNotifications = () => {
       },
     );
     return () => {
-      sub.remove();
+      receivedSub.remove();
+      responseSub.remove();
     };
   }, [
-    agent,
-    agent?.hasSession,
+    agent?.session?.did,
     router,
     queryClient,
     notificationsEnabled,

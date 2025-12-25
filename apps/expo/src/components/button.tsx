@@ -19,7 +19,6 @@ export const Button = ({
   className,
   variant = "black",
   children,
-
   ...props
 }: ButtonProps) => {
   return (
@@ -38,12 +37,13 @@ export const Button = ({
       >
         <Text
           className={cx(
-            "text-base",
+            "text-base font-medium",
             {
               black: "text-white",
               white: "text-black",
               outline: "text-black dark:text-white",
             }[variant],
+            props.disabled && "opacity-50",
           )}
         >
           {children}

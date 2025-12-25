@@ -1,33 +1,41 @@
-import { createContext, useContext, useMemo } from "react";
-import { type BskyAgent } from "@atproto/api";
+import { createContext, useContext } from "react";
+import { AtpAgent, type AtpSessionData } from "@atproto/api";
 
-const agentContext = createContext<{ agent: BskyAgent | null; update: number }>(
-  {
-    agent: null,
-    update: 0,
-  },
-);
+export const defaultAgent = new AtpAgent({
+  service: "https://public.api.bsky.app",
+});
 
-export default agentContext;
+// Agent context - provides the current agent instance
+const agentContext = createContext<AtpAgent>(defaultAgent);
+
+export const AgentProvider = agentContext.Provider;
 
 export const useAgent = () => {
-  const { agent } = useContext(agentContext);
-  if (!agent) throw new Error("No agent found in context");
+  const agent = useContext(agentContext);
   return agent;
 };
 
 export const useOptionalAgent = () => {
-  const { agent } = useContext(agentContext);
-  return agent;
+  return useContext(agentContext);
 };
 
-export const AgentProvider = ({
-  agent,
-  children,
-  update,
-}: React.PropsWithChildren<{ agent: BskyAgent | null; update: number }>) => {
-  const combined = useMemo(() => ({ agent, update }), [agent, update]);
-  return (
-    <agentContext.Provider value={combined}>{children}</agentContext.Provider>
-  );
+// Auth context - provides auth actions
+export interface AuthContextValue {
+  login: (
+    identifier: string,
+    password: string,
+    authFactorToken?: string,
+  ) => Promise<void>;
+  resumeSession: (session: AtpSessionData) => Promise<void>;
+  logout: () => void;
+}
+
+const authContext = createContext<AuthContextValue | null>(null);
+
+export const AuthProvider = authContext.Provider;
+
+export const useAuth = () => {
+  const auth = useContext(authContext);
+  if (!auth) throw new Error("AuthContext not found");
+  return auth;
 };

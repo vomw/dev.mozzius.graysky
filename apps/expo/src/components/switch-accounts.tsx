@@ -18,8 +18,7 @@ import { ChevronRightIcon, PlusIcon } from "lucide-react-native";
 
 import { ItemSeparator } from "~/components/item-separator";
 import { Text } from "~/components/themed/text";
-import { useAgent } from "~/lib/agent";
-import { useLogOut } from "~/lib/log-out-context";
+import { useAuth } from "~/lib/agent";
 import { store } from "~/lib/storage/storage";
 import { cx } from "~/lib/utils/cx";
 import { Avatar } from "./avatar";
@@ -45,10 +44,9 @@ export function SwitchAccounts({
   chevrons,
   showAddAccount,
 }: Props) {
-  const agent = useAgent();
+  const { resumeSession, logout } = useAuth();
   const theme = useTheme();
   const queryClient = useQueryClient();
-  const logOut = useLogOut();
   const router = useRouter();
   const { _ } = useLingui();
 
@@ -57,14 +55,9 @@ export function SwitchAccounts({
   const resume = useMutation({
     mutationKey: ["switch-accounts"],
     mutationFn: async (session: AtpSessionData) => {
-      // HACKFIX - service url gets changed after authenication
-      // reset service URL and pdsUrl when resuming
-      // https://github.com/bluesky-social/atproto/issues/1964
-      agent.pdsUrl = undefined;
-      agent.api.xrpc.uri = new URL("https://bsky.social");
-      const res = await agent.resumeSession(session);
-      if (!res.success) throw new Error("Could not resume session");
-      return res.data;
+      // Creates a fresh agent for the new session
+      await resumeSession(session);
+      return session;
     },
     onError: (err, session) => {
       Alert.alert(
@@ -79,10 +72,10 @@ export function SwitchAccounts({
       });
       router.push(`/sign-in?handle=${session.handle}`);
     },
-    onSuccess: (data) => {
+    onSuccess: (session) => {
       showToastable({
         title: _(msg`Logged in`),
-        message: _(msg`You are now logged in as @${data.handle}`),
+        message: _(msg`You are now logged in as @${session.handle}`),
         status: "success",
       });
       void queryClient.resetQueries();
@@ -139,7 +132,7 @@ export function SwitchAccounts({
                   <TouchableOpacity
                     onPress={() => {
                       router.push("../");
-                      logOut();
+                      logout();
                     }}
                   >
                     <Text primary className="font-medium">

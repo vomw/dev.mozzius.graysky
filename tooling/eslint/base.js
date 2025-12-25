@@ -38,6 +38,7 @@ export default tseslint.config(
       "@typescript-eslint/prefer-nullish-coalescing": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
       "import/consistent-type-specifier-style": ["error", "prefer-inline"],
     },
   },

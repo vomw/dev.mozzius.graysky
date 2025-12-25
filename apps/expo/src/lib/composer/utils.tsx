@@ -323,7 +323,7 @@ export const useSendPost = ({
           }
         }
 
-        await agent.api.app.bsky.feed.threadgate.create(
+        await agent.app.bsky.feed.threadgate.create(
           { repo: agent.assertDid, rkey: post.uri.split("/").pop() },
           { post: post.uri, createdAt: new Date().toISOString(), allow },
         );

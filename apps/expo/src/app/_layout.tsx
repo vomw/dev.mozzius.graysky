@@ -14,26 +14,26 @@ import {
 } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import * as SplashScreen from "expo-splash-screen";
-import {
-  AtpAgent,
-  type AtpSessionData,
-  type AtpSessionEvent,
-} from "@atproto/api";
+import { AtpAgent, type AtpSessionData } from "@atproto/api";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { ThemeProvider } from "@react-navigation/native";
 import * as Sentry from "@sentry/react-native";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { ListProvider } from "~/components/lists/context";
 import { StatusBar } from "~/components/status-bar";
 import { type SavedSession } from "~/components/switch-accounts";
 import { Toastable } from "~/components/toastable/toastable";
 import I18nProvider, { initializeI18n } from "~/i18n/config";
-import { AgentProvider } from "~/lib/agent";
+import {
+  AgentProvider,
+  AuthProvider,
+  defaultAgent,
+  type AuthContextValue,
+} from "~/lib/agent";
 import { PreferencesProvider } from "~/lib/hooks/preferences";
-import { LogOutProvider } from "~/lib/log-out-context";
 import { CustomerInfoProvider, useConfigurePurchases } from "~/lib/purchases";
 import { useQuickAction, useSetupQuickActions } from "~/lib/quick-actions";
 import { useThemeSetup } from "~/lib/storage/app-preferences";
@@ -75,162 +75,161 @@ initializeI18n();
 const App = () => {
   const segments = useSegments();
   const router = useRouter();
-  const [invalidator, setInvalidator] = useState(0);
   const queryClient = useQueryClient();
   const [ready, setReady] = useState(false);
-  const [agentUpdate, setAgentUpdate] = useState(0);
-  const [session, setSession] = useState(() => getSession());
+  const [agent, setAgent] = useState<AtpAgent | null>(null);
   const theme = useThemeSetup();
   const { _ } = useLingui();
+  const tRef = useRef(_);
+  tRef.current = _;
+  const resumingRef = useRef(false);
 
-  const saveSession = useCallback(
-    (sess: AtpSessionData | null, agent?: AtpAgent) => {
-      setSession(sess);
-      if (sess) {
-        store.set("session", JSON.stringify(sess));
-        if (agent) {
-          void agent.getProfile({ actor: sess.did }).then((res) => {
-            if (res.success) {
-              const sessions = store.getString("sessions");
-              if (sessions) {
-                const old = JSON.parse(sessions) as SavedSession[];
-                const newSessions = [
-                  {
-                    session: sess,
-                    did: sess.did,
-                    handle: res.data.handle,
-                    avatar: res.data.avatar,
-                    displayName: res.data.displayName,
-                    signedOut: false,
-                  },
-                  ...old.filter((s) => s.did !== sess.did),
-                ];
-                store.set("sessions", JSON.stringify(newSessions));
-              } else {
-                store.set(
-                  "sessions",
-                  JSON.stringify([
-                    {
-                      session: sess,
-                      did: sess.did,
-                      handle: res.data.handle,
-                      avatar: res.data.avatar,
-                      displayName: res.data.displayName,
-                      signedOut: false,
-                    },
-                  ] satisfies SavedSession[]),
-                );
-              }
-            }
-          });
+  // Save session to storage and update saved sessions list
+  const saveSessionToStorage = useCallback(
+    (sess: AtpSessionData, currentAgent: AtpAgent) => {
+      store.set("session", JSON.stringify(sess));
+      // Update saved sessions list with profile info
+      void currentAgent.getProfile({ actor: sess.did }).then((res) => {
+        if (res.success) {
+          const sessions = store.getString("sessions");
+          const newSession: SavedSession = {
+            session: sess,
+            did: sess.did,
+            handle: res.data.handle,
+            avatar: res.data.avatar,
+            displayName: res.data.displayName,
+            signedOut: false,
+          };
+          if (sessions) {
+            const old = JSON.parse(sessions) as SavedSession[];
+            const newSessions = [
+              newSession,
+              ...old.filter((s) => s.did !== sess.did),
+            ];
+            store.set("sessions", JSON.stringify(newSessions));
+          } else {
+            store.set("sessions", JSON.stringify([newSession]));
+          }
         }
-      } else {
-        store.remove("session");
-      }
+      });
     },
     [],
   );
 
-  const agent = useMemo(() => {
-    return new AtpAgent({
+  // Create a new agent with persistSession callback
+  const createAgent = useCallback(() => {
+    const newAgent = new AtpAgent({
       service: "https://bsky.social",
-      persistSession(evt: AtpSessionEvent, sess?: AtpSessionData) {
-        switch (evt) {
-          case "create":
-          case "update":
-            if (!sess) throw new Error("should be unreachable");
-            saveSession(sess, agent);
-            break;
-          case "expired":
-            saveSession(null);
-            showToastable({
-              message: _(
-                msg`Sorry! Your session expired. Please log in again.`,
-              ),
-            });
-            break;
+      persistSession(evt, sess) {
+        if (evt === "create" || evt === "update") {
+          if (sess) {
+            saveSessionToStorage(sess, newAgent);
+          }
+        } else if (evt === "expired") {
+          store.remove("session");
+          showToastable({
+            message: tRef.current(
+              msg`Sorry! Your session expired. Please log in again.`,
+            ),
+          });
+          setAgent(null);
         }
-        // force a re-render of things that use the agent
-        setAgentUpdate((prev) => prev + 1);
       },
     });
-  }, [invalidator, saveSession]);
+    return newAgent;
+  }, [saveSessionToStorage]);
 
-  const resumeSession = useMutation({
-    mutationFn: async (sess: AtpSessionData) => {
-      await agent.resumeSession(sess);
+  // Auth functions
+  const login = useCallback(
+    async (identifier: string, password: string, authFactorToken?: string) => {
+      const newAgent = createAgent();
+      await newAgent.login({ identifier, password, authFactorToken });
+      setAgent(newAgent);
     },
-    retry: 3,
-    onError: () => {
-      showToastable({
-        message: _(msg`Sorry! Your session expired. Please log in again.`),
-      });
-      router.replace("/");
+    [createAgent],
+  );
+
+  const resumeSession = useCallback(
+    async (session: AtpSessionData) => {
+      const newAgent = createAgent();
+      await newAgent.resumeSession(session);
+      setAgent(newAgent);
     },
-  });
+    [createAgent],
+  );
 
-  const tryResumeSession = !agent.hasSession && !!session;
-  const { mutate: resumeSessionMutate, isPending: isResuming } = resumeSession;
-  const onceRef = useRef(false);
+  const logout = useCallback(() => {
+    // Mark current session as signed out in saved sessions
+    const currentDid = agent?.session?.did;
+    if (currentDid) {
+      const sessions = store.getString("sessions");
+      if (sessions) {
+        const old = JSON.parse(sessions) as SavedSession[];
+        const newSessions = old.map((s) =>
+          s.did === currentDid ? { ...s, signedOut: true } : s,
+        );
+        store.set("sessions", JSON.stringify(newSessions));
+      }
+    }
+    store.remove("session");
+    queryClient.clear();
+    setAgent(null);
+  }, [agent?.session?.did, queryClient]);
 
+  const authValue = useMemo<AuthContextValue>(
+    () => ({ login, resumeSession, logout }),
+    [login, resumeSession, logout],
+  );
+
+  // Resume session on app launch
   useEffect(() => {
-    if (tryResumeSession) {
-      if (isResuming) return;
-      if (!onceRef.current) {
-        onceRef.current = true;
-        resumeSessionMutate(session);
-        setTimeout(() => {
+    if (resumingRef.current) return;
+    resumingRef.current = true;
+
+    const savedSession = getSession();
+    if (savedSession) {
+      resumeSession(savedSession)
+        .then(() => {
           router.replace("/(feeds)/feeds");
+        })
+        .catch(() => {
+          showToastable({
+            message: tRef.current(
+              msg`Sorry! Your session expired. Please log in again.`,
+            ),
+          });
+          store.remove("session");
+          router.replace("/");
+        })
+        .finally(() => {
           setReady(true);
         });
-      }
     } else {
       setReady(true);
     }
-  }, [session, tryResumeSession, isResuming, router, resumeSessionMutate]);
+  }, [resumeSession, router]);
 
-  // redirect depending on login state
+  // Redirect depending on login state
   useEffect(() => {
-    if (resumeSession.isPending) return;
+    if (!ready) return;
     // @ts-expect-error type is overly specific
     const atRoot = segments.length === 0;
     const inAuthGroup = segments[0] === "(auth)";
 
-    if (
-      // If the user is not signed in and the initial segment is not anything in the auth group.
-      !agent.hasSession &&
-      !inAuthGroup &&
-      !atRoot
-    ) {
-      // Redirect to the sign-in page.
+    // Never interfere with auth group - let those pages handle their own navigation
+    if (inAuthGroup) return;
+
+    // Redirect to landing if not logged in and trying to access protected routes
+    if (!agent?.hasSession && !atRoot) {
       console.log("redirecting to /");
       router.replace("/");
-    } else if (agent.hasSession && atRoot) {
+    }
+    // Redirect to feeds if at root with session (initial app launch)
+    else if (agent?.hasSession && atRoot) {
       console.log("redirecting to /feeds");
       router.replace("/(feeds)/feeds");
     }
-  }, [segments, router, agent.hasSession, resumeSession.isPending]);
-
-  const logOut = useCallback(() => {
-    const sessions = store.getString("sessions");
-    if (sessions) {
-      const old = JSON.parse(sessions) as SavedSession[];
-      const newSessions = old.map((s) => {
-        if (s.did === session?.did) {
-          return {
-            ...s,
-            signedOut: true,
-          };
-        }
-        return s;
-      });
-      store.set("sessions", JSON.stringify(newSessions));
-    }
-
-    saveSession(null);
-    queryClient.clear();
-    setInvalidator((i) => i + 1);
-  }, [queryClient, saveSession, session?.did]);
+  }, [segments, router, agent?.hasSession, ready]);
 
   const splashscreenHidden = useRef(false);
 
@@ -258,11 +257,11 @@ const App = () => {
         <StatusBar style="auto" applyToNavigationBar />
         <KeyboardProvider>
           <SafeAreaProvider>
-            {agent.hasSession && <QuickActions />}
+            {agent?.hasSession && <QuickActions />}
             <CustomerInfoProvider>
-              <AgentProvider agent={agent} update={agentUpdate}>
-                <PreferencesProvider>
-                  <LogOutProvider value={logOut}>
+              <AuthProvider value={authValue}>
+                <AgentProvider value={agent ?? defaultAgent}>
+                  <PreferencesProvider>
                     <ActionSheetProvider>
                       <ListProvider>
                         <Stack>
@@ -421,9 +420,9 @@ const App = () => {
                         </Stack>
                       </ListProvider>
                     </ActionSheetProvider>
-                  </LogOutProvider>
-                </PreferencesProvider>
-              </AgentProvider>
+                  </PreferencesProvider>
+                </AgentProvider>
+              </AuthProvider>
             </CustomerInfoProvider>
             <Toastable />
           </SafeAreaProvider>
