@@ -96,7 +96,10 @@ export default async function LandingPage({
           <h3 className="px-4 pb-4 text-center text-xl font-medium">
             Get project updates!
           </h3>
-          <EmailInput {...resolvedSearchParams} />
+          <EmailInput
+            error={resolvedSearchParams.error}
+            success={resolvedSearchParams.success}
+          />
         </div>
       </section>
     </>
