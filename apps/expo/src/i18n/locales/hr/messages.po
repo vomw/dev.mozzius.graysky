@@ -232,7 +232,7 @@ msgstr "Dodajte upozorenje o sadržaju"
 msgid "Add a description to the image. Good alt text is concise yet detailed. Make sure to write out any text in the image itself."
 msgstr "Dodajte opis slike. Dobar alternativni tekst je sažet i detaljan. Obavezno ga napišite na samoj slici."
 
-#: src/components/switch-accounts.tsx:177
+#: src/components/switch-accounts.tsx:172
 msgid "Add another account"
 msgstr "Dodajte drugi račun"
 
@@ -252,7 +252,7 @@ msgstr "Dodaj u favorite"
 msgid "Add to list"
 msgstr "Dodaj na listu"
 
-#: src/app/_layout.tsx:400
+#: src/app/_layout.tsx:432
 msgid "Add to List"
 msgstr "Dodaj na popis"
 
@@ -349,11 +349,11 @@ msgstr "Informacije o aplikaciji"
 msgid "App language"
 msgstr "Jezik aplikacije"
 
-#: src/app/(auth)/sign-in.tsx:92
+#: src/app/(auth)/sign-in.tsx:107
 msgid "App Password"
 msgstr "Lozinka aplikacije"
 
-#: src/app/(auth)/sign-in.tsx:126
+#: src/app/(auth)/sign-in.tsx:141
 msgid "App Passwords"
 msgstr "Lozinka aplikacije"
 
@@ -659,9 +659,9 @@ msgstr "Nije bilo moguće dohvatiti listu trendova"
 msgid "Could not follow user"
 msgstr "Nije bilo moguće zapratiti korisnika"
 
-#: src/app/(auth)/sign-in.tsx:50
-#: src/components/switch-accounts.tsx:71
-#: src/components/switch-accounts.tsx:76
+#: src/app/(auth)/sign-in.tsx:61
+#: src/components/switch-accounts.tsx:67
+#: src/components/switch-accounts.tsx:72
 msgid "Could not log you in"
 msgstr "Nije bilo moguće prijaviti se"
 
@@ -689,7 +689,7 @@ msgstr "Nije bilo moguće dohvatiti listu"
 msgid "Create list"
 msgstr "Stvori popis"
 
-#: src/app/_layout.tsx:393
+#: src/app/_layout.tsx:425
 msgid "Create List"
 msgstr "Novi Popis"
 
@@ -697,7 +697,7 @@ msgstr "Novi Popis"
 msgid "Create new list"
 msgstr "Napravite novi popis"
 
-#: src/app/(auth)/sign-in.tsx:146
+#: src/app/(auth)/sign-in.tsx:161
 msgid "Create one at bsky.app/settings"
 msgstr "Kreirajte novi na bsky.app/settings"
 
@@ -800,7 +800,7 @@ msgstr "Odustani od objave"
 msgid "Discover feeds"
 msgstr "Pronađite feedove"
 
-#: src/app/_layout.tsx:311
+#: src/app/_layout.tsx:343
 msgid "Discover Feeds"
 msgstr "Pronađite Feedove"
 
@@ -863,7 +863,7 @@ msgstr "Uredi feed"
 msgid "Edit profile"
 msgstr ""
 
-#: src/app/_layout.tsx:368
+#: src/app/_layout.tsx:400
 #: src/app/settings/account/index.tsx:40
 msgid "Edit Profile"
 msgstr "Uredi profil"
@@ -1008,7 +1008,7 @@ msgstr "lista pratitelja"
 msgid "Follows you"
 msgstr "Vas prati"
 
-#: src/app/(auth)/sign-in.tsx:106
+#: src/app/(auth)/sign-in.tsx:122
 msgid "Forgot?"
 msgstr "Zaboravili ste nešto?"
 
@@ -1202,7 +1202,7 @@ msgid "Log back in"
 msgstr "Prijavite se ponovno"
 
 #: src/app/(auth)/_layout.tsx:37
-#: src/app/(auth)/sign-in.tsx:163
+#: src/app/(auth)/sign-in.tsx:176
 #: src/app/index.tsx:53
 msgid "Log in"
 msgstr "Prijavi se"
@@ -1211,7 +1211,7 @@ msgstr "Prijavi se"
 msgid "Log out"
 msgstr "Odjavi se"
 
-#: src/components/switch-accounts.tsx:84
+#: src/components/switch-accounts.tsx:80
 msgid "Logged in"
 msgstr "Prijavljen"
 
@@ -1328,7 +1328,7 @@ msgstr "Zajednički"
 msgid "My circle"
 msgstr ""
 
-#: src/app/_layout.tsx:335
+#: src/app/_layout.tsx:367
 msgid "My Circle"
 msgstr ""
 
@@ -1647,7 +1647,7 @@ msgstr "Profil"
 msgid "Profile Settings"
 msgstr "Postavke profila"
 
-#: src/app/_layout.tsx:343
+#: src/app/_layout.tsx:375
 msgid "Purchase Successful"
 msgstr "Uspješna kupnja"
 
@@ -1659,7 +1659,7 @@ msgstr "Svrha"
 msgid "Push notifications"
 msgstr "Push obavijesti"
 
-#: src/app/_layout.tsx:407
+#: src/app/_layout.tsx:439
 #: src/app/push-notifications.tsx:35
 msgid "Push Notifications"
 msgstr "Push obavijesti"
@@ -1945,7 +1945,7 @@ msgstr "Podijeli objavu korisnika {0}"
 msgid "Share as image"
 msgstr "Podijeli kao sliku"
 
-#: src/app/_layout.tsx:417
+#: src/app/_layout.tsx:449
 msgid "Share as Image"
 msgstr "Podijeli sliku"
 
@@ -2027,7 +2027,7 @@ msgstr "Pogledaj ponovljene objave"
 
 #: src/components/drawer/drawer-content.tsx:222
 #: src/components/drawer/drawer-content.tsx:228
-#: src/components/switch-accounts.tsx:146
+#: src/components/switch-accounts.tsx:141
 msgid "Sign out"
 msgstr "Odjavi se"
 
@@ -2048,8 +2048,8 @@ msgstr "Skyline"
 msgid "Something went wrong, please try again later."
 msgstr "Nešto je pošlo po zlu. Pokušajte ponovno."
 
-#: src/app/_layout.tsx:148
-#: src/app/_layout.tsx:166
+#: src/app/_layout.tsx:129
+#: src/app/_layout.tsx:231
 msgid "Sorry! Your session expired. Please log in again."
 msgstr "Oprostite, ali vaša sesija je istekla! Molimo prijavite se ponovo."
 
@@ -2287,10 +2287,10 @@ msgstr "Neomiljeni popis"
 msgid "Unfollowed user"
 msgstr "Korisnik je otpraćen"
 
-#: src/app/(auth)/sign-in.tsx:51
+#: src/app/(auth)/sign-in.tsx:62
 #: src/app/settings/account/delete-account.tsx:69
-#: src/components/switch-accounts.tsx:72
-#: src/components/switch-accounts.tsx:77
+#: src/components/switch-accounts.tsx:68
+#: src/components/switch-accounts.tsx:73
 msgid "Unknown error"
 msgstr "Nepoznata greška"
 
@@ -2353,7 +2353,7 @@ msgstr "Koristi moj zadani preglednik"
 msgid "User list"
 msgstr "Lista korisnika"
 
-#: src/app/(auth)/sign-in.tsx:71
+#: src/app/(auth)/sign-in.tsx:86
 msgid "Username or email address"
 msgstr "Korisničko ime ili e-mail adresa"
 
@@ -2454,7 +2454,7 @@ msgstr "Više ne pratite @{0}"
 msgid "You are now following @{0}"
 msgstr "Pratite @{0}"
 
-#: src/components/switch-accounts.tsx:85
+#: src/components/switch-accounts.tsx:81
 msgid "You are now logged in as @{0}"
 msgstr "Prijavili ste se kao @{0}"
 
@@ -2506,7 +2506,7 @@ msgstr "Možda ćete primati obavijesti od osoba koje ste blokirali ili isključ
 msgid "You might receive the same notifications via other Bluesky clients."
 msgstr "Možete primiti iste obavijesti putem drugih Bluesky klijenata."
 
-#: src/app/(auth)/sign-in.tsx:129
+#: src/app/(auth)/sign-in.tsx:144
 msgid "You might want to use an App Password rather than your main password - this helps keep your account secure, but it's not required."
 msgstr "Možda ćete htjeti upotrijebiti lozinku aplikacije umjesto svoje glavne - to pomaže u zaštiti vašeg računa, ali nije obavezno."
 

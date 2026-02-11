@@ -232,7 +232,7 @@ msgstr "Añadir una advertencia de contenido"
 msgid "Add a description to the image. Good alt text is concise yet detailed. Make sure to write out any text in the image itself."
 msgstr "Añade una descripción a la imagen. Un buen texto alternativo es conciso pero detallado. Asegúrate de transcribir cualquier texto en la imagen misma."
 
-#: src/components/switch-accounts.tsx:177
+#: src/components/switch-accounts.tsx:172
 msgid "Add another account"
 msgstr "Añadir otra cuenta"
 
@@ -252,7 +252,7 @@ msgstr "Agregar a mis favoritos"
 msgid "Add to list"
 msgstr "Añadir a una lista"
 
-#: src/app/_layout.tsx:400
+#: src/app/_layout.tsx:432
 msgid "Add to List"
 msgstr "Añadir a una lista"
 
@@ -349,11 +349,11 @@ msgstr "Información de la aplicación"
 msgid "App language"
 msgstr "Idioma de la aplicación"
 
-#: src/app/(auth)/sign-in.tsx:92
+#: src/app/(auth)/sign-in.tsx:107
 msgid "App Password"
 msgstr "Contraseña de aplicación"
 
-#: src/app/(auth)/sign-in.tsx:126
+#: src/app/(auth)/sign-in.tsx:141
 msgid "App Passwords"
 msgstr "Contraseñas de aplicación"
 
@@ -659,9 +659,9 @@ msgstr "No se pudo obtener las tendencias"
 msgid "Could not follow user"
 msgstr "No se pudo seguir al usuario"
 
-#: src/app/(auth)/sign-in.tsx:50
-#: src/components/switch-accounts.tsx:71
-#: src/components/switch-accounts.tsx:76
+#: src/app/(auth)/sign-in.tsx:61
+#: src/components/switch-accounts.tsx:67
+#: src/components/switch-accounts.tsx:72
 msgid "Could not log you in"
 msgstr "No se pudo iniciar sesión"
 
@@ -689,7 +689,7 @@ msgstr "No se pudo obtener las listas"
 msgid "Create list"
 msgstr "Crear lista"
 
-#: src/app/_layout.tsx:393
+#: src/app/_layout.tsx:425
 msgid "Create List"
 msgstr "Crear lista"
 
@@ -697,7 +697,7 @@ msgstr "Crear lista"
 msgid "Create new list"
 msgstr "Crear una nueva lista"
 
-#: src/app/(auth)/sign-in.tsx:146
+#: src/app/(auth)/sign-in.tsx:161
 msgid "Create one at bsky.app/settings"
 msgstr "Crea una en bsky.app/settings"
 
@@ -800,7 +800,7 @@ msgstr "Descartar post"
 msgid "Discover feeds"
 msgstr "Descubre feeds"
 
-#: src/app/_layout.tsx:311
+#: src/app/_layout.tsx:343
 msgid "Discover Feeds"
 msgstr "Descubre feeds"
 
@@ -863,7 +863,7 @@ msgstr "Editar feeds"
 msgid "Edit profile"
 msgstr ""
 
-#: src/app/_layout.tsx:368
+#: src/app/_layout.tsx:400
 #: src/app/settings/account/index.tsx:40
 msgid "Edit Profile"
 msgstr "Editar perfil"
@@ -1008,7 +1008,7 @@ msgstr "Siguiendo"
 msgid "Follows you"
 msgstr "Te sigue"
 
-#: src/app/(auth)/sign-in.tsx:106
+#: src/app/(auth)/sign-in.tsx:122
 msgid "Forgot?"
 msgstr "¿La olvidaste?"
 
@@ -1202,7 +1202,7 @@ msgid "Log back in"
 msgstr "Volver a iniciar sesión"
 
 #: src/app/(auth)/_layout.tsx:37
-#: src/app/(auth)/sign-in.tsx:163
+#: src/app/(auth)/sign-in.tsx:176
 #: src/app/index.tsx:53
 msgid "Log in"
 msgstr "Iniciar sesión"
@@ -1211,7 +1211,7 @@ msgstr "Iniciar sesión"
 msgid "Log out"
 msgstr "Cerrar sesión"
 
-#: src/components/switch-accounts.tsx:84
+#: src/components/switch-accounts.tsx:80
 msgid "Logged in"
 msgstr "Sesión inciada"
 
@@ -1328,7 +1328,7 @@ msgstr "Mutuales"
 msgid "My circle"
 msgstr "Mi círculo"
 
-#: src/app/_layout.tsx:335
+#: src/app/_layout.tsx:367
 msgid "My Circle"
 msgstr "Mi círculo"
 
@@ -1647,7 +1647,7 @@ msgstr "Perfil"
 msgid "Profile Settings"
 msgstr "Ajustes de perfil"
 
-#: src/app/_layout.tsx:343
+#: src/app/_layout.tsx:375
 msgid "Purchase Successful"
 msgstr "Compra realizada con éxito"
 
@@ -1659,7 +1659,7 @@ msgstr "Propósito"
 msgid "Push notifications"
 msgstr "Notificaciones Push"
 
-#: src/app/_layout.tsx:407
+#: src/app/_layout.tsx:439
 #: src/app/push-notifications.tsx:35
 msgid "Push Notifications"
 msgstr "Notificaciones Push"
@@ -1945,7 +1945,7 @@ msgstr "Compartir post de {0}"
 msgid "Share as image"
 msgstr "Compartir como imagen"
 
-#: src/app/_layout.tsx:417
+#: src/app/_layout.tsx:449
 msgid "Share as Image"
 msgstr "Compartir como imagen"
 
@@ -2027,7 +2027,7 @@ msgstr "Mostrar reposts"
 
 #: src/components/drawer/drawer-content.tsx:222
 #: src/components/drawer/drawer-content.tsx:228
-#: src/components/switch-accounts.tsx:146
+#: src/components/switch-accounts.tsx:141
 msgid "Sign out"
 msgstr "Cerrar sesión"
 
@@ -2048,8 +2048,8 @@ msgstr "Skyline"
 msgid "Something went wrong, please try again later."
 msgstr "Ocurrió un error, inténtalo de nuevo más tarde."
 
-#: src/app/_layout.tsx:148
-#: src/app/_layout.tsx:166
+#: src/app/_layout.tsx:129
+#: src/app/_layout.tsx:231
 msgid "Sorry! Your session expired. Please log in again."
 msgstr "Tu sesión ha caducado. Intenta inicia sesión de nuevo."
 
@@ -2287,10 +2287,10 @@ msgstr "Quitar de favoritos"
 msgid "Unfollowed user"
 msgstr "Ya no sigues a este usuario"
 
-#: src/app/(auth)/sign-in.tsx:51
+#: src/app/(auth)/sign-in.tsx:62
 #: src/app/settings/account/delete-account.tsx:69
-#: src/components/switch-accounts.tsx:72
-#: src/components/switch-accounts.tsx:77
+#: src/components/switch-accounts.tsx:68
+#: src/components/switch-accounts.tsx:73
 msgid "Unknown error"
 msgstr "Error desconocido"
 
@@ -2353,7 +2353,7 @@ msgstr "Usar mi navegador predeterminado"
 msgid "User list"
 msgstr "Lista de usuarios"
 
-#: src/app/(auth)/sign-in.tsx:71
+#: src/app/(auth)/sign-in.tsx:86
 msgid "Username or email address"
 msgstr "Nombre de usuario o dirección de correo electrónico"
 
@@ -2454,7 +2454,7 @@ msgstr "Has dejado de seguir a @{0}"
 msgid "You are now following @{0}"
 msgstr "Ahora estás siguiendo a @{0}"
 
-#: src/components/switch-accounts.tsx:85
+#: src/components/switch-accounts.tsx:81
 msgid "You are now logged in as @{0}"
 msgstr "Has iniciado sesión como @{0}"
 
@@ -2506,7 +2506,7 @@ msgstr "Es posible que recibas notificaciones de cuentas que has bloqueado o sil
 msgid "You might receive the same notifications via other Bluesky clients."
 msgstr "Es posible que recibas las mismas notificaciones mediante otros clientes de Bluesky."
 
-#: src/app/(auth)/sign-in.tsx:129
+#: src/app/(auth)/sign-in.tsx:144
 msgid "You might want to use an App Password rather than your main password - this helps keep your account secure, but it's not required."
 msgstr "Es recomendado usar una contraseña de la aplicación en lugar de tu contraseña principal - esto ayuda a mantener tu cuenta segura, pero no es necesario."
 

@@ -174,6 +174,7 @@ const defineConfig = (_: ConfigContext): ExpoConfig => ({
       },
     ],
     ["react-native-safari-extension", { folderName: "OpenInGrayskyExtension" }],
+    "@10play/expo-air",
   ],
 });
 
