@@ -450,6 +450,20 @@ const App = () => {
                               presentation: "formSheet",
                             }}
                           />
+                          <Stack.Screen
+                            name="groups/[groupId]"
+                            options={{
+                              title: _(msg`Group Chat`),
+                              presentation: "card",
+                            }}
+                          />
+                          <Stack.Screen
+                            name="groups/send-to-group"
+                            options={{
+                              title: _(msg`Send to Group`),
+                              presentation: "modal",
+                            }}
+                          />
                         </Stack>
                       </ListProvider>
                     </ActionSheetProvider>

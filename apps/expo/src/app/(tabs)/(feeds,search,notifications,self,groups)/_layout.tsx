@@ -12,18 +12,46 @@ import { AbsolutePathProvider } from "~/lib/absolute-path-context";
 import { useOptionalAgent } from "~/lib/agent";
 import { isIOS26 } from "~/lib/utils/version";
 
-export default function SubStack({
-  segment,
-}: {
-  segment: "(feeds)" | "(search)" | "(notifications)" | "(self)";
-}) {
+type Segment =
+  | "(feeds)"
+  | "(search)"
+  | "(notifications)"
+  | "(self)"
+  | "(groups)";
+
+export default function SubStack({ segment }: { segment: Segment }) {
   // agent might not be available yet
   const agent = useOptionalAgent();
 
+  // Always call hooks unconditionally
   const decodedJwt = useMemo(() => {
+    if (segment === "(groups)") return "groups-bypass";
     if (!agent?.session?.accessJwt) return null;
     return jwtDecode<{ scope: string }>(agent.session.accessJwt);
-  }, [agent?.session?.accessJwt]);
+  }, [agent?.session?.accessJwt, segment]);
+
+  // Groups tab doesn't need JWT session validation
+  if (segment === "(groups)") {
+    return (
+      <AbsolutePathProvider segment={segment}>
+        <ErrorBoundary
+          FallbackComponent={({ error, resetErrorBoundary }) => (
+            <ErrorBoundaryView
+              error={error as Error}
+              retry={() => Promise.resolve(resetErrorBoundary())}
+            />
+          )}
+        >
+          <Stack
+            initialRouteName="groups"
+            screenOptions={{
+              headerBackButtonDisplayMode: isIOS26 ? "minimal" : "default",
+            }}
+          />
+        </ErrorBoundary>
+      </AbsolutePathProvider>
+    );
+  }
 
   if (!decodedJwt) {
     return (
@@ -36,7 +64,9 @@ export default function SubStack({
     );
   }
 
-  switch (decodedJwt.scope) {
+  const jwt = decodedJwt as { scope: string };
+
+  switch (jwt.scope) {
     case "com.atproto.deactivated":
       // in the queue
       return <WaitingRoom />;
@@ -64,9 +94,7 @@ export default function SubStack({
   }
 }
 
-const getInitialRouteName = (
-  segment: "(feeds)" | "(search)" | "(notifications)" | "(self)",
-) => {
+const getInitialRouteName = (segment: Segment) => {
   switch (segment) {
     case "(feeds)":
       return "feeds/index";
@@ -76,5 +104,7 @@ const getInitialRouteName = (
       return "notifications";
     case "(self)":
       return "self";
+    case "(groups)":
+      return "groups";
   }
 };

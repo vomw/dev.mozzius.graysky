@@ -232,7 +232,7 @@ msgstr "コンテンツの警告を追加"
 msgid "Add a description to the image. Good alt text is concise yet detailed. Make sure to write out any text in the image itself."
 msgstr "画像に説明を追加します。 優れたALTテキストは、簡潔でありながら詳細な説明が記載されています。 画像自体にテキストが含まれている場合は、必ず書き出すようにしてください。"
 
-#: src/components/switch-accounts.tsx:177
+#: src/components/switch-accounts.tsx:172
 msgid "Add another account"
 msgstr "別のアカウントを追加"
 
@@ -252,7 +252,7 @@ msgstr "お気に入りに追加"
 msgid "Add to list"
 msgstr "リストに追加"
 
-#: src/app/_layout.tsx:400
+#: src/app/_layout.tsx:432
 msgid "Add to List"
 msgstr "リストに追加"
 
@@ -349,11 +349,11 @@ msgstr "アプリ情報"
 msgid "App language"
 msgstr "アプリの言語"
 
-#: src/app/(auth)/sign-in.tsx:92
+#: src/app/(auth)/sign-in.tsx:107
 msgid "App Password"
 msgstr "アプリパスワード"
 
-#: src/app/(auth)/sign-in.tsx:126
+#: src/app/(auth)/sign-in.tsx:141
 msgid "App Passwords"
 msgstr "アプリパスワード"
 
@@ -659,9 +659,9 @@ msgstr "トレンドのトピックが取得できませんでした"
 msgid "Could not follow user"
 msgstr "ユーザーをフォローできませんでした"
 
-#: src/app/(auth)/sign-in.tsx:50
-#: src/components/switch-accounts.tsx:71
-#: src/components/switch-accounts.tsx:76
+#: src/app/(auth)/sign-in.tsx:61
+#: src/components/switch-accounts.tsx:67
+#: src/components/switch-accounts.tsx:72
 msgid "Could not log you in"
 msgstr "サインインできませんでした"
 
@@ -689,7 +689,7 @@ msgstr "リストの取得ができませんでした"
 msgid "Create list"
 msgstr "リストを作成"
 
-#: src/app/_layout.tsx:393
+#: src/app/_layout.tsx:425
 msgid "Create List"
 msgstr "リストを作成"
 
@@ -697,7 +697,7 @@ msgstr "リストを作成"
 msgid "Create new list"
 msgstr "新規リストを作成"
 
-#: src/app/(auth)/sign-in.tsx:146
+#: src/app/(auth)/sign-in.tsx:161
 msgid "Create one at bsky.app/settings"
 msgstr "Blueskyアプリの設定から作成"
 
@@ -800,7 +800,7 @@ msgstr "投稿を破棄"
 msgid "Discover feeds"
 msgstr "フィードを見つける"
 
-#: src/app/_layout.tsx:311
+#: src/app/_layout.tsx:343
 msgid "Discover Feeds"
 msgstr "フィードを見つける"
 
@@ -863,7 +863,7 @@ msgstr "フィードを編集"
 msgid "Edit profile"
 msgstr "プロフィールを編集"
 
-#: src/app/_layout.tsx:368
+#: src/app/_layout.tsx:400
 #: src/app/settings/account/index.tsx:40
 msgid "Edit Profile"
 msgstr "プロフィールを編集"
@@ -1008,7 +1008,7 @@ msgstr "フォロー中"
 msgid "Follows you"
 msgstr "あなたをフォロー中"
 
-#: src/app/(auth)/sign-in.tsx:106
+#: src/app/(auth)/sign-in.tsx:122
 msgid "Forgot?"
 msgstr "忘れましたか?"
 
@@ -1202,7 +1202,7 @@ msgid "Log back in"
 msgstr "サインイン"
 
 #: src/app/(auth)/_layout.tsx:37
-#: src/app/(auth)/sign-in.tsx:163
+#: src/app/(auth)/sign-in.tsx:176
 #: src/app/index.tsx:53
 msgid "Log in"
 msgstr "サインイン"
@@ -1211,7 +1211,7 @@ msgstr "サインイン"
 msgid "Log out"
 msgstr "サインアウト"
 
-#: src/components/switch-accounts.tsx:84
+#: src/components/switch-accounts.tsx:80
 msgid "Logged in"
 msgstr "サインイン済み"
 
@@ -1328,7 +1328,7 @@ msgstr "相互フォロー"
 msgid "My circle"
 msgstr "マイサークル"
 
-#: src/app/_layout.tsx:335
+#: src/app/_layout.tsx:367
 msgid "My Circle"
 msgstr "マイサークル"
 
@@ -1647,7 +1647,7 @@ msgstr "プロフィール"
 msgid "Profile Settings"
 msgstr "プロフィールの設定"
 
-#: src/app/_layout.tsx:343
+#: src/app/_layout.tsx:375
 msgid "Purchase Successful"
 msgstr "購入に成功しました"
 
@@ -1659,7 +1659,7 @@ msgstr "目的"
 msgid "Push notifications"
 msgstr "プッシュ通知"
 
-#: src/app/_layout.tsx:407
+#: src/app/_layout.tsx:439
 #: src/app/push-notifications.tsx:35
 msgid "Push Notifications"
 msgstr "プッシュ通知"
@@ -1945,7 +1945,7 @@ msgstr "{0}の投稿を共有する"
 msgid "Share as image"
 msgstr "画像として共有"
 
-#: src/app/_layout.tsx:417
+#: src/app/_layout.tsx:449
 msgid "Share as Image"
 msgstr "画像として共有"
 
@@ -2027,7 +2027,7 @@ msgstr "リポストを表示"
 
 #: src/components/drawer/drawer-content.tsx:222
 #: src/components/drawer/drawer-content.tsx:228
-#: src/components/switch-accounts.tsx:146
+#: src/components/switch-accounts.tsx:141
 msgid "Sign out"
 msgstr "サインアウト"
 
@@ -2048,8 +2048,8 @@ msgstr "Skyline"
 msgid "Something went wrong, please try again later."
 msgstr "何らか問題が発生しました、後ほどお試しください。"
 
-#: src/app/_layout.tsx:148
-#: src/app/_layout.tsx:166
+#: src/app/_layout.tsx:129
+#: src/app/_layout.tsx:231
 msgid "Sorry! Your session expired. Please log in again."
 msgstr "ごめんなさい! セッションの有効期限が切れました。再度サインインをしてください。"
 
@@ -2287,10 +2287,10 @@ msgstr "リストのお気に入りを解除"
 msgid "Unfollowed user"
 msgstr "フォローを解除したユーザー"
 
-#: src/app/(auth)/sign-in.tsx:51
+#: src/app/(auth)/sign-in.tsx:62
 #: src/app/settings/account/delete-account.tsx:69
-#: src/components/switch-accounts.tsx:72
-#: src/components/switch-accounts.tsx:77
+#: src/components/switch-accounts.tsx:68
+#: src/components/switch-accounts.tsx:73
 msgid "Unknown error"
 msgstr "不明なエラー"
 
@@ -2353,7 +2353,7 @@ msgstr "デフォルトのブラウザを使用する"
 msgid "User list"
 msgstr "ユーザーリスト"
 
-#: src/app/(auth)/sign-in.tsx:71
+#: src/app/(auth)/sign-in.tsx:86
 msgid "Username or email address"
 msgstr "ユーザー名またはメールアドレス"
 
@@ -2454,7 +2454,7 @@ msgstr "あなたは @{0} をフォローしていません"
 msgid "You are now following @{0}"
 msgstr "あなたは @{0} をフォローしました"
 
-#: src/components/switch-accounts.tsx:85
+#: src/components/switch-accounts.tsx:81
 msgid "You are now logged in as @{0}"
 msgstr "あなたは @{0} でサインインをしています"
 
@@ -2506,7 +2506,7 @@ msgstr "モデレーションリストからブロックまたはミュートを
 msgid "You might receive the same notifications via other Bluesky clients."
 msgstr "他のBlueskyクライアントでも同じ通知が表示される場合があります。"
 
-#: src/app/(auth)/sign-in.tsx:129
+#: src/app/(auth)/sign-in.tsx:144
 msgid "You might want to use an App Password rather than your main password - this helps keep your account secure, but it's not required."
 msgstr "メインパスワードではなくアプリパスワードを使用する事をおすすめします - これはアカウントの安全性を保つために役立ちますが、必須ではありません。"
 

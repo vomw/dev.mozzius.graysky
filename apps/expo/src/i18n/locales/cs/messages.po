@@ -232,7 +232,7 @@ msgstr "Přidat varování o obsahu"
 msgid "Add a description to the image. Good alt text is concise yet detailed. Make sure to write out any text in the image itself."
 msgstr "Přidejte k obrázku popis. Dobrý alt text je stručný, ale podrobný. Ujistěte se, že přepíšete všechen text, který je součástí obrázku."
 
-#: src/components/switch-accounts.tsx:177
+#: src/components/switch-accounts.tsx:172
 msgid "Add another account"
 msgstr "Přidat další účet"
 
@@ -252,7 +252,7 @@ msgstr "Přidat mezi oblíbené"
 msgid "Add to list"
 msgstr "Přidat do seznamu"
 
-#: src/app/_layout.tsx:400
+#: src/app/_layout.tsx:432
 msgid "Add to List"
 msgstr "Přidat do Seznamu"
 
@@ -349,11 +349,11 @@ msgstr "Info o aplikaci"
 msgid "App language"
 msgstr "Jazyk aplikace"
 
-#: src/app/(auth)/sign-in.tsx:92
+#: src/app/(auth)/sign-in.tsx:107
 msgid "App Password"
 msgstr "Heslo aplikace"
 
-#: src/app/(auth)/sign-in.tsx:126
+#: src/app/(auth)/sign-in.tsx:141
 msgid "App Passwords"
 msgstr "Hesla aplikace"
 
@@ -659,9 +659,9 @@ msgstr "Nepodařilo se načíst populární témata"
 msgid "Could not follow user"
 msgstr "Nepodařilo se sledovat uživatele"
 
-#: src/app/(auth)/sign-in.tsx:50
-#: src/components/switch-accounts.tsx:71
-#: src/components/switch-accounts.tsx:76
+#: src/app/(auth)/sign-in.tsx:61
+#: src/components/switch-accounts.tsx:67
+#: src/components/switch-accounts.tsx:72
 msgid "Could not log you in"
 msgstr "Nepodařilo se Vás přihlásit"
 
@@ -689,7 +689,7 @@ msgstr "Nepodařilo se načíst seznamy"
 msgid "Create list"
 msgstr "Vytvořit seznam"
 
-#: src/app/_layout.tsx:393
+#: src/app/_layout.tsx:425
 msgid "Create List"
 msgstr "Vytvořit seznam"
 
@@ -697,7 +697,7 @@ msgstr "Vytvořit seznam"
 msgid "Create new list"
 msgstr "Vytvořit nový seznam"
 
-#: src/app/(auth)/sign-in.tsx:146
+#: src/app/(auth)/sign-in.tsx:161
 msgid "Create one at bsky.app/settings"
 msgstr "Vytvořit v bsky.app/settings"
 
@@ -800,7 +800,7 @@ msgstr "Zahodit příspěvek"
 msgid "Discover feeds"
 msgstr "Objevit kanály"
 
-#: src/app/_layout.tsx:311
+#: src/app/_layout.tsx:343
 msgid "Discover Feeds"
 msgstr "Objevit kanály"
 
@@ -863,7 +863,7 @@ msgstr "Upravit kanály"
 msgid "Edit profile"
 msgstr ""
 
-#: src/app/_layout.tsx:368
+#: src/app/_layout.tsx:400
 #: src/app/settings/account/index.tsx:40
 msgid "Edit Profile"
 msgstr "Upravit profil"
@@ -1008,7 +1008,7 @@ msgstr "Seznam sledovaných"
 msgid "Follows you"
 msgstr "Sledují Vás"
 
-#: src/app/(auth)/sign-in.tsx:106
+#: src/app/(auth)/sign-in.tsx:122
 msgid "Forgot?"
 msgstr "Zapomněl/a jste?"
 
@@ -1202,7 +1202,7 @@ msgid "Log back in"
 msgstr "Znovu se přihlásit"
 
 #: src/app/(auth)/_layout.tsx:37
-#: src/app/(auth)/sign-in.tsx:163
+#: src/app/(auth)/sign-in.tsx:176
 #: src/app/index.tsx:53
 msgid "Log in"
 msgstr "Přihlásit se"
@@ -1211,7 +1211,7 @@ msgstr "Přihlásit se"
 msgid "Log out"
 msgstr "Odhlásit se"
 
-#: src/components/switch-accounts.tsx:84
+#: src/components/switch-accounts.tsx:80
 msgid "Logged in"
 msgstr "Přihlášen/a"
 
@@ -1328,7 +1328,7 @@ msgstr "Vzájemní přátelé"
 msgid "My circle"
 msgstr ""
 
-#: src/app/_layout.tsx:335
+#: src/app/_layout.tsx:367
 msgid "My Circle"
 msgstr ""
 
@@ -1647,7 +1647,7 @@ msgstr "Profil"
 msgid "Profile Settings"
 msgstr "Nastavení profilu"
 
-#: src/app/_layout.tsx:343
+#: src/app/_layout.tsx:375
 msgid "Purchase Successful"
 msgstr "Platba byla úspěšná"
 
@@ -1659,7 +1659,7 @@ msgstr "Účel"
 msgid "Push notifications"
 msgstr "Push notifikace"
 
-#: src/app/_layout.tsx:407
+#: src/app/_layout.tsx:439
 #: src/app/push-notifications.tsx:35
 msgid "Push Notifications"
 msgstr "Push notifikace"
@@ -1945,7 +1945,7 @@ msgstr "Sdílet příspěvek {0}"
 msgid "Share as image"
 msgstr "Sdílet jako obrázek"
 
-#: src/app/_layout.tsx:417
+#: src/app/_layout.tsx:449
 msgid "Share as Image"
 msgstr "Sdílet jako obrázek"
 
@@ -2027,7 +2027,7 @@ msgstr "Zobrazit přesdílené"
 
 #: src/components/drawer/drawer-content.tsx:222
 #: src/components/drawer/drawer-content.tsx:228
-#: src/components/switch-accounts.tsx:146
+#: src/components/switch-accounts.tsx:141
 msgid "Sign out"
 msgstr "Odhlásit se"
 
@@ -2048,8 +2048,8 @@ msgstr "Skyline"
 msgid "Something went wrong, please try again later."
 msgstr "Něco se pokazilo, zkuste to prosím později."
 
-#: src/app/_layout.tsx:148
-#: src/app/_layout.tsx:166
+#: src/app/_layout.tsx:129
+#: src/app/_layout.tsx:231
 msgid "Sorry! Your session expired. Please log in again."
 msgstr "Omlouváme se! Vaše relace vypršela. Přihlaste se prosím znovu."
 
@@ -2287,10 +2287,10 @@ msgstr "Odebrat seznam z oblíbených"
 msgid "Unfollowed user"
 msgstr "Sledování uživatele bylo zrušeno"
 
-#: src/app/(auth)/sign-in.tsx:51
+#: src/app/(auth)/sign-in.tsx:62
 #: src/app/settings/account/delete-account.tsx:69
-#: src/components/switch-accounts.tsx:72
-#: src/components/switch-accounts.tsx:77
+#: src/components/switch-accounts.tsx:68
+#: src/components/switch-accounts.tsx:73
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
@@ -2353,7 +2353,7 @@ msgstr "Použít můj výchozí prohlížeč"
 msgid "User list"
 msgstr "Seznam uživatelů"
 
-#: src/app/(auth)/sign-in.tsx:71
+#: src/app/(auth)/sign-in.tsx:86
 msgid "Username or email address"
 msgstr "Uživatelské jméno nebo e-mail"
 
@@ -2454,7 +2454,7 @@ msgstr "Nyní už nesledujete @{0}"
 msgid "You are now following @{0}"
 msgstr "Nyní sledujete @{0}"
 
-#: src/components/switch-accounts.tsx:85
+#: src/components/switch-accounts.tsx:81
 msgid "You are now logged in as @{0}"
 msgstr "Nyní jste přihlášen jako @{0}"
 
@@ -2506,7 +2506,7 @@ msgstr "Můžete dostávat oznámení od lidí, které jste zablokovali nebo ztl
 msgid "You might receive the same notifications via other Bluesky clients."
 msgstr "Stejná oznámení můžete dostávat prostřednictvím jiných klientů Bluesky."
 
-#: src/app/(auth)/sign-in.tsx:129
+#: src/app/(auth)/sign-in.tsx:144
 msgid "You might want to use an App Password rather than your main password - this helps keep your account secure, but it's not required."
 msgstr "Možná budete chtít použít spíše 'Heslo aplikace' než vaše hlavní heslo - pomáhá to udržovat váš účet v bezpečí, ale není to nutné."
 

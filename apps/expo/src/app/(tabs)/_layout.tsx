@@ -296,6 +296,21 @@ export default function AppLayout() {
               },
             }}
           />
+          <Tabs.Screen
+            name="(groups)"
+            options={{
+              title: _(msg`Groups`),
+              tabBarIcon: ({ focused }) =>
+                Platform.select<ImageSourcePropType | AppleIcon>({
+                  ios: {
+                    sfSymbol: focused ? "person.2.fill" : "person.2",
+                  },
+                  default:
+                    // eslint-disable-next-line @typescript-eslint/no-require-imports
+                    require("../../../assets/tabs/users.svg") as ImageSourcePropType,
+                }),
+            }}
+          />
         </Tabs>
       </Drawer>
     </DrawerProvider>

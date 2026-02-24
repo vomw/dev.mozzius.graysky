@@ -6,7 +6,7 @@ import { useTheme } from "@react-navigation/native";
 import { HeartIcon, RepeatIcon, UserPlusIcon } from "lucide-react-native";
 import colors from "tailwindcss/colors";
 
-import { type NotificationGroup } from "~/app/(tabs)/(feeds,search,notifications,self)/notifications";
+import { type NotificationGroup } from "~/app/(tabs)/(feeds,search,notifications,self,groups)/notifications";
 import { useAbsolutePath } from "~/lib/absolute-path-context";
 import { useAgent } from "~/lib/agent";
 import { useHaptics } from "~/lib/hooks/preferences";

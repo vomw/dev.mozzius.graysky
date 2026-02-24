@@ -8,7 +8,7 @@ import { useTheme } from "@react-navigation/native";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { MessageCircleIcon, RepeatIcon } from "lucide-react-native";
 
-import { type Posts } from "~/app/(tabs)/(feeds,search,notifications,self)/profile/[author]/post/[post]";
+import { type Posts } from "~/app/(tabs)/(feeds,search,notifications,self,groups)/profile/[author]/post/[post]";
 import { useAbsolutePath } from "~/lib/absolute-path-context";
 import { useAgent } from "~/lib/agent";
 import {

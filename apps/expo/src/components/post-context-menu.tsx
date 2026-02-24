@@ -45,6 +45,10 @@ const PostContextMenuButton = ({
 
   const url = `https://bsky.app/profile/${post.author.handle}/post/${rkey}`;
 
+  const sendToGroup = () => {
+    router.push(`/groups/send-to-group?uri=${encodeURIComponent(post.uri)}`);
+  };
+
   const translate = () => onTranslate?.();
 
   const share = async (mode: "link" | "capture" | "copy") => {
@@ -183,6 +187,15 @@ const PostContextMenuButton = ({
               >
                 <DropdownMenu.ItemIcon ios={{ name: "photo" }} />
               </DropdownMenu.Item>
+              {agent.hasSession && (
+                <DropdownMenu.Item
+                  key="send to group"
+                  textValue={_(msg`Send to Group`)}
+                  onSelect={sendToGroup}
+                >
+                  <DropdownMenu.ItemIcon ios={{ name: "person.2" }} />
+                </DropdownMenu.Item>
+              )}
             </DropdownMenu.SubContent>
           </DropdownMenu.Sub>
           {showCopyText && (
