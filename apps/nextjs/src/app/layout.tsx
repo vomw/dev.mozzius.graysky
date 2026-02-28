@@ -11,21 +11,31 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Graysky - a bluesky client",
-  description: "Experience a whole different skyline.",
+  title: "Saucer - a Bluesky client",
+  description: "A Bluesky client with group chats.",
   metadataBase: new URL("https://graysky.app"),
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent" as const,
+    title: "Saucer",
+  },
+  icons: {
+    apple: "/icons/apple-touch-icon.png",
+  },
   openGraph: {
-    title: "Graysky - a bluesky client",
-    description: "Experience a whole different skyline.",
+    title: "Saucer - a Bluesky client",
+    description: "A Bluesky client with group chats.",
     type: "website",
     locale: "en_GB",
     url: "https://graysky.app",
-    siteName: "Graysky",
+    siteName: "Saucer",
   },
 };
 
 export const viewport = {
   colorScheme: "dark",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
