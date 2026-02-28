@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "dd1fc0a9-8082-465f-a087-1e46489bcb0e"
+      }
+    },
+    "owner": "scantics",
+    "android": {
+      "package": "com.scantics.saucer"
+    }
+  }
+}

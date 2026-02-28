@@ -8,19 +8,22 @@ import {
   View,
   type ListRenderItemInfo,
 } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Image } from "expo-image";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useTheme } from "@react-navigation/native";
-import { SendHorizontalIcon } from "lucide-react-native";
+import { SendHorizontalIcon, SettingsIcon, UsersIcon } from "lucide-react-native";
 
 import { BskyPostEmbed } from "~/components/groups/bsky-post-embed";
 import { Text } from "~/components/themed/text";
 import { useOptionalAgent } from "~/lib/agent";
 import {
+  fetchGroup,
   isBskyPostContent,
   sendMessage,
   subscribeToMessages,
+  type Group,
   type Message,
 } from "~/lib/groups";
 import { timeSince } from "~/lib/utils/time";
@@ -29,13 +32,21 @@ export default function GroupChatScreen() {
   const { groupId } = useLocalSearchParams<{ groupId: string }>();
   const agent = useOptionalAgent();
   const theme = useTheme();
+  const router = useRouter();
   const { i18n } = useLingui();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState("");
   const [sending, setSending] = useState(false);
+  const [group, setGroup] = useState<Group | null>(null);
   const flatListRef = useRef<FlatList>(null);
 
   const currentDid = agent?.session?.did;
+
+  // Fetch group metadata for header
+  useEffect(() => {
+    if (!groupId) return;
+    void fetchGroup(groupId).then(setGroup);
+  }, [groupId]);
 
   useEffect(() => {
     if (!groupId) return;
@@ -70,8 +81,22 @@ export default function GroupChatScreen() {
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<Message>) => {
-      const isOwn = item.senderDid === currentDid;
-      const isPostEmbed = isBskyPostContent(item.content);
+      // System messages (e.g. "X was added to the group")
+      if (item.type === "system") {
+        return (
+          <View className="px-6 py-2">
+            <Text
+              className="text-xs text-center italic"
+              style={{ color: theme.colors.text + "77" }}
+            >
+              {item.text}
+            </Text>
+          </View>
+        );
+      }
+
+      const isOwn = item.sender === currentDid;
+      const isPostEmbed = isBskyPostContent(item.text);
 
       return (
         <View className={`px-3 py-1 ${isOwn ? "items-end" : "items-start"}`}>
@@ -81,7 +106,7 @@ export default function GroupChatScreen() {
               style={{ color: theme.colors.text + "77" }}
               numberOfLines={1}
             >
-              {item.senderDid.slice(0, 20)}...
+              {item.sender.slice(0, 20)}...
             </Text>
           )}
           <View
@@ -95,22 +120,22 @@ export default function GroupChatScreen() {
             }}
           >
             {isPostEmbed ? (
-              <BskyPostEmbed content={item.content} />
+              <BskyPostEmbed content={item.text} />
             ) : (
               <Text
                 className="text-sm"
                 style={{ color: isOwn ? "#fff" : theme.colors.text }}
               >
-                {item.content}
+                {item.text}
               </Text>
             )}
           </View>
-          {item.timestamp && (
+          {item.createdAt && (
             <Text
               className="text-xs mt-1 mx-1"
               style={{ color: theme.colors.text + "55" }}
             >
-              {timeSince(item.timestamp.toDate(), i18n).visible}
+              {timeSince(item.createdAt.toDate(), i18n).visible}
             </Text>
           )}
         </View>
@@ -123,8 +148,43 @@ export default function GroupChatScreen() {
     <>
       <Stack.Screen
         options={{
-          title: "Group Chat",
           headerBackButtonDisplayMode: "minimal",
+          headerTitle: () => (
+            <TouchableOpacity
+              onPress={() =>
+                router.push(`/groups/settings?groupId=${groupId}`)
+              }
+              className="flex-row items-center"
+            >
+              {group?.avatarUrl ? (
+                <Image
+                  source={{ uri: group.avatarUrl }}
+                  className="h-7 w-7 rounded-full"
+                  contentFit="cover"
+                />
+              ) : (
+                <View
+                  className="h-7 w-7 rounded-full items-center justify-center"
+                  style={{ backgroundColor: theme.colors.primary + "22" }}
+                >
+                  <UsersIcon size={14} color={theme.colors.primary} />
+                </View>
+              )}
+              <Text className="text-base font-semibold ml-2" numberOfLines={1}>
+                {group?.name ?? "Group Chat"}
+              </Text>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() =>
+                router.push(`/groups/settings?groupId=${groupId}`)
+              }
+              className="mr-2"
+            >
+              <SettingsIcon size={22} color={theme.colors.text} />
+            </TouchableOpacity>
+          ),
         }}
       />
       <KeyboardAvoidingView

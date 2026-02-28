@@ -1,12 +1,18 @@
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
-import { AppBskyFeedDefs, AppBskyFeedPost } from "@atproto/api";
+import {
+  AppBskyEmbedRecordWithMedia,
+  AppBskyEmbedVideo,
+  AppBskyFeedDefs,
+  AppBskyFeedPost,
+} from "@atproto/api";
 import { useLingui } from "@lingui/react";
 import { useTheme } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
 import { AlertCircleIcon } from "lucide-react-native";
 
 import { Avatar } from "~/components/avatar";
+import { Embed } from "~/components/embed";
 import { RichText } from "~/components/rich-text";
 import { Text } from "~/components/themed/text";
 import { useAbsolutePath } from "~/lib/absolute-path-context";
@@ -144,6 +150,31 @@ export function BskyPostEmbed({ content }: Props) {
             numberOfLines={4}
           />
         ) : null}
+
+        {/* Post media/embeds — skip native video to avoid teardown crash */}
+        {data.embed && (() => {
+          const isVideo = AppBskyEmbedVideo.isView(data.embed);
+          const isRecordWithVideo =
+            AppBskyEmbedRecordWithMedia.isView(data.embed) &&
+            AppBskyEmbedVideo.isView(data.embed.media);
+          if (isVideo || isRecordWithVideo) {
+            return (
+              <View
+                className="mt-2 rounded-lg px-3 py-2 flex-row items-center gap-2"
+                style={{ backgroundColor: theme.colors.border }}
+              >
+                <Text className="text-xs" style={{ color: theme.colors.text + "88" }}>
+                  🎬 Video
+                </Text>
+              </View>
+            );
+          }
+          return (
+            <View className="mt-2">
+              <Embed uri={data.uri} content={data.embed} truncate depth={1} />
+            </View>
+          );
+        })()}
 
         {/* Stats row */}
         <View className="flex-row gap-3 mt-2">
