@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { type AppBskyActorDefs, type AppBskyFeedDefs } from "@atproto/api";
 
 import { PostCard } from "~/components/post-card";
 import { useAuth } from "~/lib/auth-context";
-import { createAgent } from "~/lib/bsky-api";
 
 type Tab = "people" | "posts";
 
@@ -46,8 +45,7 @@ function ActorRow({ actor }: { actor: AppBskyActorDefs.ProfileView }) {
 }
 
 export default function SearchPage() {
-  const { session } = useAuth();
-  const agent = useMemo(() => createAgent(session), [session]);
+  const { agent } = useAuth();
 
   const [tab, setTab] = useState<Tab>("people");
   const [query, setQuery] = useState("");

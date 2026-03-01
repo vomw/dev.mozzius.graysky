@@ -1,101 +1,176 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Home } from "lucide-react";
 
-import { type AppBskyFeedDefs } from "@atproto/api";
+import { type AppBskyFeedDefs as FeedDefsNS } from "@atproto/api";
 
-import { PostCard } from "~/components/post-card";
+import { DrawerMenu } from "~/components/drawer-menu";
 import { useAuth } from "~/lib/auth-context";
-import { createAgent } from "~/lib/bsky-api";
+import { encodeFeedUri } from "~/lib/feed-uri";
+
+type GeneratorView = FeedDefsNS.GeneratorView;
 
 export default function FeedsPage() {
-  const { session } = useAuth();
-  const agent = useMemo(() => createAgent(session), [session]);
+  const { agent } = useAuth();
 
-  const [feed, setFeed] = useState<AppBskyFeedDefs.FeedViewPost[]>([]);
-  const [cursor, setCursor] = useState<string | undefined>();
-  const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const load = useCallback(
-    async (cur?: string) => {
-      if (cur) setLoadingMore(true);
-      else { setLoading(true); setError(null); }
-      try {
-        const { data } = await agent.getTimeline({ limit: 30, cursor: cur });
-        setFeed((prev) =>
-          cur ? [...prev, ...data.feed] : data.feed,
-        );
-        setCursor(data.cursor);
-      } catch {
-        setError("Could not load your feed. Check your connection.");
-      } finally {
-        setLoading(false);
-        setLoadingMore(false);
-      }
-    },
-    [agent],
-  );
+  const [pinned, setPinned] = useState<GeneratorView[]>([]);
+  const [saved, setSaved] = useState<GeneratorView[]>([]);
+  // null = still loading, true/false = done
+  const [feedsLoaded, setFeedsLoaded] = useState(false);
+  const [feedsError, setFeedsError] = useState<string | null>(null);
 
   useEffect(() => {
-    void load();
-  }, [load]);
+    let cancelled = false;
+    setFeedsLoaded(false);
+    setFeedsError(null);
+
+    void (async () => {
+      try {
+        // Use the high-level getPreferences() which normalises both v1 and v2
+        // formats into a unified savedFeeds: SavedFeed[] array.
+        const prefs = await agent.getPreferences();
+
+        // savedFeeds is already normalised: [{ id, type, value, pinned }]
+        // type === 'feed' means it's a feed generator; value is the AT-URI.
+        const feedItems = prefs.savedFeeds.filter(
+          (f) => f.type === "feed" && f.value.includes("app.bsky.feed.generator"),
+        );
+
+        if (feedItems.length === 0) {
+          if (!cancelled) setFeedsLoaded(true);
+          return;
+        }
+
+        const allUris = feedItems.map((f) => f.value);
+        const { data: gensData } =
+          await agent.app.bsky.feed.getFeedGenerators({ feeds: allUris });
+        const genMap = new Map(gensData.feeds.map((g) => [g.uri, g]));
+
+        if (cancelled) return;
+
+        const pinnedFeeds: GeneratorView[] = [];
+        const savedFeeds: GeneratorView[] = [];
+
+        for (const item of feedItems) {
+          const gen = genMap.get(item.value);
+          if (!gen) continue;
+          if (item.pinned) pinnedFeeds.push(gen);
+          else savedFeeds.push(gen);
+        }
+
+        setPinned(pinnedFeeds);
+        setSaved(savedFeeds);
+      } catch (err) {
+        if (!cancelled) {
+          const msg = err instanceof Error ? err.message : String(err);
+          setFeedsError(msg);
+        }
+      } finally {
+        if (!cancelled) setFeedsLoaded(true);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [agent]);
 
   return (
     <div className="flex h-full flex-col">
-      {/* Page header */}
-      <header className="flex flex-shrink-0 items-center justify-between border-b border-gray-800 px-4 py-3">
-        <h1 className="text-lg font-bold">Home</h1>
-        <button
-          onClick={() => void load()}
-          disabled={loading}
-          className="text-xs text-blue-400 hover:text-blue-300 disabled:opacity-40"
-        >
-          ↺ Refresh
-        </button>
+      {/* Header */}
+      <header className="flex flex-shrink-0 items-center gap-3 border-b border-gray-800 px-4 py-3">
+        <DrawerMenu />
+        <h1 className="text-lg font-bold">Feeds</h1>
       </header>
 
-      {/* Feed */}
       <div className="flex-1 overflow-y-auto">
-        {loading ? (
-          <div className="flex items-center justify-center py-16">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+        {/* Following — always shown immediately, no API needed */}
+        <Link
+          href="/feeds/following"
+          className="flex items-center gap-4 border-b border-gray-800 px-4 py-5 transition hover:bg-gray-900/50 active:bg-gray-900"
+        >
+          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-blue-600">
+            <Home size={28} className="text-white" />
           </div>
-        ) : error ? (
-          <div className="flex flex-col items-center justify-center py-16 text-center">
-            <p className="mb-3 text-sm text-gray-500">{error}</p>
-            <button
-              onClick={() => void load()}
-              className="rounded-xl bg-blue-500 px-4 py-2 text-sm text-white"
-            >
-              Try again
-            </button>
+          <div className="min-w-0 flex-1">
+            <p className="text-base font-semibold text-white">Following</p>
+            <p className="text-sm text-gray-500">
+              Posts from people you follow
+            </p>
           </div>
-        ) : feed.length === 0 ? (
-          <p className="py-16 text-center text-sm text-gray-600">
-            Your feed is empty. Follow some people on Bluesky!
+          <span className="text-gray-600">›</span>
+        </Link>
+
+        {/* Custom feeds — loaded asynchronously */}
+        {!feedsLoaded ? (
+          <div className="flex items-center justify-center py-8">
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+          </div>
+        ) : feedsError ? (
+          <p className="px-4 py-4 text-xs text-gray-600">
+            Could not load custom feeds: {feedsError}
           </p>
         ) : (
           <>
-            {feed.map((item) => (
-              <PostCard key={`${item.post.uri}-${item.reason?.$type ?? "post"}`} item={item} />
-            ))}
+            {pinned.length > 0 && (
+              <div>
+                <p className="px-4 pb-1 pt-4 text-xs font-semibold uppercase tracking-wider text-gray-600">
+                  Favourites
+                </p>
+                {pinned.map((gen) => (
+                  <FeedRow key={gen.uri} gen={gen} />
+                ))}
+              </div>
+            )}
 
-            {cursor && (
-              <div className="flex justify-center py-4">
-                <button
-                  onClick={() => void load(cursor)}
-                  disabled={loadingMore}
-                  className="rounded-xl border border-gray-700 px-5 py-2 text-sm text-gray-400 hover:border-gray-500 disabled:opacity-40"
-                >
-                  {loadingMore ? "Loading…" : "Load more"}
-                </button>
+            {saved.length > 0 && (
+              <div>
+                <p className="px-4 pb-1 pt-4 text-xs font-semibold uppercase tracking-wider text-gray-600">
+                  All Feeds
+                </p>
+                {saved.map((gen) => (
+                  <FeedRow key={gen.uri} gen={gen} />
+                ))}
               </div>
             )}
           </>
         )}
       </div>
     </div>
+  );
+}
+
+// ── Feed row ──────────────────────────────────────────────────────────────────
+
+function FeedRow({ gen }: { gen: GeneratorView }) {
+  return (
+    <Link
+      href={`/feeds/${encodeFeedUri(gen.uri)}`}
+      className="flex items-center gap-3 border-b border-gray-800 px-4 py-3 transition hover:bg-gray-900/50 active:bg-gray-900"
+    >
+      {gen.avatar ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={gen.avatar}
+          alt={gen.displayName}
+          className="h-10 w-10 flex-shrink-0 rounded-lg object-cover"
+        />
+      ) : (
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-blue-950 text-lg">
+          #
+        </div>
+      )}
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-medium text-white">
+          {gen.displayName}
+        </p>
+        <p className="truncate text-xs text-gray-500">
+          by @{gen.creator.handle}
+        </p>
+      </div>
+      <span className="text-gray-600">›</span>
+    </Link>
   );
 }

@@ -2,10 +2,13 @@
 
 import { createContext, useContext } from "react";
 
+import { type AtpAgent } from "@atproto/api";
+
 import { type WebSession } from "./auth";
 
 interface AuthContextValue {
   session: WebSession;
+  agent: AtpAgent;
   logout: () => void;
 }
 

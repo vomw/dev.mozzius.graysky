@@ -1,11 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { type AppBskyNotificationListNotifications } from "@atproto/api";
 
 import { useAuth } from "~/lib/auth-context";
-import { createAgent } from "~/lib/bsky-api";
 
 type Notif = AppBskyNotificationListNotifications.Notification;
 
@@ -83,8 +82,7 @@ function NotifRow({ notif }: { notif: Notif }) {
 }
 
 export default function NotificationsPage() {
-  const { session } = useAuth();
-  const agent = useMemo(() => createAgent(session), [session]);
+  const { agent } = useAuth();
 
   const [notifs, setNotifs] = useState<Notif[]>([]);
   const [loading, setLoading] = useState(true);

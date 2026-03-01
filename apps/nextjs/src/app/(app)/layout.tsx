@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,6 +11,7 @@ import {
   type WebSession,
 } from "~/lib/auth";
 import { AuthContext } from "~/lib/auth-context";
+import { createAgent } from "~/lib/bsky-api";
 
 // ── Bottom navigation tab bar ─────────────────────────────────────────────────
 
@@ -81,6 +82,14 @@ export default function AppLayout({
     clearSession();
     setSession(null);
   };
+
+  // Always call useMemo unconditionally (Rules of Hooks).
+  // Returns null when not yet authenticated; only used in the provider branch.
+  const agent = useMemo(
+    () =>
+      session && session !== "loading" ? createAgent(session) : null,
+    [session],
+  );
 
   // ── Loading ───────────────────────────────────────────────────────────────
   if (session === "loading") {
@@ -160,7 +169,8 @@ export default function AppLayout({
 
   // ── Authenticated app shell ───────────────────────────────────────────────
   return (
-    <AuthContext.Provider value={{ session, logout: handleLogout }}>
+    // agent is guaranteed non-null here because session is a WebSession
+    <AuthContext.Provider value={{ session, agent: agent!, logout: handleLogout }}>
       <div className="flex h-screen flex-col bg-black text-white">
         {/* Page content */}
         <main className="min-h-0 flex-1 overflow-hidden">{children}</main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   type AppBskyActorDefs,
@@ -9,7 +9,6 @@ import {
 
 import { PostCard } from "~/components/post-card";
 import { useAuth } from "~/lib/auth-context";
-import { createAgent } from "~/lib/bsky-api";
 
 function fmtCount(n?: number): string {
   if (!n) return "0";
@@ -19,8 +18,7 @@ function fmtCount(n?: number): string {
 }
 
 export default function ProfilePage() {
-  const { session, logout } = useAuth();
-  const agent = useMemo(() => createAgent(session), [session]);
+  const { session, logout, agent } = useAuth();
 
   const [profile, setProfile] = useState<AppBskyActorDefs.ProfileViewDetailed | null>(null);
   const [feed, setFeed] = useState<AppBskyFeedDefs.FeedViewPost[]>([]);
