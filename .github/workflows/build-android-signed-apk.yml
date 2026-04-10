@@ -15,7 +15,6 @@ jobs:
     env:
       OWNER: ${{ vars.OWNER || 'mozzius' }}
       APP_ID: ${{ vars.APP_ID || 'dev.mozzius.graysky' }}
-      EAS_PROJECT_ID: ${{ vars.EAS_PROJECT_ID || '7e8ff69c-ba23-4bd8-98ce-7b61b05766c4' }}
       ANDROID_VERSION_CODE: ${{ github.run_number }}
 
     steps:
@@ -33,11 +32,14 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Setup Expo and EAS
-        uses: expo/expo-github-action@v8
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -53,7 +55,6 @@ jobs:
           cat > .env <<EOF
           OWNER=${OWNER}
           APP_ID=${APP_ID}
-          EAS_PROJECT_ID=${EAS_PROJECT_ID}
           ANDROID_VERSION_CODE=${ANDROID_VERSION_CODE}
           EOF
 
@@ -75,48 +76,53 @@ jobs:
             cp apps/expo/google-services.json.example apps/expo/google-services.json
           fi
 
-      - name: Start EAS Android build
+      - name: Decode Android keystore
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: |
+          test -n "${ANDROID_KEYSTORE_B64}"
+          printf '%s' "${ANDROID_KEYSTORE_B64}" | base64 --decode > apps/expo/android-signing-key.jks
+
+      - name: Generate Android project
         working-directory: apps/expo
         shell: bash
         run: |
-          build_output="$(eas build --platform android --profile production-apk --non-interactive --wait --json)"
-          printf '%s\n' "${build_output}" > build.json
+          pnpm exec expo prebuild --platform android --non-interactive --clean
 
-      - name: Download APK
+      - name: Build release APK
+        working-directory: apps/expo/android
         shell: bash
         run: |
-          apk_url="$(
-            node <<'EOF'
-          const fs = require("fs");
-          const path = require("path");
+          ./gradlew assembleRelease
 
-          const raw = fs.readFileSync(path.join("apps", "expo", "build.json"), "utf8");
-          const payload = JSON.parse(raw);
-          const build = Array.isArray(payload) ? payload[payload.length - 1] : payload;
-          const buildUrl =
-            build?.artifacts?.buildUrl ??
-            build?.artifacts?.applicationArchiveUrl;
+      - name: Sign release APK
+        shell: bash
+        env:
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          unsigned_apk="apps/expo/android/app/build/outputs/apk/release/app-release-unsigned.apk"
+          signed_apk="graysky-${{ github.run_number }}-${{ github.sha }}.apk"
+          apksigner_path="$(find "${ANDROID_SDK_ROOT}/build-tools" -name apksigner | sort | tail -n 1)"
 
-          if (!buildUrl) {
-            throw new Error("EAS build output did not include an APK URL.");
-          }
+          test -f "${unsigned_apk}"
+          test -n "${apksigner_path}"
 
-          process.stdout.write(buildUrl);
-          EOF
-          )"
+          "${apksigner_path}" sign \
+            --ks apps/expo/android-signing-key.jks \
+            --ks-key-alias "${ANDROID_KEY_ALIAS}" \
+            --ks-pass "pass:${ANDROID_KEYSTORE_PASSWORD}" \
+            --key-pass "pass:${ANDROID_KEY_PASSWORD}" \
+            --out "${signed_apk}" \
+            "${unsigned_apk}"
 
-          curl -L "${apk_url}" -o graysky-${{ github.run_number }}-${{ github.sha }}.apk
+          "${apksigner_path}" verify "${signed_apk}"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: graysky-signed-apk-${{ github.run_number }}
           path: graysky-${{ github.run_number }}-${{ github.sha }}.apk
-          if-no-files-found: error
-
-      - name: Upload EAS metadata
-        uses: actions/upload-artifact@v4
-        with:
-          name: graysky-eas-build-metadata-${{ github.run_number }}
-          path: apps/expo/build.json
           if-no-files-found: error
