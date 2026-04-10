@@ -1,0 +1,122 @@
+name: Build Android Signed APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-signed-apk:
+    runs-on: ubuntu-latest
+    env:
+      OWNER: ${{ vars.OWNER || 'mozzius' }}
+      APP_ID: ${{ vars.APP_ID || 'dev.mozzius.graysky' }}
+      EAS_PROJECT_ID: ${{ vars.EAS_PROJECT_ID || '7e8ff69c-ba23-4bd8-98ce-7b61b05766c4' }}
+      ANDROID_VERSION_CODE: ${{ github.run_number }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare Expo config inputs
+        shell: bash
+        env:
+          GOOGLE_SERVICES_JSON_B64: ${{ secrets.GOOGLE_SERVICES_JSON_B64 }}
+          REVENUECAT_API_KEY_ANDROID: ${{ secrets.REVENUECAT_API_KEY_ANDROID }}
+          REVENUECAT_API_KEY_IOS: ${{ secrets.REVENUECAT_API_KEY_IOS }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        run: |
+          cat > .env <<EOF
+          OWNER=${OWNER}
+          APP_ID=${APP_ID}
+          EAS_PROJECT_ID=${EAS_PROJECT_ID}
+          ANDROID_VERSION_CODE=${ANDROID_VERSION_CODE}
+          EOF
+
+          if [ -n "${REVENUECAT_API_KEY_ANDROID}" ]; then
+            echo "REVENUECAT_API_KEY_ANDROID=${REVENUECAT_API_KEY_ANDROID}" >> .env
+          fi
+
+          if [ -n "${REVENUECAT_API_KEY_IOS}" ]; then
+            echo "REVENUECAT_API_KEY_IOS=${REVENUECAT_API_KEY_IOS}" >> .env
+          fi
+
+          if [ -n "${SENTRY_DSN}" ]; then
+            echo "SENTRY_DSN=${SENTRY_DSN}" >> .env
+          fi
+
+          if [ -n "${GOOGLE_SERVICES_JSON_B64}" ]; then
+            printf '%s' "${GOOGLE_SERVICES_JSON_B64}" | base64 --decode > apps/expo/google-services.json
+          else
+            cp apps/expo/google-services.json.example apps/expo/google-services.json
+          fi
+
+      - name: Start EAS Android build
+        working-directory: apps/expo
+        shell: bash
+        run: |
+          build_output="$(eas build --platform android --profile production-apk --non-interactive --wait --json)"
+          printf '%s\n' "${build_output}" > build.json
+
+      - name: Download APK
+        shell: bash
+        run: |
+          apk_url="$(
+            node <<'EOF'
+          const fs = require("fs");
+          const path = require("path");
+
+          const raw = fs.readFileSync(path.join("apps", "expo", "build.json"), "utf8");
+          const payload = JSON.parse(raw);
+          const build = Array.isArray(payload) ? payload[payload.length - 1] : payload;
+          const buildUrl =
+            build?.artifacts?.buildUrl ??
+            build?.artifacts?.applicationArchiveUrl;
+
+          if (!buildUrl) {
+            throw new Error("EAS build output did not include an APK URL.");
+          }
+
+          process.stdout.write(buildUrl);
+          EOF
+          )"
+
+          curl -L "${apk_url}" -o graysky-${{ github.run_number }}-${{ github.sha }}.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: graysky-signed-apk-${{ github.run_number }}
+          path: graysky-${{ github.run_number }}-${{ github.sha }}.apk
+          if-no-files-found: error
+
+      - name: Upload EAS metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: graysky-eas-build-metadata-${{ github.run_number }}
+          path: apps/expo/build.json
+          if-no-files-found: error

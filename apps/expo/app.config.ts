@@ -9,6 +9,10 @@ dotenv.config({
   path: "../../.env",
 });
 
+const androidVersionCode = process.env.ANDROID_VERSION_CODE
+  ? Number.parseInt(process.env.ANDROID_VERSION_CODE, 10)
+  : undefined;
+
 const defineConfig = (_: ConfigContext): ExpoConfig => ({
   name: "Graysky",
   slug: "graysky",
@@ -48,6 +52,9 @@ const defineConfig = (_: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: process.env.APP_ID ?? "dev.mozzius.graysky",
+    versionCode: Number.isFinite(androidVersionCode)
+      ? androidVersionCode
+      : undefined,
     softwareKeyboardLayoutMode: "pan",
     googleServicesFile:
       process.env.GOOGLE_SERVICES_JSON ?? "./google-services.json",
