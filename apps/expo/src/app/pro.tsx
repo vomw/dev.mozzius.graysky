@@ -21,7 +21,6 @@ import { ImageBackground } from "expo-image";
 import { Stack, useRouter } from "expo-router";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import * as Sentry from "@sentry/react-native";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   CheckIcon,
@@ -88,7 +87,6 @@ export default function Pro() {
     },
     onError: (err) => {
       console.error(err);
-      Sentry.captureException(err, { extra: { annual } });
       showToastable({
         title: _(msg`Could not complete purchase`),
         message: _(msg`Something went wrong, please try again later.`),

@@ -44,7 +44,6 @@
     "@react-native-menu/menu": "^2.0.0",
     "@react-navigation/elements": "^2.9.3",
     "@react-navigation/native": "^7.1.26",
-    "@sentry/react-native": "7.8.0",
     "@shopify/flash-list": "2.2.0",
     "@tanstack/react-query": "^5.90.12",
     "@trpc/client": "^11.8.1",

@@ -19,7 +19,6 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { ThemeProvider } from "@react-navigation/native";
-import * as Sentry from "@sentry/react-native";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { ListProvider } from "~/components/lists/context";
@@ -41,33 +40,6 @@ import { store } from "~/lib/storage/storage";
 import { TRPCProvider } from "~/lib/utils/api";
 import { resolvePdsFromDid, resolvePdsUrl } from "~/lib/utils/resolve-pds";
 import { isIOS26 } from "~/lib/utils/version";
-
-const routingInstrumentation = Sentry.reactNavigationIntegration();
-
-Sentry.init({
-  enabled: !__DEV__,
-  debug: false,
-  // not a secret, but allow override
-  dsn:
-    (Constants.expoConfig?.extra?.sentry as string) ??
-    "https://76421919ff114625bfd275af5f843452@o4505343214878720.ingest.sentry.io/4505478653739008",
-  ignoreErrors: [
-    // https://graysky.sentry.io/issues/4916862074/?project=4505478653739008&query=is%3Aunresolved&referrer=issue-stream&statsPeriod=14d&stream_index=0
-    "viewNotFoundForReactTag",
-    // https://graysky.sentry.io/issues/4677582595/?project=4505478653739008&query=is%3Aunresolved&referrer=issue-stream&statsPeriod=14d&stream_index=1
-    "nilReactBridge",
-  ],
-});
-
-const useSentryTracing = () => {
-  const ref = useNavigationContainerRef();
-
-  useEffect(() => {
-    if (ref) {
-      routingInstrumentation.registerNavigationContainer(ref);
-    }
-  }, [ref]);
-};
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -483,7 +455,6 @@ const getSession = (): StoredSession | null => {
 
 function RootLayout() {
   useConfigurePurchases();
-  useSentryTracing();
 
   return (
     <I18nProvider>
@@ -494,7 +465,7 @@ function RootLayout() {
   );
 }
 
-export default Sentry.wrap(RootLayout);
+export default RootLayout;
 
 const QuickActions = () => {
   const fired = useRef<string | null>(null);

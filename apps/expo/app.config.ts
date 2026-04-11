@@ -72,7 +72,6 @@ const defineConfig = (_: ConfigContext): ExpoConfig => ({
       ios: process.env.REVENUECAT_API_KEY_IOS,
       android: process.env.REVENUECAT_API_KEY_ANDROID,
     },
-    sentry: process.env.SENTRY_DSN,
     devClient: process.env.DEV_CLIENT === "true",
   },
   experiments: {
@@ -100,13 +99,6 @@ const defineConfig = (_: ConfigContext): ExpoConfig => ({
       },
     ],
     "expo-localization",
-    [
-      "@sentry/react-native/expo",
-      {
-        organization: "graysky",
-        project: "graysky",
-      },
-    ],
     "expo-router",
     [
       "expo-media-library",

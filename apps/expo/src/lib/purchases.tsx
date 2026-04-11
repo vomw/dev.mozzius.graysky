@@ -7,7 +7,6 @@ import Purchases, {
   type CustomerInfoUpdateListener,
 } from "react-native-purchases";
 import Constants from "expo-constants";
-import * as Sentry from "@sentry/react-native";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const configureRevenueCat = () => {
@@ -27,9 +26,7 @@ export const useConfigurePurchases = () => {
     try {
       configureRevenueCat();
     } catch (err) {
-      Sentry.captureException(err, {
-        extra: Constants?.expoConfig?.extra,
-      });
+      console.error(err);
     }
   }, []);
 };
@@ -83,12 +80,6 @@ const useCustomerInfoQuery = () => {
   });
 
   const { error } = info;
-
-  useEffect(() => {
-    if (error) {
-      Sentry.captureException(error);
-    }
-  }, [error]);
 
   return info;
 };

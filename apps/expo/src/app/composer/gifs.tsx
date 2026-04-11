@@ -16,7 +16,6 @@ import { Stack, useRouter } from "expo-router";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useTheme } from "@react-navigation/native";
-import Sentry from "@sentry/react-native";
 import { FlashList } from "@shopify/flash-list";
 import { keepPreviousData } from "@tanstack/react-query";
 
@@ -209,7 +208,7 @@ const Gif = ({ item }: GifProps) => {
       router.navigate("../");
     },
     onError: (err) => {
-      Sentry.captureException(err);
+      console.error(err);
       showToastable({
         title: _(msg`Could not select GIF`),
         message: _(msg`Please try again`),

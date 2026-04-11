@@ -22,7 +22,6 @@ import {
 import { type I18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import Sentry from "@sentry/react-native";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import RNFetchBlob from "rn-fetch-blob";
 import { z } from "zod";
@@ -220,10 +219,6 @@ export const useSendPost = ({
             encoding = "image/jpeg";
           } else {
             console.warn(`Unknown thumbnail extension, skipping: ${thumbUri}`);
-            Sentry.captureMessage(
-              `Unknown thumbnail extension, skipping: ${thumbUri}`,
-              { level: "warning" },
-            );
           }
           if (encoding) {
             const thumbUploadRes = await uploadBlob(agent, thumbUri, encoding);
@@ -236,7 +231,6 @@ export const useSendPost = ({
         }
       } catch (err) {
         console.error("thumbnail upload failed", err);
-        Sentry.captureException(err);
       }
 
       let mergedEmbed: AppBskyFeedPost.Record["embed"];
@@ -336,7 +330,7 @@ export const useSendPost = ({
         message: _(msg`Post published!`),
       });
     },
-    onError: (err) => Sentry.captureException(err),
+    onError: (err) => console.error(err),
   });
 };
 

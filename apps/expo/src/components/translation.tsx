@@ -5,7 +5,6 @@ import { Image } from "expo-image";
 import { msg, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useTheme } from "@react-navigation/native";
-import * as Sentry from "@sentry/react-native";
 import {
   AlertTriangleIcon,
   LanguagesIcon,
@@ -61,12 +60,6 @@ export const Translation = ({ text, uri, forceShow }: Props) => {
   useEffect(() => {
     reset();
   }, [uri, reset]);
-
-  useEffect(() => {
-    if (translate.error) {
-      Sentry.captureException(translate.error);
-    }
-  }, [translate.error]);
 
   if (text.length < 2) {
     return null;

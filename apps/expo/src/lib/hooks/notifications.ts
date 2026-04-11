@@ -3,7 +3,6 @@ import { Platform } from "react-native";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 import { useRouter } from "expo-router";
-import * as Sentry from "@sentry/react-native";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useOptionalAgent } from "../agent";
@@ -66,9 +65,7 @@ export const useNotifications = () => {
             });
           }
         } catch (error) {
-          Sentry.captureException(
-            new Error("Failed to register push token", { cause: error }),
-          );
+          console.error("Failed to register push token", error);
         }
       }
     })();

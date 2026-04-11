@@ -8,7 +8,6 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useTheme } from "@react-navigation/native";
-import * as Sentry from "@sentry/react-native";
 import { CopyIcon, ExternalLinkIcon, Share2Icon } from "lucide-react-native";
 
 import {
@@ -76,7 +75,7 @@ export const useLinkPress = () => {
             err instanceof Error ? err.message : _(msg`Not sure why, sorry :(`),
           status: "danger",
         });
-        Sentry.captureException(err);
+        console.error(err);
       }
     },
     [inAppBrowser, setAppPreferences, showActionSheetWithOptions, theme, _],
