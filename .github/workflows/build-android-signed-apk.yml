@@ -99,10 +99,11 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
-          unsigned_apk="apps/expo/android/app/build/outputs/apk/release/app-release-unsigned.apk"
+          unsigned_apk="$(find apps/expo/android/app/build/outputs/apk/release -name "*.apk" | head -n 1)"
           signed_apk="graysky-${{ github.run_number }}-${{ github.sha }}.apk"
           apksigner_path="$(find "${ANDROID_SDK_ROOT}/build-tools" -name apksigner | sort | tail -n 1)"
 
+          test -n "${unsigned_apk}"
           test -f "${unsigned_apk}"
           test -n "${apksigner_path}"
 
