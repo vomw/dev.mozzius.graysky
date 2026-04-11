@@ -67,7 +67,7 @@ Copy `.env.example` to `.env`. Key variables:
 - `DATABASE_URL` - PlanetScale MySQL connection
 - `GOOGLE_API_KEY` - Translation API
 - `DEEPL_API_KEY` - Alternative translation
-- Various RevenueCat, Sentry keys for mobile
+- Various RevenueCat keys for mobile
 
 ## Code Conventions
 

@@ -420,57 +420,11 @@ export const useImages = () => {
     [setImages],
   );
 
-  // const handlePaste = useCallback(
-  //   async (err: string | null, files: PastedFile[]) => {
-  //     if (images.length >= MAX_IMAGES) return;
-
-  //     if (err) {
-  //       console.error(err);
-  //       return;
-  //     }
-  //     const uris = files.map((f) => f.uri);
-  //     const uri = uris.find((uri) => /\.(jpg|jpeg|png).*$/.test(uri));
-
-  //     if (uri) {
-  //       try {
-  //         const { width, height } = await new Promise<{
-  //           width: number;
-  //           height: number;
-  //         }>((resolve, reject) => {
-  //           Image.getSize(
-  //             uri,
-  //             (width, height) => {
-  //               resolve({ width, height });
-  //             },
-  //             reject,
-  //           );
-  //         });
-  //         setImages((prev) => [
-  //           ...prev,
-  //           {
-  //             asset: {
-  //               uri,
-  //               width,
-  //               height,
-  //             },
-  //             alt: "",
-  //           },
-  //         ]);
-  //       } catch (err) {
-  //         Sentry.captureException(err);
-  //         return;
-  //       }
-  //     }
-  //   },
-  //   [images.length],
-  // );
-
   return {
     images,
     imagePicker,
     removeImage,
     addAltText,
-    // handlePaste,
   };
 };
 

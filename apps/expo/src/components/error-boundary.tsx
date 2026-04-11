@@ -1,19 +1,13 @@
-import { useEffect } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { type ErrorBoundaryProps } from "expo-router";
 import { Trans } from "@lingui/macro";
 import { useTheme } from "@react-navigation/native";
-import * as Sentry from "@sentry/react-native";
 import { RefreshCcwIcon } from "lucide-react-native";
 
 import { Text } from "./themed/text";
 
 export const ErrorBoundary = ({ error, retry }: ErrorBoundaryProps) => {
   const theme = useTheme();
-
-  useEffect(() => {
-    Sentry.captureException(error);
-  }, [error]);
 
   return (
     <View className="flex-1 items-center justify-center">

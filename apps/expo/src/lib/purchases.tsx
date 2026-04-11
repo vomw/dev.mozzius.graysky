@@ -79,8 +79,6 @@ const useCustomerInfoQuery = () => {
     },
   });
 
-  const { error } = info;
-
   return info;
 };
 
@@ -114,14 +112,6 @@ export const useOfferings = () => {
       return count < 3;
     },
   });
-
-  const { error } = offerings;
-
-  useEffect(() => {
-    if (error) {
-      Sentry.captureException(error);
-    }
-  }, [error]);
 
   return offerings;
 };
